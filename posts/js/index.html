@@ -7,15 +7,34 @@
   
   
   
-  <title>Liuyanjie&#39;s Blog</title>
+  <title>js | Liuyanjie&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Liuyanjie&#39;s Blog">
-<meta property="og:url" content="https://liuyanjie.github.io/index.html">
+  <meta name="description" content="syntaxFocus on concepts，not syntax. 关注概念的理解，而不是语法。 数据类型基本类型 PrimitiveUndefined、Null、Boolean、Number、String、Symbol(ES2015) 原始类型 和 原始值 基本类型的值 是不可变的，我们无法给它们添加属性。 基本类型的值 不是一个对象，也没有方法。 1234567891011121314va">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js">
+<meta property="og:url" content="https://liuyanjie.github.io/posts/js/index.html">
 <meta property="og:site_name" content="Liuyanjie&#39;s Blog">
+<meta property="og:description" content="syntaxFocus on concepts，not syntax. 关注概念的理解，而不是语法。 数据类型基本类型 PrimitiveUndefined、Null、Boolean、Number、String、Symbol(ES2015) 原始类型 和 原始值 基本类型的值 是不可变的，我们无法给它们添加属性。 基本类型的值 不是一个对象，也没有方法。 1234567891011121314va">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/basic-object.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/prototype-chain.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/constructor-proto-chain.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/javascript-prototype.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/caller-chain.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/ec-stack.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/ec-stack-changes.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/execution-context.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/variable-object.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/activation-object.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/scope-chain.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/scope-chain-with.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/shared-scope.png">
+<meta property="og:image" content="https://liuyanjie.github.io/posts/js/images/estree.png">
+<meta property="og:updated_time" content="2018-04-11T14:50:57.159Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liuyanjie&#39;s Blog">
+<meta name="twitter:title" content="js">
+<meta name="twitter:description" content="syntaxFocus on concepts，not syntax. 关注概念的理解，而不是语法。 数据类型基本类型 PrimitiveUndefined、Null、Boolean、Number、String、Symbol(ES2015) 原始类型 和 原始值 基本类型的值 是不可变的，我们无法给它们添加属性。 基本类型的值 不是一个对象，也没有方法。 1234567891011121314va">
+<meta name="twitter:image" content="https://liuyanjie.github.io/posts/js/images/basic-object.png">
   
     <link rel="alternative" href="/atom.xml" title="Liuyanjie&#39;s Blog" type="application/atom+xml">
   
@@ -29,9 +48,6 @@
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
-    
-    
-  
   
       <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
@@ -42,8 +58,8 @@
       var yiliaConfig = {
           fancybox: true,
           animate: true,
-          isHome: true,
-          isPost: false,
+          isHome: false,
+          isPost: true,
           isArchive: false,
           isTag: false,
           isCategory: false,
@@ -249,9 +265,7 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-js" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-js" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a  href="/posts/js/" class="article-date">
@@ -268,13 +282,20 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a  class="article-title" href="/posts/js/">js</a>
+    <h1 class="article-title" itemprop="name">
+      js
     </h1>
   
 
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -1145,31 +1166,140 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/posts/js/">js</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 Liu Yanjie 的个人博客">Liu Yanjie</a></p>
+        <p><span>发布时间:</span>2018年04月11日 - 22时05分</p>
+        <p><span>最后更新:</span>2018年04月11日 - 22时50分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/posts/js/" title="js">https://liuyanjie.github.io/posts/js/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://liuyanjie.github.io/posts/js/　　作者: Liu Yanjie" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+
   
 </article>
 
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#syntax"><span class="toc-number">1.</span> <span class="toc-text">syntax</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">1.1.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本类型-Primitive"><span class="toc-number">1.1.1.</span> <span class="toc-text">基本类型 Primitive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Boolean、Number、String、Symbol"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Boolean、Number、String、Symbol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Undefined、Null"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">Undefined、Null</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用类型"><span class="toc-number">1.1.2.</span> <span class="toc-text">引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object-对象"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Object{} - 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Function-函数对象"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Function - 函数对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Array-复合类型-（引用，指针）"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">Array[] - 复合类型 （引用，指针）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类数组对象"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">类数组对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型识别"><span class="toc-number">1.1.3.</span> <span class="toc-text">类型识别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#识别方法"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">识别方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Example"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">Example</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型转换"><span class="toc-number">1.1.4.</span> <span class="toc-text">类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#显式转换"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">显式转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隐式转换"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">隐式转换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#void"><span class="toc-number">1.2.</span> <span class="toc-text">void</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Operator"><span class="toc-number">1.3.</span> <span class="toc-text">Operator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object"><span class="toc-number">1.4.</span> <span class="toc-text">Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链（prototype-chain）"><span class="toc-number">1.5.</span> <span class="toc-text">原型链（prototype-chain）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链-lookup-规则："><span class="toc-number">1.5.1.</span> <span class="toc-text">原型链 lookup 规则：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proto"><span class="toc-number">1.5.2.</span> <span class="toc-text">__proto__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性类型"><span class="toc-number">1.5.3.</span> <span class="toc-text">属性类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据属性"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">数据属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问器属性-getter-setter"><span class="toc-number">1.5.3.2.</span> <span class="toc-text">访问器属性: getter setter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#应用："><span class="toc-number">1.5.3.3.</span> <span class="toc-text">应用：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ECMAScript5-对象保护功能"><span class="toc-number">1.5.4.</span> <span class="toc-text">ECMAScript5 对象保护功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-number">1.6.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象构造"><span class="toc-number">1.7.</span> <span class="toc-text">对象构造</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂模式"><span class="toc-number">1.7.1.</span> <span class="toc-text">工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数模式"><span class="toc-number">1.7.2.</span> <span class="toc-text">构造函数模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型模式"><span class="toc-number">1.7.3.</span> <span class="toc-text">原型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合构造函数和原型模式-默认模式"><span class="toc-number">1.7.4.</span> <span class="toc-text">组合构造函数和原型模式 - [默认模式]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态原型模式"><span class="toc-number">1.7.5.</span> <span class="toc-text">动态原型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展模式-（寄生模式）"><span class="toc-number">1.7.6.</span> <span class="toc-text">扩展模式 （寄生模式）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#稳妥构造函数模式"><span class="toc-number">1.7.7.</span> <span class="toc-text">稳妥构造函数模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">1.8.</span> <span class="toc-text">继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-number">1.8.1.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合继承"><span class="toc-number">1.8.2.</span> <span class="toc-text">组合继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型式继承"><span class="toc-number">1.8.3.</span> <span class="toc-text">原型式继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#寄生式继承"><span class="toc-number">1.8.4.</span> <span class="toc-text">寄生式继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#寄生组合式继承"><span class="toc-number">1.8.5.</span> <span class="toc-text">寄生组合式继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象构造和原型链总结"><span class="toc-number">1.9.</span> <span class="toc-text">对象构造和原型链总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.10.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.10.1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行上下文堆栈"><span class="toc-number">1.11.</span> <span class="toc-text">执行上下文堆栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#执行上下文"><span class="toc-number">1.11.1.</span> <span class="toc-text">执行上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量对象（variable-object）"><span class="toc-number">1.11.2.</span> <span class="toc-text">变量对象（variable object）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#活动对象（activation-object）"><span class="toc-number">1.11.3.</span> <span class="toc-text">活动对象（activation object）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域链-scope-chain"><span class="toc-number">1.11.4.</span> <span class="toc-text">作用域链(scope chain)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包（closure）"><span class="toc-number">1.11.4.1.</span> <span class="toc-text">闭包（closure）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#This"><span class="toc-number">1.11.5.</span> <span class="toc-text">This</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bind、call、apply"><span class="toc-number">1.11.5.1.</span> <span class="toc-text">bind、call、apply</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行上下文总结"><span class="toc-number">1.11.6.</span> <span class="toc-text">执行上下文总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行过程"><span class="toc-number">1.12.</span> <span class="toc-text">执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#执行顺序"><span class="toc-number">1.12.1.</span> <span class="toc-text">执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键步骤"><span class="toc-number">1.12.2.</span> <span class="toc-text">关键步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键概念"><span class="toc-number">1.12.3.</span> <span class="toc-text">关键概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#词法分析"><span class="toc-number">1.12.4.</span> <span class="toc-text">词法分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟解析"><span class="toc-number">1.12.5.</span> <span class="toc-text">模拟解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完"><span class="toc-number">1.13.</span> <span class="toc-text">完</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.14.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
 
 
 
 
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
 
 
 
+    
+        <section id="comments">
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'liuyanjie'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+    
 
 
-  
-  
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/posts/js/">js</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
 
 </div>
       <footer id="footer">
