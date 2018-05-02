@@ -746,6 +746,302 @@
 
 </div>
             
+                
+<div class="post">
+
+    <div class="post-header index">
+        <h1 class="title">
+            <a href="/posts/JavaScript深入之执行上下文、变量对象、活动对象、词法作用域、闭包、执行过程/">
+                JavaScript深入之执行上下文、变量对象、活动对象、词法作用域、闭包、执行过程
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-04-12</span>
+            
+            
+                <a href="/posts/JavaScript深入之执行上下文、变量对象、活动对象、词法作用域、闭包、执行过程/#disqus_thread" class="comments article-comment-link">Comments</a>
+            
+            
+        </div>
+    </div>
+
+    
+        <div class="content">
+            <h1 id="JavaScript-Deep"><a href="#JavaScript-Deep" class="headerlink" title="JavaScript Deep"></a>JavaScript Deep</h1><p>Focus on concepts，not syntax.</p>
+<p>关注概念的理解，而不是语法。</p>
+<h2 id="执行上下文堆栈"><a href="#执行上下文堆栈" class="headerlink" title="执行上下文堆栈"></a>执行上下文堆栈</h2><ul>
+<li>EC(执行环境或者执行上下文，Execution Context)</li>
+<li>ECS(执行环境堆栈或者执行上下文堆栈，Execution Context Stack)</li>
+<li>VO(变量对象，Variable Object)</li>
+<li>AO(活动对象，Active Object)</li>
+<li>ScopeChain(作用域链)和 <code>[[scope]]</code> 属性</li>
+</ul>
+<p>有三种类型的ECMAScript代码：</p>
+<p><code>全局代码</code>、<code>函数代码</code>、<code>eval代码</code></p>
+<ul>
+<li>每个代码是在其执行上下文（EC）中被求值的。</li>
+<li>全局上下文只有一个，可能有多个函数执行上下文以及 <code>eval</code> 执行上下文。</li>
+<li>对一个函数的每次调用，会进入到函数执行上下文中，并对函数代码类型进行求值。</li>
+<li>每次对 <code>eval</code> 函数进行调用，会进入 <code>eval</code> 执行上下文并对其代码进行求值。</li>
+</ul>
+<blockquote>
+<p>注意，一个函数可能会创建无数的上下文，因为对函数的每次调用（即使这个函数递归的调用自己）都会生成一个具有新状态的上下文：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">bar</span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// call the same function,</span></span><br><span class="line"><span class="comment">// generate three different contexts in each call,</span></span><br><span class="line"><span class="comment">// with different context state (e.g. value of the "bar" argument)</span></span><br><span class="line">foo(<span class="number">10</span>);</span><br><span class="line">foo(<span class="number">20</span>);</span><br><span class="line">foo(<span class="number">30</span>);</span><br></pre></td></tr></table></figure>
+<p>一个 <code>执行上下文(EC)</code> 可能会触发另一个 <code>执行上下文(EC)</code>，如，一个函数调用另一个函数。从逻辑上来说，这是以栈的形式实现的，它叫作 <code>执行上下文栈(ECS)</code>。</p>
+<p>一个触发其他上下文的上下文叫作 <code>caller</code>，被触发的上下文叫作 <code>callee</code>，<code>callee</code> 在同一时间可能是一些其他 <code>callee</code> 的 <code>caller</code>。</p>
+<p>当一个 <code>caller</code> 触发（调用）了一个 <code>callee</code> ，这个 <code>caller</code> 会暂缓自身的执行，然后把控制权传递给 <code>callee</code>，控制权转移。</p>
+<p>这个 <code>callee</code> 被push到 <code>执行上下文栈(ECS)</code> 中，并成为一个 <code>活动的</code> <code>执行上下文</code>，在 <code>callee</code> 的上下文结束后（<code>callee</code> 可能简单的返回或者由于异常而退出，一个抛出的但没有被捕获的异常可能退出一个或者多个上下文），它会把控制权返回给 <code>caller</code>，然后 <code>caller</code> 的上下文继续执行直到它结束，以此类推。</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/caller" target="_blank" rel="noopener">Caller</a></p>
+<blockquote>
+<p>function.caller[Non-standard]<br>The function.caller property returns the function that invoked the specified function.<br>If the function f was invoked by the top level code, the value of f.caller is null, otherwise it’s the function that called f.<br>This property replaces the obsolete arguments.caller property of the arguments object.<br>The special property <code>__caller__</code>, which returned the activation object of the caller thus allowing to reconstruct the stack, was removed for security reasons.</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">n</span>) </span>&#123; g(n - <span class="number">1</span>); &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params">n</span>) </span>&#123; <span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123; f(n); &#125; <span class="keyword">else</span> &#123; stop(); &#125; &#125;</span><br><span class="line">f(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// f(2) -&gt; g(1) -&gt; f(1) -&gt; g(0) -&gt; stop()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// stop.caller === g &amp;&amp; f.caller === g &amp;&amp; g.caller === f</span></span><br></pre></td></tr></table></figure>
+<p>Example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">trace</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> f = trace, stack = <span class="string">'Stack trace:'</span>;</span><br><span class="line">  <span class="keyword">while</span> (f) &#123;</span><br><span class="line">    stack += <span class="string">'\n'</span> + f.name;</span><br><span class="line">    f = f.caller;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> stack;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunc</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> trace(); &#125;</span><br><span class="line"><span class="keyword">var</span> stacks = myFunc();</span><br><span class="line"><span class="built_in">console</span>.log(stacks);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> myFunc(); &#125;</span><br><span class="line"><span class="keyword">var</span> stacks = f();</span><br><span class="line"><span class="built_in">console</span>.log(stacks);</span><br></pre></td></tr></table></figure>
+<p>下图是上面代码的函数调用链，对应于 <code>执行上下文(EC)</code>，在引擎层面，函数只是 <code>执行上下文</code> 的一个属性。</p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/caller-chain.png" alt="caller-chain"></p>
+<p>所有ECMAScript程序的运行时可以用 <code>执行上下文栈（ECS）</code> 来表示，栈顶是当前 <code>活动的执行上下文</code>：</p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/ec-stack.png" alt="ec-stack"></p>
+<p>当程序开始的时候它会进入 <code>全局执行上下文</code>，此上下文位于栈顶并且是栈中的第一个元素。然后全局代码进行一些 <code>初始化</code>。</p>
+<p>当初始化完成之后，运行时系统就会等待一些事件，这些事件将会触发一些函数，从而进入新的执行上下文中。</p>
+<p>在下个图中，拥有一个 <code>函数上下文 EC1</code> 和 <code>全局上下文 GlobalEC</code>，当 <code>EC1</code> 进入和退出全局上下文的时候下面的栈将会发生变化：</p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/ec-stack-changes.png" alt="ec-stack-changes"></p>
+<p>这就是 ECMAScript 的运行时系统如何真正地管理代码执行的。</p>
+<p>栈中的每个 <code>执行上下文</code> 都可以用一个对象来表示。</p>
+<p>让我们来看看它的结构以及一个上下文到底需要什么状态（属性）来执行它的代码。</p>
+<h3 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h3><p>一个执行上下文可以抽象的表示为一个简单的对象。每一个执行上下文拥有一些属性（可以叫作上下文状态）用来跟踪或表示和它相关的代码的执行过程。</p>
+<p>在下图中展示了一个上下文的结构：</p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/execution-context.png" alt="execution-context"></p>
+<p>除了这三个必需的属性 <code>变量/活动对象</code>、<code>作用域链</code>、<code>this</code> 之外，<code>执行上下文</code> 可以拥有其他状态，这取决于实现。</p>
+<p>让我们详细看看上下文中的这些重要的属性。</p>
+<h3 id="变量对象（variable-object）"><a href="#变量对象（variable-object）" class="headerlink" title="变量对象（variable object）"></a>变量对象（variable object）</h3><p><code>变量对象</code> 是与 <code>执行上下文</code> 相关的 <code>数据作用域</code>，所以也可以叫做 <code>作用域对象</code>。</p>
+<p>它是一个与上下文相关的特殊对象，其中存储了在上下文中定义的 <code>变量</code> 和 <code>函数</code>。</p>
+<blockquote>
+<p>函数表达式（与函数声明相对）不包含在变量对象之中。</p>
+</blockquote>
+<p>变量对象是一个抽象概念。对于不同的上下文类型，在物理上，是使用不同的对象。</p>
+<p>在全局上下文中变量对象就是全局对象本身，这就是为什么我们可以通过 <code>全局对象的属性名</code> 来关联 <code>“全局变量”</code>。</p>
+<p>全局变量：</p>
+<p>JavaScript中并不存在 <code>全局变量</code>，所谓的全局变量，不过是 <code>Global对象的一个属性</code>，叫 <code>全局属性</code> 还差不多，或者叫 <code>全局变量对象</code>，变量和属性虽然都是数据的引用方式，但是却有很大差别。</p>
+<p>Example:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> global = global || <span class="built_in">window</span>;</span><br><span class="line">global.env = <span class="string">'production'</span>;</span><br><span class="line">NODE_ENV = <span class="string">'production'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(env);</span><br><span class="line"><span class="built_in">console</span>.log(global.NODE_ENV);</span><br><span class="line"><span class="comment">// 访问 全局属性 直接通过属性名就可以了。</span></span><br><span class="line"><span class="comment">// 这也是为什么被误称为 全局对象 的原因之一。</span></span><br></pre></td></tr></table></figure>
+<p>让我们在全局执行上下文中考虑下面这个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;&#125;       <span class="comment">// function declaration, FD</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;&#125;);    <span class="comment">// function expression, FE</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.foo == foo, <span class="built_in">window</span>.bar == bar);  <span class="comment">// true // true</span></span><br><span class="line"><span class="built_in">console</span>.log(baz);       <span class="comment">// ReferenceError, "baz" is not defined</span></span><br></pre></td></tr></table></figure>
+<p>之后，全局上下文的 <code>变量对象</code> 将会拥有如下属性：</p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/variable-object.png" alt="variable-object"></p>
+<p>函数 <code>baz</code> 是一个函数表达式，没有被包含在变量对象之中。这就是为什么当我们想要在函数自身之外访问它的时候会出现 <code>ReferenceError</code>。</p>
+<p>注意，与其他语言（比如C/C++）相比，在ECMAScript中只有函数可以创建一个新的作用域。在函数作用域中所定义的变量和内部函数在函数外边是不能直接访问到的，而且并不会污染全局变量对象。</p>
+<p>使用 <code>eval</code> 我们也会进入一个新的执行上下文。无论如何，<code>eval</code> 使用全局的变量对象或者使用 <code>caller</code>（比如eval被调用时所在的函数）的变量对象。</p>
+<p>那么函数和它的变量对象是怎么样的？</p>
+<p>在函数上下文中，<code>变量对象</code> 是以 <code>活动对象</code> 来表示的。</p>
+<p>为什么全局上下文中不需要 <code>活动对象</code>，而 <code>变量对象</code> 就是 <code>全局对象本身</code>？</p>
+<p>因为 <code>全局上下文</code> 只有一个，用 <code>全局对象</code> 即可作为 <code>变量对象</code> 提供名字查找，而同一函数可能 会同时存在多个 <code>函数上下文</code>，每个上下文各不相同，且 <code>函数上下文</code> 与 <code>全局上下文</code> 又有不同，所以引入了 <code>活动对象</code> 来表示 <code>变量对象</code>。</p>
+<h3 id="活动对象（activation-object）"><a href="#活动对象（activation-object）" class="headerlink" title="活动对象（activation object）"></a>活动对象（activation object）</h3><p>当一个函数被 <code>caller</code> 调用，一个特殊的对象，叫作 <code>活动对象</code>（activation object）将会被创建。</p>
+<p>这个对象中包含 <code>形参</code> 和 <code>arguments</code> 对象（是对形参的一个映射，但是值是通过索引来获取）。</p>
+<p><code>活动对象</code> 之后会做为函数上下文的 <code>变量对象</code> 来使用。</p>
+<p>换句话说，函数的 <code>活动对象</code> 就是一个同样简单的 <code>变量对象</code>，但是除了 <code>变量</code> 和 <code>函数声明</code> 之外，它还存储了 <code>形参</code> 和 <code>arguments</code> 对象，并叫作 <code>活动对象</code>。</p>
+<p>即：<code>活动对象</code> &lt;=&gt; <code>变量对象</code> + <code>形参</code> + <code>arguments</code> + <code>变量声明</code> + <code>函数声明</code></p>
+<p>全局上下文中并没有 <code>形参</code>，更没有 <code>arguments</code>，所以和函数上下文不同，这是全局上下文和函数上下文的不同之一。</p>
+<p>考虑如下例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> z = <span class="number">30</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;&#125;     <span class="comment">// FD</span></span><br><span class="line">  (<span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;&#125;);  <span class="comment">// FE</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">10</span>, <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<p>我们看下函数foo的上下文中的活动对象：</p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/activation-object.png" alt="activation-object"></p>
+<p>函数表达式baz还是没有被包含在 <code>变量/活动对象</code> 中。</p>
+<p>在ES5中 <code>变量对象</code> 和 <code>活动对象</code> 被并入了 <code>词法环境模型</code>（lexical environments model）。</p>
+<p>众所周知，在 ECMAScript 中我们可以使用内部函数，然后在这些内部函数中可以引用父函数的变量或者全局上下文中的变量。</p>
+<p>当我们把 <code>变量对象</code> 命名为 执行上下文的 <code>作用域对象</code>，与上面讨论的原型链相似，作用域对象 可以 形成一条链，叫作 <code>作用域链</code>。</p>
+<h3 id="作用域链-scope-chain"><a href="#作用域链-scope-chain" class="headerlink" title="作用域链(scope chain)"></a>作用域链(scope chain)</h3><p><code>作用域链</code> 是一个 <code>作用域对象</code>（即：<code>变量/活动对象</code>） 列表，代码中出现的标识符在这个列表中进行查找。</p>
+<p>这个规则还是与原型链同样简单：</p>
+<p>如果一个变量在函数自身的 <code>作用域对象</code>中没有找到，那么将会查找它父函数（外层函数）的 <code>作用域对象</code>，以此类推。</p>
+<p>就上下文而言，标识符指的是：<code>变量名称、函数声明、形参</code> 等。</p>
+<p>自由变量(free variables)：</p>
+<p>当一个函数在其代码中引用一个不是 <code>局部变量</code>（或者局部函数或者一个形参）的标识符，那么这个标识符就叫作 <code>自由变量</code>，搜索这些 <code>自由变量</code> 正好就要用到 <code>作用域链</code>。</p>
+<p>在通常情况下，<code>作用域链</code> 是一个包含所有 <code>caller的变量/活动对象</code> 加上（在作用域链头部的）<code>callee（自身）变量/活动对象</code> 的一个列表。</p>
+<p>这个 <code>作用域链</code> 也可以包含任何其他对象，比如，在上下文执行过程中动态加入到作用域链中的对象－像 <code>with对象</code> 或者特殊的 <code>catch从句（catch-clauses）对象</code>。</p>
+<p>当解析一个标识符的时候，会从作用域链中的 <code>变量对象</code> 开始查找，然后（如果这个标识符在函数自身的活动对象中没有被查找到）向作用域链的上一层查找－重复这个过程，就和原型链查找一样。</p>
+<p>综上：<code>作用域链</code> 可以看作是 <code>变量对象链</code>。</p>
+<p>我们可以假设通过隐式的 <code>__parent__</code> 属性 来和 <code>作用域链对象</code> 进行交互，这个属性指向作用域链中的下一个对象。</p>
+<p>这个方案可能在真实的 Rhino 代码中经过了测试，并且这个技术很明确得被用于ES5的词法环境中（在那里被叫作outer连接）。</p>
+<p>作用域链的另一个表现方式可以是一个简单的数组。利用 <code>__parent__</code> 概念，我们可以用下面的图来表现上面的例子（并且父变量对象存储在函数的 <code>[[Scope]]</code> 属性中）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="number">20</span>;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> z = <span class="number">30</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(x + y + z);</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/scope-chain.png" alt="scope-chain"></p>
+<p>在代码执行过程中，作用域链可以通过使用 <code>with语句</code> 和 <code>catch从句对象</code> 来增强。并且由于这些对象是简单的对象，它们可以拥有原型（和原型链）。</p>
+<p>这个事实导致作用域链查找变为两个维度：</p>
+<ol>
+<li>首先是作用域链连接，然后</li>
+<li>在每个作用域链连接上－深入作用域链连接的原型链（如果此连接拥有原型）。</li>
+</ol>
+<p>对于这个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.x = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> w = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">var</span> y = <span class="number">30</span>;</span><br><span class="line"><span class="comment">// in SpiderMonkey global object i.e. variable object of the global context inherits from "Object.prototype",</span></span><br><span class="line"><span class="comment">// 全局对象(global|window) 依然是 Object 对象的实例，所以会从 Object.prototype 继承 属性和方法</span></span><br><span class="line"><span class="comment">// so we may refer "not defined global variable x", which is found in the prototype chain</span></span><br><span class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 10</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// "foo" local variables</span></span><br><span class="line">  <span class="keyword">var</span> w = <span class="number">40</span>;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="number">100</span>;</span><br><span class="line">  <span class="comment">// "x" is found in the "Object.prototype", because &#123;z: 50&#125; inherits from it</span></span><br><span class="line">  <span class="keyword">with</span> (&#123;<span class="attr">z</span>: <span class="number">50</span>&#125;) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(w, x, y, z); <span class="comment">// 40, 10, 30, 50 // 关键在这里</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// after "with" object is removed from the scope chain,</span></span><br><span class="line">  <span class="comment">// "x" is again found in the AO of "foo" context;</span></span><br><span class="line">  <span class="comment">// variable "w" is also local</span></span><br><span class="line">  <span class="built_in">console</span>.log(x, w); <span class="comment">// 100, 40</span></span><br><span class="line">  <span class="comment">// and that's how we may refer shadowed global "w" variable in the browser host environment</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">window</span>.w); <span class="comment">// 20</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>我们可以给出如下的结构：</p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/scope-chain-with.png" alt="scope-chain-with"></p>
+<blockquote>
+<p>在 <code>GlobalVO</code> 向上查找时，会同时存在 <code>__parent__</code> 和 <code>__proto__</code>，即 <code>作用域链</code> 和 <code>原型链</code> 在引擎内部的表示对象上有了交点，在查找 <code>__parent__</code> 之前，首先查找 <code>__proto__</code> 链，此时，<code>作用域链</code> 已到达终点，也不需要继续查找。只在 <code>GlobalVO</code> <code>作用域链</code> 和 <code>原型链</code> 才会有交点。</p>
+</blockquote>
+<blockquote>
+<p>注意，不是在所有的实现中 <code>全局对象</code> 都是继承自 <code>Object.prototype</code>，但是通常 是这样的。</p>
+</blockquote>
+<p>由于所有 <code>父变量对象</code> 都存在，所以在内部函数中获取父函数中的数据没有什么特别－就是遍历作用域链去搜寻需要的变量。</p>
+<p>就像上边提及的，在一个上下文结束之后，它所有的状态和它自身都会被销毁，这个上下文（函数）可能会返回另一个函数，这个返回的函数之后可能在另一个上下文中被调用。<br>如果 <code>自由变量</code> 的上下文已经「消失」了，将会出现问题，有一个方式可以帮助我们解决这个问题，叫作 <code>闭包</code>，其在ECMAScript 中就是和 <code>作用域链</code> 的概念紧密相关的。</p>
+<p>父函数上下文被销毁之后，为了满足子函数查找 <code>自由变量</code> 的需求，子函数在创建的时候，需要保存父函数的 <code>执行上下文</code>，保存的字段 叫 <code>[[Scope]]</code>，这一方式被称为 <code>闭包</code>。</p>
+<h4 id="闭包（closure）"><a href="#闭包（closure）" class="headerlink" title="闭包（closure）"></a>闭包（closure）</h4><p>在 ECMAScript 中，函数是一级（<code>first-class</code>）对象。这意味着函数可以做为参数传递给其他函数 <code>「函数类型参数」（funargs）</code>。</p>
+<p>接收 <code>「函数类型参数」</code> 的函数叫作 <code>高阶函数</code>。或者，贴近数学一些，叫作 <code>高阶操作符</code>。同样函数也可以返回一个函数，<code>「函数类型值」（funvals）</code>。</p>
+<p>这有两个在概念上与 <code>「函数类型参数」</code> 和 <code>「函数类型值」</code> 相关的问题。</p>
+<p>并且这两个子问题在 <code>Funarg problem</code> 中很普遍。为了解决整个 <code>Funarg problem</code>，<code>闭包</code> 的概念被创造了出来。</p>
+<p><code>Funarg problem</code> 的第一个子问题是 <code>「向上funarg问题」</code>。它会在当一个函数从另一个函数中返回并且使用上面所提到的 <code>自由变量</code> 的时候出现。</p>
+<p>为了在即使 <code>父函数上下文销毁</code> 的情况下也能访问其中的变量，内部函数在被创建的时候会在它的 <code>[[Scope]]</code> 属性中保存 <code>父函数的作用域链</code>。</p>
+<p>所以当函数被调用的时候，它上下文的作用域链会被格式化成 <code>活动对象</code> 与 <code>[[Scope]]</code> 属性的和：</p>
+<p><code>Scope chain = AO + [[Scope]]</code>。</p>
+<p>函数在创建时会保存父函数的 <code>作用域链</code>，这个保存下来的 <code>作用域链</code> 将会在未来的函数调用时用来 <code>查找变量</code>。</p>
+<p>如果从对象引用层面来理解，<code>[[Scope]]</code> 被另外一个对象（函数）引用，引擎不会回收这些资源，所以闭包容易带来内存泄漏的隐患。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// "foo" returns a function and this returned function uses free variable "x"</span></span><br><span class="line"><span class="keyword">var</span> returnedFunction = foo();</span><br><span class="line"><span class="comment">// global variable "x"</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">20</span>;</span><br><span class="line"><span class="comment">// execution of the returned function</span></span><br><span class="line">returnedFunction(); <span class="comment">// 10, but not 20</span></span><br></pre></td></tr></table></figure>
+<p>这个类型的作用域叫作 <code>静态（或者词法）作用域</code>。我们看到 <code>变量x</code> 在返回的bar函数的 <code>[[Scope]]</code> 属性中被找到。</p>
+<p>通常来说，也存在动态作用域，那么上面例子中的 <code>变量x</code> 将会被解析成 <code>20</code>，而不是 <code>10</code>。但是，动态作用域在 ECMAScript 中没有被使用。</p>
+<p><code>Funarg problem</code> 的第二个子问题是 <code>「向下funarg问题」</code>。它会在当一个函数作为另一个函数的参数并且使用上面所提到的 <code>自由变量</code> 的时候出现。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// global "x"</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="comment">// global function</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">funArg</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// local "x"</span></span><br><span class="line">  <span class="keyword">var</span> x = <span class="number">20</span>;</span><br><span class="line">  <span class="comment">// there is no ambiguity, because we use global "x", </span></span><br><span class="line">  <span class="comment">// which was statically saved in [[Scope]] of the "foo" function,</span></span><br><span class="line">  <span class="comment">// but not the "x" of the caller's scope, which activates the "funArg"</span></span><br><span class="line">  funArg(); <span class="comment">// 10, but not 20</span></span><br><span class="line">&#125;)(foo); <span class="comment">// pass "down" foo as a "funarg"</span></span><br></pre></td></tr></table></figure>
+<p><code>词法作用域/静态作用域</code>：变量的作用域是在 <code>定义时</code> 决定而不是 <code>运行时</code> 决定，也就是说 <code>词法作用域</code> 取决于源码，通过静态分析就能确定，因此词法作用域也叫做静态作用域。<code>with</code> 和 <code>eval</code> 除外，所以只能说JS的作用域机制非常接近 <code>词法作用域（Lexical scope）</code>。</p>
+<p>我们可以断定 <code>静态作用域</code> 是一门语言拥有 <code>闭包</code> 的必需条件。但是，一些语言可能会同时提供动态和静态作用域，允许程序员做选择－什么应该 <code>包含</code> 在内和什么不应包含在内。</p>
+<p>由于在 ECMAScript 中只使用了 <code>静态作用域</code>，所以：ECMAScript 完全支持闭包，技术上是通过函数的 <code>[[Scope]]</code> 属性实现的。</p>
+<p>现在我们可以给闭包下一个准确的定义：<a href="https://zh.wikipedia.org/wiki/闭包_(计算机科学" target="_blank" rel="noopener">闭包</a> )</p>
+<p>在计算机科学中，闭包（英语：Closure），又称词法闭包（Lexical Closure）或函数闭包（function closures），是引用了自由变量的函数。<br>这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。<br>所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。<br>闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。</p>
+<p>闭包是一个代码块（在ECMAScript是一个函数）和以 <code>静态方式</code>/<code>词法方式</code> 进行存储的所有父作用域的一个集合体。所以，通过这些存储的作用域，函数可以很容易的找到 <code>自由变量</code>。</p>
+<p>闭包使得一个函数能够通过作用域链查找到另一个函数作用域中的变量。</p>
+<p>闭包影响了作用域链，尤其是那些被销毁的上下文。</p>
+<p>注意，由于每个（标准的）函数都在创建的时候保存了 <code>[[Scope]]</code>，所以理论上来讲，ECMAScript 中的所有函数都是闭包。</p>
+<p>另一个需要注意的重要事情是，多个函数可能拥有相同的父作用域，比如当我们拥有两个内部/全局函数的时候。</p>
+<p>在这种情况下，<code>[[Scope]]</code> 属性中存储的变量是在拥有相同父作用域链的所有函数之间共享的。</p>
+<p>一个闭包对变量进行的修改会体现在另一个闭包对这些变量的读取上：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">baz</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    foo: <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> ++x; &#125;,</span><br><span class="line">    bar: <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> --x; &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> closures = baz();</span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">  closures.foo(), <span class="comment">// 2</span></span><br><span class="line">  closures.bar()  <span class="comment">// 1</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/shared-scope.png" alt="shared-scope"></p>
+<p>确切来说这个特性在循环中创建多个函数的时候会使人非常困惑。在创建的函数中使用循环计数器的时候，一些程序员经常会得到非预期的结果，所有函数中的计数器都是同样的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; <span class="number">3</span>; k++) &#123;</span><br><span class="line">  data[k] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(k);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">data[<span class="number">0</span>](); <span class="comment">// 3, but not 0</span></span><br><span class="line">data[<span class="number">1</span>](); <span class="comment">// 3, but not 1</span></span><br><span class="line">data[<span class="number">2</span>](); <span class="comment">// 3, but not 2</span></span><br><span class="line"><span class="comment">// 这里有几种技术可以解决这个问题。</span></span><br><span class="line"><span class="comment">// 其中一种是在作用域链中提供一个额外的对象－比如，使用额外函数：</span></span><br><span class="line"><span class="keyword">var</span> data = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; <span class="number">3</span>; k++) &#123;</span><br><span class="line">  data[k] = (<span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(x);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;)(k); <span class="comment">// pass "k" value</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// now it is correct</span></span><br><span class="line">data[<span class="number">0</span>](); <span class="comment">// 0</span></span><br><span class="line">data[<span class="number">1</span>](); <span class="comment">// 1</span></span><br><span class="line">data[<span class="number">2</span>](); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>因为所有这些函数拥有同一个 <code>[[Scope]]</code>，这个属性中的循环计数器的值是最后一次所赋的值。</p>
+<p>建议了解一下其他语言闭包的支持情况。</p>
+<p>然后我们移动到下个部分，考虑一下执行上下文的最后一个属性，关于 this 值的概念。</p>
+<h3 id="This"><a href="#This" class="headerlink" title="This"></a>This</h3><p><code>this</code> 是一个与执行上下文相关的特殊对象。因此，它可以叫作 <code>上下文对象</code>，也就是用来指明执行上下文是在对象上触发的。</p>
+<p>任何对象都可以做为上下文中的 <code>this</code> 的值。在一些对 ECMAScript 执行上下文和部分 <code>this</code> 的描述中的所产生误解，<code>this</code> 经常被错误的描述成是变量对象的一个属性。</p>
+<p>正确的是：<code>this是执行上下文的一个属性，而不是变量对象的一个属性</code>。这个特性非常重要，因为如果 <code>this</code> 是变量对象的属性，<code>this</code> 会参与标识符解析过程，然而，<code>this</code> 从不会参与到标识符解析过程。</p>
+<p>换句话说，在代码中当访问 <code>this</code> 的时候，它的值是直接从 <code>执行上下文</code> 中获取的，并不需要任何作用域链查找。<code>this</code> 的值只在进入上下文的时候进行一次确定。</p>
+<p>顺便说一下，与 ECMAScript 相反，Python 的方法都会拥有一个被当作简单变量的 <code>self</code> 参数，这个变量的值在各个方法中是相同的的并且在执行过程中可以被更改成其他值。<br>在 ECMAScript 中，给 <code>this</code> 赋一个新值是不可能的，因为，它不是一个变量并且不存在于变量对象中。</p>
+<p>在全局上下文中，<code>this</code> 就等于 <code>全局对象</code> 本身，这也意味着 <code>this</code> 就是 <code>全局变量对象</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(x, <span class="keyword">this</span>.x, <span class="built_in">window</span>.x);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line">f(); <span class="comment">// 输出了全局对象</span></span><br></pre></td></tr></table></figure>
+<p>在函数上下文的情况下，对函数的每次调用，其中的 <code>this</code> 值可能是不同的。这个 <code>this</code> 值是通过函数调用表达式（也就是函数被调用的方式）的形式由 <code>caller</code> 所提供的。</p>
+<p>让我们通过例子看一下，对于一个代码相同的函数，<code>this</code> 值是如何在不同的调用中（函数触发的不同方式），由 <code>caller</code> 给出不同的结果的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">foo(); <span class="comment">// global object</span></span><br><span class="line">foo.prototype.constructor(); <span class="comment">// foo.prototype</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = &#123; <span class="attr">baz</span>: foo &#125;;</span><br><span class="line">bar.baz(); <span class="comment">// bar</span></span><br><span class="line"></span><br><span class="line">(bar.baz)();            <span class="comment">// also bar</span></span><br><span class="line">(bar.baz = bar.baz)();  <span class="comment">// but here is global object</span></span><br><span class="line">(bar.baz, bar.baz)();   <span class="comment">// also global object</span></span><br><span class="line">(<span class="literal">false</span> || bar.baz)();   <span class="comment">// also global object</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> otherFoo = bar.baz;</span><br><span class="line">otherFoo();             <span class="comment">// again global object</span></span><br></pre></td></tr></table></figure>
+<h4 id="bind、call、apply"><a href="#bind、call、apply" class="headerlink" title="bind、call、apply"></a><code>bind</code>、<code>call</code>、<code>apply</code></h4><p><code>call apply</code> 给了代码在控制 <code>this</code> 的能力。</p>
+<p><code>bind</code> 是基于 <code>call apply</code> 实现的高阶函数。</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind" target="_blank" rel="noopener">bind Polyfill</a>：fun.bind(thisArg[, arg1[, arg2[, …]]])<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// console.log(Function.prototype.apply.bind.call === Function.prototype.call);</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Function</span>.prototype.bind) &#123;</span><br><span class="line">  <span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">oThis</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">      <span class="comment">// closest thing possible to the ECMAScript 5</span></span><br><span class="line">      <span class="comment">// internal IsCallable function</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Function.prototype.bind - what is trying to be bound is not callable'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> aArgs   = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>),</span><br><span class="line">        fToBind = <span class="keyword">this</span>,</span><br><span class="line">        fNOP    = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">        fBound  = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> fToBind.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fNOP ? <span class="keyword">this</span> : oThis, aArgs.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数拥有 prototype</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.prototype) &#123;</span><br><span class="line">      <span class="comment">// native functions don't have a prototype</span></span><br><span class="line">      fNOP.prototype = <span class="keyword">this</span>.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果 this 是构造函数，fBound 继承相关属性</span></span><br><span class="line">    <span class="keyword">return</span> fBound;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>关于 <code>this</code> 绑定</p>
+<p>在 JavaScript 中，<code>this</code> 和 <code>函数</code> 之间的绑定时松散的，体现在我们可以轻易的通过 <code>call</code>、<code>apply</code> <code>指定</code> 或 <code>修改</code> <code>this</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#id'</span>).foreach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  $(<span class="keyword">this</span>).click();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="执行上下文总结"><a href="#执行上下文总结" class="headerlink" title="执行上下文总结"></a>执行上下文总结</h3><ul>
+<li><code>变量/活动对象</code>：记录运行时所需要的数据，变量、函数、形参、实参等。</li>
+<li><code>作用域链</code>：即 <code>变量/活动对象链</code>，为引擎进行变量查找提供基础。</li>
+<li><code>this</code>：指明了当前执行的函数作用在哪个对象身上，方法的作用对象是谁。</li>
+</ul>
+<p>全局上下文 和 函数上下文比较：</p>
+<p>在全局上下文中，<code>this=全局对象本身=变量对象</code>。</p>
+<p>在函数上下文中，<code>this</code> 是 <code>执行上下文</code> 的一个属性。</p>
+<p>所以这也解释了一些现象，<code>全局作用域</code> 下的 <code>变量或函数</code> 成为了 <code>全局对象的属性</code>了，如上面示例的代码。</p>
+<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p><a href="https://www.nosuchfield.com/2017/07/16/Talk-about-compilation-principles-1/" target="_blank" rel="noopener">聊聊编译原理（一） - 词法分析</a><br><a href="https://www.nosuchfield.com/2017/07/30/Talk-about-compilation-principles-2/" target="_blank" rel="noopener">聊聊编译原理（二） - 语法分析</a></p>
+<h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><ul>
+<li>编译型语言，编译步骤分为：<code>词法分析</code>、<code>语法分析</code>、<code>语义检查</code>、<code>代码优化</code> 和 <code>字节生成</code>。</li>
+<li>解释型语言，通过 <code>词法分析</code> 和 <code>语法分析</code> 得到 <code>语法分析树</code> 后，就可以开始 <code>解释执行</code> 了。</li>
+</ul>
+<p>这里是一个简单原始的关于解析过程的原理，仅作为参考，详细的解析过程还需要更深一步的研究。</p>
+<p>JavaScript 执行过程，如果一个 <code>文档流</code> 中包含多个 <code>script代码段</code>（用script标签分隔的js代码或引入的js文件），它们的运行顺序是：</p>
+<ul>
+<li>阶段一：解析<ul>
+<li>步骤1. 载入第一个代码段（js执行引擎并非一行一行地执行程序，而是一段一段地分析执行的）。</li>
+<li>步骤2. 做 <code>词法分析</code> -&gt; <code>[词法作用域]</code> 和 <code>语法分析</code> -&gt; <code>[语法分析树]</code>，如果有错则报语法错误(<code>Syntax Error</code>)（<code>解析时错误</code>，比如括号不匹配等），并跳转到步骤5。</li>
+<li>步骤3. 对 <code>var</code> 变量 和 <code>function</code> 定义 做 <code>预解析</code>（永远不会报错的，因为只解析正确的声明）。</li>
+</ul>
+</li>
+<li>阶段二：执行<ul>
+<li>步骤4. 执行代码段，有错则报错（<code>运行时错误</code>，比如变量未定义）。</li>
+<li>步骤5. 如果还有下一个代码段，则读入下一个代码段，重复步骤2。</li>
+<li>步骤6. 结束</li>
+</ul>
+</li>
+</ul>
+<h3 id="关键步骤"><a href="#关键步骤" class="headerlink" title="关键步骤"></a>关键步骤</h3><ul>
+<li>解析(2,3)：通过 <code>词法分析</code>、<code>语法分析</code> 和 <code>预解析</code> 构造的 <code>语法分析树</code>。</li>
+<li>执行( 4 )：执行具体的某个函数，JS引擎在执行每个函数实例时，会创建一个 <code>执行上下文</code>。</li>
+</ul>
+<h3 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h3><ul>
+<li>词法分析 -&gt; 词法作用域<ul>
+<li>变量的作用域是在定义时决定而不是执行时决定，也就是说词法作用域取决于源码，通过静态分析就能确定，因此词法作用域也叫做静态作用域。</li>
+<li><code>with</code> 和 <code>eval</code> 除外，所以只能说JS的作用域机制非常接近 <code>词法作用域</code>（Lexical scope）。</li>
+<li><code>词法分析</code>（英语：lexical analysis）是计算机科学中将 <code>字符序列</code> 转换为 <code>标记（token）序列</code> 的过程。</li>
+<li><code>词法分析器（扫描器）</code> 的功能输入源程序，按照构词规则分解成一系列单词符号。如：<code>关键字</code>、<code>标识符</code>、<code>常数</code>、<code>运算符</code>、<code>分界符</code> 等。</li>
+</ul>
+</li>
+</ul>
+<p>实际上，<code>运行时的作用域链</code> 并不是 <code>词法分析</code> 阶段 得到的，而是运行时得到的，但是在 <code>词法分析阶段</code> 能够确定作用域是一定，要不然写代码的人无法确定作用域，代码无法编写和理解。<br>在相同规则下，人和解释器对代码的理解是一致的。<br>某些情况下，静态分析也无法分析出完整的作用域链，比如递归的情况，这个阶段根本无法预知递归深度，无法得出实际的作用域链。</p>
+<ul>
+<li>语法分析树（SyntaxTree）<ul>
+<li>可以直观地表示出这段代码的相关信息，具体的实现就是JS引擎创建了一些表。</li>
+<li>用来记录每个方法的 <em>内部变量集（variables）</em>、<em>内嵌函数集（functions）</em> 和 <em>作用域（scope）</em> 等。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>执行环境/执行上下文（ExecutionContext）<ul>
+<li>可理解为记录当前执行的方法 <em>外部描述信息</em> 的对象。</li>
+<li>记录所执行函数的 <em>活动对象（activeObject）</em>、<em>作用域链（scope-chain）</em>、<em>this</em>。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>活动对象（activeObject）<ul>
+<li>可理解为记录当前执行的方法 <em>内部执行信息</em> 的对象。</li>
+<li>记录 <em>内部变量集（variables）</em>、<em>内嵌函数集（functions）</em>、<em>实参（arguments）</em>、<em>作用域链（scopeChain）</em> 等执行所需信息。</li>
+<li>直接 <em>内部变量集（variables）</em>、<em>内嵌函数集（functions）</em> 是直接 <em>语法分析树</em> 复制过来的。</li>
+<li>执行时，活动对象里的内部变量集全部被设置为 <code>undefined</code>, 创建<em>形参（parameters</em>）和<em>实参（arguments）</em>对象, 执行方法内的赋值语句，这才会对变量集中的变量进行赋值。</li>
+<li>作用域链 闭包。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>作用域链<ul>
+<li>简单的理解为 <em>变量对象链</em>，解释器可见的。</li>
+<li>词法作用域 的实现机制就是 作用域链（scopeChain），作用域链 是一套按名称查找（Name Lookup）的机制。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>闭包<ul>
+<li>闭包 是一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。</li>
+<li>保护函数内的变量安全，实现 <em>私有属性</em> 和 <em>私有方法</em>（不能被外部访问）。</li>
+<li>闭包就是将 <em>函数内部和函数外部</em> 连接起来的一座桥梁，让外部环境有途径访问内部变量。</li>
+<li>闭包函数可以访问所保持的作用域链上的外部环境。</li>
+</ul>
+</li>
+</ul>
+<h3 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h3><p>lexical-analyzer Lexer Tokenizer</p>
+<p>词法分析主要分为3步：</p>
+<ul>
+<li>第1步：分析 <code>形参</code></li>
+<li>第2步：分析 <code>变量声明</code></li>
+<li>第3步：分析 <code>函数声明</code></li>
+</ul>
+<p>在词法分析阶段，<code>变量声明</code> 和 <code>函数声明</code> 被提升</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'global'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(str);   <span class="comment">// undefined</span></span><br><span class="line">  <span class="keyword">var</span> str = <span class="string">'local'</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(str);   <span class="comment">// local</span></span><br><span class="line">  <span class="keyword">var</span> str;</span><br><span class="line">  <span class="built_in">console</span>.log(str);   <span class="comment">// local</span></span><br><span class="line">  str = <span class="string">'local'</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<p><code>var str = &#39;local&#39;; &lt;==&gt; var str; str = &#39;local&#39;;</code></p>
+<p>函数表达式中，变量声明部分被提升，但是知道执行到这一句时，变量才被赋值为一个函数，所以函数表达式需要在使用之前赋值，而函数声明这不需要。</p>
+<h3 id="模拟解析"><a href="#模拟解析" class="headerlink" title="模拟解析"></a>模拟解析</h3><p>模拟代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> escope = <span class="built_in">require</span>(<span class="string">'escope'</span>);</span><br><span class="line"><span class="keyword">var</span> esprima = <span class="built_in">require</span>(<span class="string">'esprima'</span>);</span><br><span class="line"><span class="keyword">var</span> estraverse = <span class="built_in">require</span>(<span class="string">'estraverse'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> code = <span class="string">`</span></span><br><span class="line"><span class="string">var i = 1, j = 2, k = 3;</span></span><br><span class="line"><span class="string">function a(o, p, x, q) &#123;</span></span><br><span class="line"><span class="string">  var x = 4;</span></span><br><span class="line"><span class="string">  console.log(i);</span></span><br><span class="line"><span class="string">  function b(r, s) &#123;</span></span><br><span class="line"><span class="string">    var i = 11, y = 5;</span></span><br><span class="line"><span class="string">    console.log(i);</span></span><br><span class="line"><span class="string">    function c(t) &#123;</span></span><br><span class="line"><span class="string">      var z = 6;</span></span><br><span class="line"><span class="string">      console.log(i);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    //函数表达式</span></span><br><span class="line"><span class="string">    var d = function () &#123;</span></span><br><span class="line"><span class="string">      console.log(y);</span></span><br><span class="line"><span class="string">    &#125;;</span></span><br><span class="line"><span class="string">    c(60);</span></span><br><span class="line"><span class="string">    d();</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  b(40, 50);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">a(10, 20, 30);</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ast = esprima.parse(code);</span><br><span class="line"><span class="keyword">var</span> scopeManager = escope.analyze(ast);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> currentScope = scopeManager.acquire(ast);   <span class="comment">// global scope</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// console.dir(ast, &#123;depth: null&#125;);</span></span><br><span class="line"><span class="built_in">console</span>.dir(scopeManager, &#123;<span class="attr">depth</span>: <span class="literal">null</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/estree.png" alt="ESTree"></p>
+<p>上面的模拟代码生成了JS解析过程所产生的用于在执行阶段使用的信息，但是并不代表解释器和这个一样的。</p>
+<p>这些分析工具有很多，他们大都用于 <code>代码压缩</code>、<code>代码混淆</code>、<code>代码转换（ES6-&gt;ES5，babel，ts-&gt;js）</code>、<code>代码优化</code>、<code>学习研究</code> 等。</p>
+
+        </div>
+    
+
+</div>
+            
         </section>
     </div>
 </div>
@@ -776,6 +1072,10 @@
             
             <li>
                 <a class="footer-post" href="/posts/JavaScript基础/">JavaScript基础</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/posts/JavaScript深入之执行上下文、变量对象、活动对象、词法作用域、闭包、执行过程/">JavaScript深入之执行上下文、变量对象、活</a>
             </li>
             
         </ul>
