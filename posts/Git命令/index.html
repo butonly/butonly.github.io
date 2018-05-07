@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Git命令本文件包含常用命令
+查看帮助1git help
+配置管理
+配置文件
+
+Git 提供了一个叫做 git config 的工具，专门用来配置或读取相应的工作环境变量。而正是由这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。
+这些变量可以存放在以下三个不同的地方：
+
+/etc/gi">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Liu Yanjie">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Git命令"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Liuyanjie&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>Git命令 - Liuyanjie&#39;s Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/posts/Git命令/">
+                Git命令
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2018-05-07</span>
+            
+            
+                <a href="#disqus_thread" class="comments">Comments</a>
+            
+            
+                <span class="category">
+                    <a href="/categories/GIT/">GIT</a>
+                </span>
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h1 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h1><p>本文件包含常用命令</p>
+<h2 id="查看帮助"><a href="#查看帮助" class="headerlink" title="查看帮助"></a>查看帮助</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h2><ul>
+<li>配置文件</li>
+</ul>
+<p>Git 提供了一个叫做 git config 的工具，专门用来配置或读取相应的工作环境变量。而正是由这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。</p>
+<p>这些变量可以存放在以下三个不同的地方：</p>
+<ul>
+<li>/etc/gitconfig ：系统中对所有用户都普遍适用的配置。若使用 git config 时用 –system 选项，读写的就是这个文件。</li>
+<li>~/.gitconfig   ：用户目录下的配置文件只适用该用户。若使用 git config 时用 –global 选项，读写的就是这个文件。</li>
+<li>.git/config    ：当前项目的 Git 目录中的配置文件，这里的配置仅仅针对当前项目有效。</li>
+</ul>
+<p>每一个级别的配置都会覆盖上层的相同配置，所以 .git/config 里的配置会覆盖 /etc/gitconfig 中的同名变量。</p>
+<ul>
+<li>配置用户信息（必须配置）</li>
+</ul>
+<p>修改全局用户信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"John Doe"</span></span><br><span class="line">git config --global user.email johndoe@example.com</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置文本编辑器</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.editor vim</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置差异分析工具</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global merge.tool vimdiff</span><br></pre></td></tr></table></figure>
+<p>Git 可以理解 kdiff3，tkdiff，meld，xxdiff，emerge，vimdiff，gvimdiff，ecmerge，和 opendiff 等合并工具的输出信息。</p>
+<ul>
+<li>查看配置信息</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br><span class="line">user.name=Scott Chacon</span><br><span class="line">user.email=schacon@gmail.com</span><br><span class="line">color.status=auto</span><br><span class="line">color.branch=auto</span><br><span class="line">color.interactive=auto</span><br><span class="line">color.diff=auto</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>常用配置</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"xxx"</span>                       <span class="comment"># 配置用户名</span></span><br><span class="line">git config --global user.email <span class="string">"xxx@xxx.com"</span>              <span class="comment"># 配置邮件</span></span><br><span class="line">git config --global color.ui <span class="literal">true</span></span><br><span class="line">git config --global color.status auto</span><br><span class="line">git config --global color.diff auto</span><br><span class="line">git config --global color.branch auto</span><br><span class="line">git config --global color.interactive auto</span><br></pre></td></tr></table></figure>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h3 id="Refspec"><a href="#Refspec" class="headerlink" title="Refspec"></a><a href="https://git-scm.com/book/zh/v1/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-The-Refspec" target="_blank" rel="noopener">Refspec</a></h3><p>refspec主要用来表示本地版本库和远程版本库之间的分支标签等数据的对应关系。</p>
+<p>指定获取哪些<code>远程refs</code>更新<code>本地refs</code>，当没有在命令行显示指明<code>refspec</code>，会按照下面的默认策略执行。</p>
+<p>Refspec 的格式是一个可选的 + 号，接着是 <src>:<dst> 的格式，这里 <src> 是远端上的引用格式， <dst> 是将要记录在本地的引用格式。可选的 + 号告诉 Git 在即使不能快速演进的情况下，也去强制更新它。</dst></src></dst></src></p>
+<p>从远程获取指定数据到本地，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">branch master 	&lt;==&gt; +refs/heads/master:+refs/heads/master</span><br><span class="line">branch A:a 		&lt;==&gt; +refs/heads/A:+refs/heads/a</span><br><span class="line">tag &lt;tag&gt; 		&lt;==&gt; +refs/tags/&lt;tag&gt;:refs/tags/&lt;tag&gt;</span><br></pre></td></tr></table></figure>
+<p><code>refspec</code>一般不会出现在命令行中，而是由命令自动写在配置文件中，但是可以在命令行中直接使用。</p>
+<h3 id="GIT-URLS"><a href="#GIT-URLS" class="headerlink" title="GIT-URLS"></a>GIT-URLS</h3><p>一般来说，URL中含有<strong>协议、远程主机名、版本库路径</strong>等信息。依赖于不同协议，有些信息可以省略。GIT支持<strong>HTTP、HTTPS、SSH、GIT</strong>协议。</p>
+<p>以下是相关协议的语法:</p>
+<ul>
+<li>ssh://[user@]host.xz[:port]/path/to/repo.git/</li>
+<li>git://host.xz[:port]/path/to/repo.git/</li>
+<li>http[s]://host.xz[:port]/path/to/repo.git/</li>
+<li>ftp[s]://host.xz[:port]/path/to/repo.git/</li>
+</ul>
+<p>扩展了用户名之后的:</p>
+<ul>
+<li>ssh://[user@]host.xz[:port]/~[user]/path/to/repo.git/</li>
+<li>git://host.xz[:port]/~[user]/path/to/repo.git/</li>
+<li>[user@]host.xz:/~[user]/path/to/repo.git/</li>
+</ul>
+<p>GIT同时也支持本地版本库，URL如下：</p>
+<ul>
+<li>/path/to/repo.git/</li>
+<li>file:///path/to/repo.git/</li>
+</ul>
+<h3 id="远程仓库REMOTES"><a href="#远程仓库REMOTES" class="headerlink" title="远程仓库REMOTES"></a>远程仓库REMOTES</h3><p>远程仓库配置主要包含的就是一系列<code>GIT-URLS</code>及<code>refspec</code>等数据，并赋予一个名字<code>&lt;repository&gt;</code>。</p>
+<p>可以使用以下当中的任意一个来替代<code>&lt;repository&gt;</code>参数，<code>&lt;repository&gt;</code>即表示一个仓库。</p>
+<p>以下内容指明了Git如何确定 <code>&lt;repository&gt;:&lt;branch&gt;</code>。</p>
+<h4 id="Named-remote-in-configuration-file-GIT-DIR-config"><a href="#Named-remote-in-configuration-file-GIT-DIR-config" class="headerlink" title="Named remote in configuration file $GIT_DIR/config"></a>Named remote in configuration file <code>$GIT_DIR/config</code></h4><p>在之前使用<code>git-remote</code>、<code>git-config</code>时可以选择为远程版本库提供一个名字，也可以手动编辑<code>$GIT_DIR/config</code>文件。这个名字可以用来访问版本库。<br>在命令行上，会默认使用这个名字下的远程路径<code>refspec</code>。</p>
+<p>查看<code>config</code>文件应该会看到这样一个结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[remote &quot;&lt;name&gt;&quot;]</span><br><span class="line">	url = &lt;url&gt;</span><br><span class="line">	pushurl = &lt;pushurl&gt;</span><br><span class="line">	push = &lt;refspec&gt;</span><br><span class="line">	fetch = &lt;refspec&gt;</span><br></pre></td></tr></table></figure>
+<p><code>pushurl</code>只能用于push，默认使用<code>url</code></p>
+<p>这个结构记录了REMOTES信息。</p>
+<h4 id="Named-file-in-GIT-DIR-remotes"><a href="#Named-file-in-GIT-DIR-remotes" class="headerlink" title="Named file in　$GIT_DIR/remotes"></a>Named file in　<code>$GIT_DIR/remotes</code></h4><p>也可以选择提供一个特定名称的文件放到<code>$GIT_DIR/remotes</code>目录下，文件中URL将被用于访问版本库。</p>
+<p>在命令行没有提供<code>refspec</code>时文件中<code>refspec</code>将会被使用。</p>
+<p>文件会是如下格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">URL: one of the above URL format</span><br><span class="line">Push: &lt;refspec&gt;</span><br><span class="line">Pull: &lt;refspec&gt;</span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">* Push:用于`git push`</span><br><span class="line">* Pull:用于`git pull`</span><br><span class="line"></span><br><span class="line">#### Named file in `$GIT_DIR/branches`</span><br><span class="line"></span><br><span class="line">也可以选择提供一个特定名称的文件放到`$GIT_DIR/branches`目录下，文件中URL将被用于访问版本库。</span><br><span class="line"></span><br><span class="line">文件会是如下格式：</span><br></pre></td></tr></table></figure>
+<p><url>#<head><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;url&gt; 必须的; #&lt;head&gt; 可选的.</span><br><span class="line"></span><br><span class="line">配置文件中并没有指明`refspecs`，所以Git需要按照某种策略执行。</span><br><span class="line"></span><br><span class="line">根据不同操作，如果你没有在命令行提供，Git将会使用以下`refspecs`中的一种：</span><br><span class="line"></span><br><span class="line">`&lt;branch&gt;` 是 `$GIT_DIR/branches` 目录下的文件名，`&lt;head&gt;` 默认值是 `master`.</span><br><span class="line"></span><br><span class="line">git fetch uses:</span><br></pre></td></tr></table></figure></head></url></p>
+<p>refs/heads/<head>:refs/heads/<branch><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git push uses:</span><br></pre></td></tr></table></figure></branch></head></p>
+<p>HEAD:refs/heads/<head><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### CONFIGURED REMOTE-TRACKING BRANCHES</span><br><span class="line"></span><br><span class="line">你经常定期的重复的获取和远程版本库往来，为了保持跟踪远程版本库进展，`git fetch`允许你配置`remote.&lt;repository&gt;.fetch`变量。</span><br><span class="line"></span><br><span class="line">变量形式如下：</span><br></pre></td></tr></table></figure></head></p>
+<p>[remote “origin”]<br>    fetch = +refs/heads/<em>:refs/remotes/origin/</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">This configuration is used in two ways:</span><br><span class="line"></span><br><span class="line">When git fetch is run without specifying what branches and/or tags to fetch on the command line, e.g. git fetch origin or git fetch, remote.&lt;repository&gt;.fetch values are used as the refspecs—​they specify which refs to fetch and which local refs to update. The example above will fetch all branches that exist in the origin (i.e. any ref that matches the left-hand side of the value, refs/heads/*) and update the corresponding remote-tracking branches in the refs/remotes/origin/* hierarchy.</span><br><span class="line"></span><br><span class="line">When git fetch is run with explicit branches and/or tags to fetch on the command line, e.g. git fetch origin master, the &lt;refspec&gt;s given on the command line determine what are to be fetched (e.g. master in the example, which is a short-hand for master:, which in turn means &quot;fetch the master branch but I do not explicitly say what remote-tracking branch to update with it from the command line&quot;), and the example command will fetch only the master branch. The remote.&lt;repository&gt;.fetch values determine which remote-tracking branch, if any, is updated. When used in this way, the remote.&lt;repository&gt;.fetch values do not have any effect in deciding what gets fetched (i.e. the values are not used as refspecs when the command-line lists refspecs); they are only used to decide where the refs that are fetched are stored by acting as a mapping.</span><br><span class="line"></span><br><span class="line">The latter use of the remote.&lt;repository&gt;.fetch values can be overridden by giving the --refmap=&lt;refspec&gt; parameter(s) on the command line.</span><br><span class="line"></span><br><span class="line">#### 输出</span><br></pre></td></tr></table></figure></p>
+<p> <flag> <summary> <from> -&gt; <to> [<reason>]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">flags A single character indicating the status of the ref:</span><br><span class="line"></span><br><span class="line">* `(space)` for a successfully fetched fast-forward;</span><br><span class="line">* `+`       for a successful forced update;</span><br><span class="line">* `-`       for a successfully pruned ref;</span><br><span class="line">* `t`       for a successful tag update;</span><br><span class="line">* `*`       for a successfully fetched new ref;</span><br><span class="line">* `!`       for a ref that was rejected or failed to update; and</span><br><span class="line">* `=`       for a ref that was up to date and did not need fetching.</span><br><span class="line"></span><br><span class="line">summary</span><br><span class="line"></span><br><span class="line">For a successfully fetched ref, the summary shows the old and new values of the ref in a form suitable for using as an argument to git log </span><br><span class="line"></span><br><span class="line">(this is &lt;old&gt;..&lt;new&gt; in most cases, and &lt;old&gt;...&lt;new&gt; for forced non-fast-forward updates).</span><br><span class="line"></span><br><span class="line">from</span><br><span class="line">The name of the remote ref being fetched from, minus its refs/&lt;type&gt;/ prefix. In the case of deletion, the name of the remote ref is &quot;(none)&quot;.</span><br><span class="line"></span><br><span class="line">to</span><br><span class="line">The name of the local ref being updated, minus its refs/&lt;type&gt;/ prefix.</span><br><span class="line"></span><br><span class="line">reason</span><br><span class="line">A human-readable explanation. In the case of successfully fetched refs, no explanation is needed. For a failed ref, the reason for failure is described.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 版本库管理</span><br><span class="line"></span><br><span class="line">Git是一个分布式的版本控制系统，这意味着在Git中版本库有**本地版本库**和**远程版本库**之分。</span><br><span class="line">每个远程仓库可以有多个本地仓库，同时一个本地版本库可以同时对应多个远程版本库，多个远程版本库是从一个最原始的版本库Fork产生的，本质上就是以一个版本库为基础，创建了另外一个新的版本库，这些版本库直接可以通过`PullRequest`操作进行仓库的交互。</span><br><span class="line">本地仓库对应的远程仓库记录在`.git/config`文件中。本地仓库可以于多个的远程仓库`pull/push`代码。</span><br><span class="line"></span><br><span class="line">### 初始化仓库</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">mkdir repo</span><br><span class="line">cd repo</span><br><span class="line">git init                                                  # 初始化本地git仓库</span><br></pre></td></tr></table></figure></reason></to></from></summary></flag></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git+ssh://git@192.168.53.168/VT.git             <span class="comment"># clone远程仓库</span></span><br></pre></td></tr></table></figure>
+<h3 id="仓库维护"><a href="#仓库维护" class="headerlink" title="仓库维护"></a>仓库维护</h3><h4 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git remote [-v | --verbose]</span><br><span class="line">git remote [-v | --verbose] show [-n] &lt;name&gt;…​</span><br><span class="line">git remote [-v | --verbose] update [-p | --prune] [(&lt;group&gt; | &lt;remote&gt;)…​]</span><br><span class="line">git remote add [-t &lt;branch&gt;] [-m &lt;master&gt;] [-f] [--[no-]tags] [--mirror=&lt;fetch|push&gt;] &lt;name&gt; &lt;url&gt;</span><br><span class="line">git remote rename &lt;old&gt; &lt;new&gt;</span><br><span class="line">git remote remove &lt;name&gt;</span><br><span class="line">git remote set-head &lt;name&gt; (-a | --auto | -d | --delete | &lt;branch&gt;)</span><br><span class="line">git remote set-branches [--add] &lt;name&gt; &lt;branch&gt;…​</span><br><span class="line">git remote get-url 			[--push] [--all] &lt;name&gt;</span><br><span class="line">git remote set-url 			[--push] &lt;name&gt; &lt;newurl&gt; [&lt;oldurl&gt;]</span><br><span class="line">git remote set-url --add 	[--push] &lt;name&gt; &lt;newurl&gt;</span><br><span class="line">git remote set-url --delete [--push] &lt;name&gt; &lt;url&gt;</span><br><span class="line">git remote prune [-n | --dry-run] &lt;name&gt;…​</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">git remote                                          		<span class="comment"># 列出已经存在的远程分支</span></span><br><span class="line">git remote -v                                       		<span class="comment"># 查看远程主机的地址</span></span><br><span class="line">git remote show   remote_name                       		<span class="comment"># 查看该远程主机的详细信息</span></span><br><span class="line">git remote add    remote_name remote_url            		<span class="comment"># 添加远程主机</span></span><br><span class="line">git remote remove remote_name                       		<span class="comment"># 删除远程主机</span></span><br><span class="line">git remote rename remote_name new_remote_name       		<span class="comment"># 重命名远程主机</span></span><br><span class="line"></span><br><span class="line">git remote get-url remote_name                      		<span class="comment"># 查看远程主机地址</span></span><br><span class="line">git remote <span class="built_in">set</span>-url remote_name git://new.url.here   		<span class="comment"># 修改远程主机地址</span></span><br><span class="line">git remote <span class="built_in">set</span>-url remote_name --add 	git://new.url.here  <span class="comment"># 修改远程主机地址</span></span><br><span class="line">git remote <span class="built_in">set</span>-url remote_name --delete git://new.url.here  <span class="comment"># 删除远程主机地址</span></span><br><span class="line"></span><br><span class="line">git remote prune [-n | --dry-run] &lt;name&gt;…​           <span class="comment"># 删除某个远程名下过期的分支，即在远程删除本地存在的分支</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># see http://stackoverflow.com/questions/1856499/differences-between-git-remote-update-and-fetch</span></span><br><span class="line">git remote [-v | --verbose] update [-p | --prune] [(&lt;group&gt; | &lt;remote&gt;)…​]</span><br><span class="line"></span><br><span class="line">git remote <span class="built_in">set</span>-head 		<span class="comment"># 可以 设置（增加、修改、删除） 默认分支</span></span><br><span class="line">git remote <span class="built_in">set</span>-branches</span><br></pre></td></tr></table></figure>
+<p>添加一个远程仓库的时候，除了指定仓库地址，可以对与仓库交互时的一些行为等进行设置，具体参见<a href="https://git-scm.com/docs/git-remote" target="_blank" rel="noopener">官方文档</a>。</p>
+<h4 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git fetch [&lt;options&gt;] [&lt;repository&gt; [&lt;refspec&gt;…​]]</span><br><span class="line">git fetch [&lt;options&gt;] &lt;group&gt;</span><br><span class="line">git fetch --multiple [&lt;options&gt;] [(&lt;repository&gt; | &lt;group&gt;)…​]</span><br><span class="line">git fetch --all [&lt;options&gt;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git fetch                                                  	<span class="comment"># 更新git remote中所有的远程repo 所包含分支的最新commit-id，将其记录到.git/FETCH_HEAD文件中（不更新本地分支，另需merge）</span></span><br><span class="line">git fetch -all                  							<span class="comment"># 获取所有远程分支</span></span><br><span class="line">git fetch remote-repo                                      	<span class="comment"># 更新名称为 remote-repo 的远程repo上的所有分支的最新commit-id，将其记录。</span></span><br><span class="line">git fetch remote-repo remote-branch-name                   	<span class="comment"># 更新名称为 remote-repo 的远程repo上的分支：remote-branch-name，可以用来测试远程主机的远程分支是否存在，如果存在，返回0，如果不存在，返回128，抛出一个异常.</span></span><br><span class="line">git fetch remote-repo remote-branch-name:<span class="built_in">local</span>-branch-name 	<span class="comment"># 更新名称为 remote-repo 的远程repo上的分支：remote-branch-name，并在本地创建 local-branch-name 本地分支保存远端分支的所有数据。</span></span><br><span class="line">git fetch --dry-run 										<span class="comment"># Show what would be done, without making any changes.</span></span><br><span class="line">git fetch -f | --force 										<span class="comment"># 当使用refspec(&lt;rbranch&gt;:&lt;lbranch&gt;)时，跳过亲子关系检查，强制更新本地分支。</span></span><br><span class="line">git fetch -p | --prune                                    	<span class="comment"># 获取所有原创分支并清除服务器上已删掉的分支</span></span><br><span class="line">git fetch -t | --tags 										<span class="comment"># 从远程获取数据时获取tags，默认</span></span><br><span class="line">git fetch -n | --no-tags 									<span class="comment"># 从远程获取数据时去除tags</span></span><br><span class="line">git fetch --progress --verbose 								<span class="comment"># 显示进度及冗长日志</span></span><br></pre></td></tr></table></figure>
+<p>FETCH_HEAD：是一个版本链接，记录在本地的一个文件中，指向着目前已经从远程仓库取下来的分支的末端版本。</p>
+<p>执行过fetch操作的项目都会存在一个<code>FETCH_HEAD</code>列表，这个列表保存在，其中每一行对应于远程服务器的一个分支.</p>
+<p>当前分支指向的<code>FETCH_HEAD</code>，就是这个文件第一行对应的那个分支。</p>
+<p>一般来说，存在两种情况:</p>
+<ul>
+<li>如果没指定远程分支，<code>FETCH_HEAD</code> 为 <code>master</code></li>
+<li>如果指定了远程分支，<code>FETCH_HEAD</code> 为 指定的 <code>远程分支</code>，在这种情况下，不会在本地创建本地远程分支，因为:这个操作是<code>git pull origin branch-name</code>的第一步，而对应的pull操作，并不会在本地创建新的branch.</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git fetch origin :branch-local 等价于: git fetch origin master:branch-local</span></span><br><span class="line">git fetch origin branch-remote:branch-local</span><br></pre></td></tr></table></figure>
+<ul>
+<li>首先执行上面的fetch操作</li>
+<li>使用远程branch-remote分支在本地创建branch-local(但不会切换到该分支)</li>
+<li>如果本地不存在branch-local分支，则会自动创建一个新的branch-local分支</li>
+<li>如果本地已存在branch-local分支，并且是`fast forward’模式，则自动合并两个分支，否则，会阻止以上操作</li>
+</ul>
+<p>fetch 用法与三处分支关系图</p>
+<p>三处分支关系图 </p>
+<p>git fetch 用于取回更新<br>取回远程所有分支的更新</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch [originName]：参数是远程源名</span><br></pre></td></tr></table></figure>
+<p>用于取回该远程源所有的更新<br>注意：取回的更新是是放在.git\refs\remotes\origin目录下，打开该目录可看到远程源的所有分支 </p>
+<p>—dev<br>—master<br>—…</p>
+<p>取回远程特定分支的更新</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch [originName] [branchName]</span><br></pre></td></tr></table></figure>
+<p>注意：虽然我们取回了更新，fetch取回的之后的更新的保存位置保存在<code>.git\refs\remotes\origin</code>目录下，那么如何恢复这些更新到工作区呢？</p>
+<p>同步工作区与<code>.git</code>仓库</p>
+<p>工作区为空，以fetch回来的某分支的更新在工作区新建分支，并自动与该远程分支建立追踪关系</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b [newBranch] [originName]/[remoteBranchName]</span><br></pre></td></tr></table></figure>
+<p>上面命令表示，在originName/remoteBranchName的基础上，创建一个新分支，并建立追踪关系。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge [originName]/[branchName]</span><br></pre></td></tr></table></figure>
+<p>合并远程分支的更新到当前工作分支（但不建立追踪关系） </p>
+<h4 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull [options] [&lt;repository&gt; [&lt;refspec&gt;…​]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master  <span class="comment"># 获取远程分支master并merge到当前分支</span></span><br></pre></td></tr></table></figure>
+<p>在默认模式下，<code>git pull</code>等价于以下两步:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch ...</span><br><span class="line">git merge FETCH_HEAD</span><br></pre></td></tr></table></figure>
+<p>所以<code>git pull</code>的参数主要由<code>git fetch</code>和<code>git merge</code>的参数组成。</p>
+<p>git pull 的运行过程：</p>
+<ul>
+<li>首先，基于本地的<code>FETCH_HEAD</code>记录，比对本地的<code>FETCH_HEAD</code>记录与远程仓库的版本号，</li>
+<li>然后<code>git fetch</code>获得当前指向的远程分支的后续版本的数据，</li>
+<li>然后再利用<code>git merge</code>将其与本地的当前分支合并。</li>
+</ul>
+<p>若有多个 remote，git pull [remote name] 所做的事情是：</p>
+<ul>
+<li>fetch [remote name] 的所有分支</li>
+<li>寻找本地分支有没有 tracking 这些分支的，若有则 merge 这些分支，若没有则 merge 当前分支</li>
+</ul>
+<p>另外，若只有一个 remote，假设叫 origin，那么 git pull 等价于 git pull origin；平时养成好习惯，没谱的时候都把 【来源】带上。</p>
+<p>怎么知道 tracking 了没有？</p>
+<ul>
+<li>如果你曾经这么推过：<code>git push -u origin master</code>，那么你执行这条命令时所在的分支就已经 <code>tracking to origin/master</code> 了，-u 的用处就在这里</li>
+<li>如果你记不清了：<code>cat .git/config</code>，由此可见，tracking 的本质就是指明 pull 的 merge 动作来源。别忘了：pull = fetch + merge。</li>
+</ul>
+<p>总结:</p>
+<ul>
+<li><code>git pull = git fetch + merge</code></li>
+<li><code>git fetch</code> 拿到了远程所有分支的更新，<code>cat .git/FETCH_HEAD</code> 可以看到其状态，若是 not-for-merge 则不会有接下来的 merge 动作</li>
+<li>merge 动作的默认目标是当前分支，若要切换目标，可以直接切换分支</li>
+<li>merge 动作的来源则取决于你是否有 tracking，若有则读取配置自动完成，若无则请指明【来源】</li>
+</ul>
+<p>需要提及的一点是:</p>
+<p>pull操作, 不应该涉及三方合并 或 衍合操作<br>换个说法: pull 应该总是 fast forward 的。 为了达到这样一个效果, 在真正push操作之前, 我倾向于使用衍合, 在本地对代码执行合并操作。</p>
+<h4 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">git push </span><br><span class="line">	   [--all | --mirror | --tags] </span><br><span class="line">	   [--follow-tags] </span><br><span class="line">	   [--atomic] </span><br><span class="line">	   [-n | --dry-run] </span><br><span class="line">	   [--receive-pack=&lt;git-receive-pack&gt;]</span><br><span class="line">	   [--repo=&lt;repository&gt;] </span><br><span class="line">	   [-f | --force] </span><br><span class="line">	   [-d | --delete] </span><br><span class="line">	   [--prune] </span><br><span class="line">	   [-v | --verbose]</span><br><span class="line">	   [-u | --<span class="built_in">set</span>-upstream] </span><br><span class="line">	   [--push-option=&lt;string&gt;]</span><br><span class="line">	   [--[no-]signed|--sign=(<span class="literal">true</span>|<span class="literal">false</span>|<span class="keyword">if</span>-asked)]</span><br><span class="line">	   [--force-with-lease[=&lt;refname&gt;[:&lt;expect&gt;]]]</span><br><span class="line">	   [--no-verify] </span><br><span class="line">	   [&lt;repository&gt; [&lt;refspec&gt;…​]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git push 													<span class="comment"># 如果当前分支只有一个追踪分支，那么主机名都可以省略</span></span><br><span class="line">git push origin HEAD 										<span class="comment"># 将当前分支push到远程master分支</span></span><br><span class="line">git push origin master                                      <span class="comment"># 将master分支push到远程master分支</span></span><br><span class="line">git push -u origin master 									<span class="comment"># 如果当前分支与多个主机存在追踪关系，则可以使用-u选项指定一个默认主机，这样后面就可以不加任何参数使用git push</span></span><br><span class="line">git push --<span class="built_in">set</span>-upstream origin master 						<span class="comment"># 同上</span></span><br><span class="line">git push --all origin  										<span class="comment"># 将所有本地分支都推送到origin主机。</span></span><br><span class="line">git push --force origin 									<span class="comment"># 如果远程主机的版本比本地版本更新，推送时Git会报错，如果你一定要推送，可以使用–force选项。</span></span><br><span class="line"></span><br><span class="line">git push --prune 											<span class="comment"># 删除在本地没有对应分支的远程分支</span></span><br><span class="line">git push origin :hotfixes/BJVEP933                          <span class="comment"># 删除远程仓库的hotfixes/BJVEP933分支</span></span><br><span class="line">git push origin :master 									<span class="comment"># 删除origin主机的master分支，相当于推送空分支到远程</span></span><br><span class="line">git push origin --delete master 							<span class="comment"># 删除origin主机的master分支</span></span><br><span class="line">git push --tags                                             <span class="comment"># 把所有tag推送到远程仓库</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>simple  模式: 不带任何参数的git push，默认只推送当前分支。2.0以上版本，默认此方式。</li>
+<li>matching模式: 会推送所有有对应的远程分支的本地分支。</li>
+</ul>
+<p>配置模式<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global push.default matching</span><br><span class="line">$ git config --global push.default simple</span><br></pre></td></tr></table></figure></p>
+<h4 id="submodule"><a href="#submodule" class="headerlink" title="submodule"></a>submodule</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git submodule [--quiet] add [-b &lt;branch&gt;] [-f|--force] [--name &lt;name&gt;]</span><br><span class="line">	      [--reference &lt;repository&gt;] [--depth &lt;depth&gt;] [--] &lt;repository&gt; [&lt;path&gt;]</span><br><span class="line">git submodule [--quiet] status [--cached] [--recursive] [--] [&lt;path&gt;…​]</span><br><span class="line">git submodule [--quiet] init [--] [&lt;path&gt;…​]</span><br><span class="line">git submodule [--quiet] deinit [-f|--force] (--all|[--] &lt;path&gt;…​)</span><br><span class="line">git submodule [--quiet] update [--init] [--remote] [-N|--no-fetch]</span><br><span class="line">	      [--[no-]recommend-shallow] [-f|--force] [--rebase|--merge]</span><br><span class="line">	      [--reference &lt;repository&gt;] [--depth &lt;depth&gt;] [--recursive]</span><br><span class="line">	      [--<span class="built_in">jobs</span> &lt;n&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git submodule [--quiet] summary [--cached|--files] [(-n|--summary-limit) &lt;n&gt;]</span><br><span class="line">	      [commit] [--] [&lt;path&gt;…​]</span><br><span class="line">git submodule [--quiet] foreach [--recursive] &lt;<span class="built_in">command</span>&gt;</span><br><span class="line">git submodule [--quiet] sync [--recursive] [--] [&lt;path&gt;…​]</span><br></pre></td></tr></table></figure>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p>Git作为一个版本控制系统，主要就是对文件的修改历史进行追踪，自然而然对应一系列文件管理操作。</p>
+<p>文件管理可以当作是文件状态管理，一般仓库中的文件可能存在于这三种状态：</p>
+<ol>
+<li>Untracked files → 文件未被跟踪；</li>
+<li>Changes to be committed → 文件已暂存，这是下次提交的内容；</li>
+<li>Changes bu not updated → 文件被修改，但并没有添加到暂存区。如果 commit 时没有带 -a 选项，这个状态下的文件不会被提交。</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line"><span class="comment"># On branch master</span></span><br><span class="line"><span class="comment"># Changes to be committed:</span></span><br><span class="line"><span class="comment">#   (use "git reset HEAD &lt;file&gt;..." to unstage)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#    new file:   file2</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Changed but not updated:</span></span><br><span class="line"><span class="comment">#   (use "git add &lt;file&gt;..." to update what will be committed)</span></span><br><span class="line"><span class="comment">#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#    modified:   file</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Untracked files:</span></span><br><span class="line"><span class="comment">#   (use "git add &lt;file&gt;..." to include in what will be committed)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#    file3</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>status</li>
+<li>diff</li>
+<li>reset</li>
+</ul>
+<h3 id="git-add"><a href="#git-add" class="headerlink" title="git add"></a>git add</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">git add </span><br><span class="line">	  [--verbose | -v]</span><br><span class="line">	  [--dry-run | -n]</span><br><span class="line">	  [--force | -f]</span><br><span class="line">	  [--interactive | -i]</span><br><span class="line">	  [--patch | -p]</span><br><span class="line">	  [--edit | -e]</span><br><span class="line">	  [--[no-]all | --[no-]ignore-removal | [--update | -u]]</span><br><span class="line">	  [--intent-to-add | -N]</span><br><span class="line">	  [--refresh]</span><br><span class="line">	  [--ignore-errors]</span><br><span class="line">	  [--ignore-missing]</span><br><span class="line">	  [--chmod=(+|-)x]</span><br><span class="line">	  [--]</span><br><span class="line">	  [&lt;pathspec&gt;…​]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add Documentation/\*.txt   		<span class="comment"># 添加文件</span></span><br><span class="line">git add -f node_modules/bluebird 	<span class="comment"># 强制添加文件，跳过忽略列表</span></span><br></pre></td></tr></table></figure>
+<h3 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h3><p><a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="noopener">Commit message 和 Change log 编写指南</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">git commit </span><br><span class="line">       [-a | --interactive | --patch]</span><br><span class="line">	   [-s]</span><br><span class="line">	   [-v]</span><br><span class="line">	   [-u&lt;mode&gt;]</span><br><span class="line">	   [--amend]</span><br><span class="line">	   [--dry-run]</span><br><span class="line">	   [(-c | -C | --fixup | --squash) &lt;commit&gt;]</span><br><span class="line">	   [-F &lt;file&gt; | -m &lt;msg&gt;]</span><br><span class="line">	   [--reset-author]</span><br><span class="line">	   [--allow-empty]</span><br><span class="line">	   [--allow-empty-message]</span><br><span class="line">	   [--no-verify]</span><br><span class="line">	   [-e]</span><br><span class="line">	   [--author=&lt;author&gt;]</span><br><span class="line">	   [--date=&lt;date&gt;]</span><br><span class="line">	   [--cleanup=&lt;mode&gt;]</span><br><span class="line">	   [--[no-]status]</span><br><span class="line">	   [-i | -o] [-S[&lt;keyid&gt;]]</span><br><span class="line">	   [--]</span><br><span class="line">	   [&lt;file&gt;…​]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git commit 							<span class="comment"># 提交的是暂存区里面的内容，也就是 Changes to be committed 中的文件。</span></span><br><span class="line">git commit -a  						<span class="comment"># 除了将暂存区里的文件提交外，还提交 Changes bu not updated 中的文件。</span></span><br><span class="line">git commit -a -m <span class="string">'commit info'</span> 		<span class="comment"># 注释，如果没有 -m，会默认会使用vi编辑注释。</span></span><br><span class="line">git commit -am <span class="string">"This is a commit"</span>   <span class="comment"># 同上，合并提交，将add和commit合为一步</span></span><br><span class="line">git commit --amend                  <span class="comment"># 对上一次提交进行修改，合并上一次提交（用于反复修改）</span></span><br><span class="line">git commit --amend -a               <span class="comment"># 提交时忘记使用 -a 选项，导致 Changes bu not updated 中的内容没有被提交</span></span><br></pre></td></tr></table></figure>
+<h3 id="git-rm"><a href="#git-rm" class="headerlink" title="git rm"></a>git rm</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm [-f | --force] [-n] [-r] [--cached] [--ignore-unmatch] [--quiet] [--] &lt;file&gt;…​</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git rm Documentation/\*.txt</span><br><span class="line">git rm -f git-*.sh</span><br></pre></td></tr></table></figure>
+<h3 id="git-mv"><a href="#git-mv" class="headerlink" title="git mv"></a>git mv</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git mv &lt;options&gt;…​ &lt;args&gt;…​</span><br><span class="line">git mv [-v] [-f] [-n] [-k] &lt;<span class="built_in">source</span>&gt; &lt;destination&gt;</span><br><span class="line">git mv [-v] [-f] [-n] [-k] &lt;<span class="built_in">source</span>&gt; ... &lt;destination directory&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git mv old_name new_name            <span class="comment"># 重命名</span></span><br><span class="line">git mv -f old_name new_name         <span class="comment"># 强制重命名，即时目标名称已经存在</span></span><br><span class="line">git mv -k old_name new_name         <span class="comment"># 跳过会导致错误的动作</span></span><br><span class="line">git mv -v old_name new_name         <span class="comment"># 报告被移动文件</span></span><br><span class="line">git mv --dry-run old_name new_name  <span class="comment"># 只显示将会发生什么</span></span><br></pre></td></tr></table></figure>
+<h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status [&lt;options&gt;…​] [--] [&lt;pathspec&gt;…​]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status     <span class="comment"># 显示状态</span></span><br><span class="line">git status -s  <span class="comment"># 显示简短信息</span></span><br><span class="line">git status -b  <span class="comment"># 显示分支状态</span></span><br></pre></td></tr></table></figure>
+<h3 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git diff [options] [&lt;commit&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [options] --cached [&lt;commit&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [options] &lt;commit&gt; &lt;commit&gt; [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [options] &lt;blob&gt; &lt;blob&gt;</span><br><span class="line">git diff [options] [--no-index] [--] &lt;path&gt; &lt;path&gt;</span><br></pre></td></tr></table></figure>
+<p><a href="https://en.wikipedia.org/wiki/Diff_utility" target="_blank" rel="noopener">Diff_utility</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git diff 				<span class="comment"># 查看尚未暂存的文件更新了哪些部分，不加参数直接输入。此命令比较的是工作目录(Working tree)和暂存区域快照(index)之间的差异，也就是修改之后还没有暂存起来的变化内容。</span></span><br><span class="line">git diff --cached 		<span class="comment"># 查看已经暂存起来的文件(staged)和上次提交时的快照之间(HEAD)的差异</span></span><br><span class="line">git diff --staged 		<span class="comment"># 显示的是下一次commit时会提交到HEAD的内容(不带-a情况下)</span></span><br><span class="line">git diff HEAD 			<span class="comment"># 显示工作版本(Working tree)和HEAD的差别</span></span><br><span class="line">git diff topic master 	<span class="comment"># 直接将两个分支上最新的提交做diff</span></span><br><span class="line">git diff topic...master <span class="comment"># 输出自topic和master分别开发以来，master分支上的changed。</span></span><br><span class="line">git diff --<span class="built_in">stat</span> 		<span class="comment"># 查看简单的diff结果，可以加上--stat参数</span></span><br><span class="line">git diff <span class="built_in">test</span> 			<span class="comment"># 查看当前目录和另外一个分支的差别 显示当前目录和另一个叫'test'分支的差别</span></span><br><span class="line">git diff HEAD -- ./lib 	<span class="comment"># 显示当前目录下的lib目录和上次提交之间的差别（更准确的说是在当前分支下）</span></span><br><span class="line">git diff HEAD^ HEAD 	<span class="comment"># 比较上次提交commit和上上次提交</span></span><br><span class="line">git diff SHA1 SHA2 		<span class="comment"># 比较两个历史版本之间的差异</span></span><br></pre></td></tr></table></figure>
+<h3 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset [-q] [&lt;tree-ish&gt;] [--] &lt;paths&gt;…​</span><br><span class="line">git reset (--patch | -p) [&lt;tree-ish&gt;] [--] [&lt;paths&gt;…​]</span><br><span class="line">git reset [--soft | --mixed [-N] | --hard | --merge | --keep] [-q] [&lt;commit&gt;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset --mixed id   <span class="comment"># (默认)是将git的HEAD变了(也就是提交记录变了),但文件并没有改变，(也就是working tree并没有改变). 取消了commit和add的内容.</span></span><br><span class="line">git reset --soft  id   <span class="comment"># 实际上，是git reset –mixed id 后,又做了一次git add.即取消了commit的内容.</span></span><br><span class="line">git reset --hard  id   <span class="comment"># 是将git的HEAD变了,文件也变了.</span></span><br></pre></td></tr></table></figure>
+<p>按改动影响范围排序如下: soft (commit) &lt; mixed (commit + add) &lt; hard (commit + add + local working)</p>
+<h3 id="暂存区"><a href="#暂存区" class="headerlink" title="暂存区"></a>暂存区</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git stash                       <span class="comment"># 暂存当前修改，将所有至为HEAD状态</span></span><br><span class="line">git stash list                  <span class="comment"># 查看所有暂存</span></span><br><span class="line">git stash show -p stash@&#123;0&#125;     <span class="comment"># 参考第一次暂存</span></span><br><span class="line">git stash apply stash@&#123;0&#125;       <span class="comment"># 应用第一次暂存</span></span><br></pre></td></tr></table></figure>
+<h2 id="历史管理"><a href="#历史管理" class="headerlink" title="历史管理"></a>历史管理</h2><p>特殊符号:<br>     ^ 代表父提交,当一个提交有多个父提交时,可以通过在^后面跟上一个数字,表示第几个父提交: ^相当于^1.<br>     ~ <n>相当于连续的<n>个^.</n></n></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD                                     <span class="comment"># 将当前版本重置为HEAD（通常用于merge失败回退）</span></span><br><span class="line">git revert dfb02e6e4f2f7b573337763e5c0013802e392818       <span class="comment"># 撤销提交dfb02e6e4f2f7b573337763e5c0013802e392818</span></span><br></pre></td></tr></table></figure>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><p>GIT是一个分布式的结构，有本地版本库和远程版本库，便有了本地分支和远程分支的区别了。</p>
+<p>本地分支和远程分支在<code>git push</code>的时候可以随意指定，交错对应，只要不出现版本从图即可。</p>
+<p>分支关系：</p>
+<ul>
+<li>上游分支，upstream，即指父分支。</li>
+<li>追踪分支，本地分支和远程分支绑定，在<code>pull/push</code>时可以自动关联分支。</li>
+</ul>
+<p>在git进行本地和远程交互时，git需要知道本地分支和对应的远程分支，但是通常不需要指定，因为git自动推断出对应关系并进行分支追踪，这也是为什么书写命令时可以省略很多参数。</p>
+<p>如果你从这里克隆，Git 的 clone 命令会为你自动将其命名为 origin，拉取它的所有数据，创建一个指向它的 master 分支的指针，并且在本地将其命名为 origin/master。<br>Git 也会给你一个与 origin 的 master 分支在指向同一个地方的本地 master 分支，这样你就有工作的基础。</p>
+<ul>
+<li>追踪分支</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git branch --track local_branch_name remote_branch_name</span></span><br><span class="line">git branch --track expermental origin/expermental</span><br></pre></td></tr></table></figure>
+<p>远程跟踪分支是远程分支状态的引用。它们是你不能移动的本地引用，当你做任何网络通信操作时，它们会自动移动。远程跟踪分支像是你上次连接到远程仓库时，那些分支所处状态的书签。</p>
+<p>它们以 (remote)/(branch) 形式命名。</p>
+<p>从一个远程跟踪分支检出一个本地分支会自动创建一个叫做 “跟踪分支”（有时候也叫做 “上游分支”）。 跟踪分支是与远程分支有直接关系的本地分支。 如果在一个跟踪分支上输入 git pull，Git 能自动地识别去哪个服务器上抓取、合并到哪个分支。</p>
+<p>当克隆一个仓库时，它通常会自动地创建一个跟踪 origin/master 的 master 分支。</p>
+<p>上游快捷方式:当设置好跟踪分支后，可以通过 @{upstream} 或 @{u} 快捷方式来引用它。 所以在 master 分支时并且它正在跟踪 origin/master 时，如果愿意的话可以使用 git merge @{u} 来取代 git merge origin/master。</p>
+<ul>
+<li>查看分支</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git branch                  <span class="comment"># 显示本地分支</span></span><br><span class="line">git branch -a               <span class="comment"># 显示所有分支</span></span><br><span class="line">git branch -r               <span class="comment"># 显示所有原创分支</span></span><br><span class="line">git branch --contains 50089 <span class="comment"># 显示包含提交50089的分支</span></span><br><span class="line">git branch --merged         <span class="comment"># 显示所有已合并到当前分支的分支</span></span><br><span class="line">git branch --no-merged      <span class="comment"># 显示所有未合并到当前分支的分支</span></span><br><span class="line">git branch -vv 				<span class="comment"># 将所有的本地分支列出来并且包含更多的信息</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建分支</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch <span class="built_in">test</span>             <span class="comment"># 创建test分支</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>检出/切换/创建分支</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b `master_copy`            <span class="comment"># 从当前分支创建新分支`master_copy`并检出</span></span><br><span class="line">git checkout -b master master_copy       <span class="comment"># 从当前分支创建新分支`master_copy`并检出</span></span><br><span class="line">git checkout -b devel origin/develop     <span class="comment"># 从远程分支develop创建新本地分支devel并检出，但是不建立对应的追踪关系</span></span><br><span class="line">git checkout features/performance        <span class="comment"># 检出已存在的features/performance分支</span></span><br><span class="line">git checkout --track hotfixes/BJVEP933   <span class="comment"># 检出远程分支hotfixes/BJVEP933并创建本地跟踪分支</span></span><br><span class="line">git checkout -- README                   <span class="comment"># 检出head版本的README文件（可用于修改错误回退）</span></span><br><span class="line">git checkout v2.0                        <span class="comment"># 检出版本v2.0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout --orphan gh-pages</span><br></pre></td></tr></table></figure>
+<ul>
+<li>合并分支</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge origin/master                 <span class="comment"># 合并远程master分支至当前分支</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除分支</li>
+</ul>
+<p>删除一个分支的前提是：该分支完全合并到其上游分支，或者无上游分支。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch -d hotfixes/BJVEP933     <span class="comment"># 删除分支（本分支修改已合并到其他分支）</span></span><br><span class="line">git branch -D hotfixes/BJVEP933     <span class="comment"># 强制删除分支  ===&gt;  git branch --delete --force hotfixes/BJVEP933</span></span><br><span class="line">git branch -d -r branchname         <span class="comment"># 删除远程branchname分支</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除远程分支</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete serverfix</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重命名分支</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -m master master_copy        <span class="comment"># 本地分支改名</span></span><br><span class="line">git branch -M oldbranch newbranch       <span class="comment"># 重命名分支，使用-M强制重命名。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>分支追踪</li>
+</ul>
+<p>git clone时只在本地创建与远程同名的默认分支，并建立追踪关系</p>
+<p>工作区新建的分支需要与远程分支建立关系时：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --<span class="built_in">set</span>-upstream [branchName] [originName]/[remoteBranchName] <span class="comment"># 将本地分支与远程某分支建立追踪关系（并没有要求名字必须相同）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch --track [originName]/[remoteBranchName] <span class="comment"># 将自己当前工作分支与某远程分支建立联系 </span></span><br><span class="line">git branch --<span class="built_in">set</span>-upstream-to [originName]/[remoteBranchName]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u [originName] [branchName]:[remoteBranchName] 是先建立[branchName]:[remoteBranchName] <span class="comment"># 追踪对应关系，再把本地更新推上去 省略[branchName]则代表是当前工作分支 -u参数是upstream的意思</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull -u [originName] [branchName]:[remoteBranchName] <span class="comment"># 只负责拉下某个远程分支的更新到本地某分支，但是 无法建立追踪关系</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push、git pull、git push --all <span class="comment"># 这些缺省指定分支和参数的命令最好在已经指定了追踪关系后使用</span></span><br></pre></td></tr></table></figure>
+<p>查看追踪分支<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch -vv</span><br><span class="line">cat .git/config</span><br><span class="line">git config --list</span><br></pre></td></tr></table></figure></p>
+<p>情景1：本地有分支，把分支更新推送到远程版本库（远程版本库还没有对应的分支）<br>git push -u origin newbranch<br>-u参数的作用：本地新建分支，远程仓库并没有该新分支，-u代表的意思：1.在远程仓库创建新版本库：newbranch；2.将本地新分支与新建的远程分支建立联系；3.push新分支上的文件上远程新分支去</p>
+<p>情景2：远程有分支，本地还没有创建对应的分支</p>
+<p>方案一：</p>
+<p>本地新建分支<br>在现有分支的基础上新建分支：见上方创建分支<br>创建一个新的空分支<br>git symbolic-ref HEAD refs/heads/newbranch<br>rm .git/index<br>git clean -fdx </p>
+<p>取回远程分支的代码<br>git pull [originName] [remoteBranchNaem] </p>
+<p>这样就能在本地创建一个全新的分支且与远程同步并不发生冲突了<br>情景3：本地和远程都没分支 ===&gt; 划归到情景 1 或 2</p>
+<p>情景4：本地和远程有相同数量的分支 ===&gt; 建立分支追踪即可</p>
+<p>删除本地分支和远程分支</p>
+<p>删除本地分支：<br>$ git branch -D mybranch1 </p>
+<p>删除远程分支：<br>git push [originName] –delete [branchName] </p>
+<ul>
+<li>分支同步</li>
+</ul>
+<p>如何在本地删除分支后，使远程的该分支也得到删除？</p>
+<p>再使用下面的命令删除远程分支，相当于把一个空的分支推送到远程分支上，达到删除的目的，注意：不能删除设置的默认分值，删除时会报错<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :mybranch1</span><br></pre></td></tr></table></figure></p>
+<p>如何在删除远程分支后，使本地分支也得到删除？</p>
+<p>远程主机删除了某个分支，默认情况下，git pull 不会在拉取远程分支的时候，删除对应的本地分支。这是为了防止，由于其他人操作了远程主机，导致git pull不知不觉删除了本地分支。 </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull -p [origin]</span><br></pre></td></tr></table></figure>
+<h2 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git tag                                 <span class="comment"># 显示已存在的tag</span></span><br><span class="line">git tag -r 								<span class="comment"># 查看远程版本</span></span><br><span class="line">git tag v2.0   							<span class="comment"># 创建标签</span></span><br><span class="line">git tag -a v2.0 -m <span class="string">'xxx'</span>                <span class="comment"># 增加v2.0的tag，带有注释</span></span><br><span class="line">git tag -d v2.0                         <span class="comment"># 删除标签</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull origin --tags 					<span class="comment"># 合并远程仓库的tag到本地</span></span><br><span class="line">git push origin --tags 					<span class="comment"># 上传本地tag到远程仓库</span></span><br></pre></td></tr></table></figure>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=short | git shortlog [&lt;options&gt;]</span><br><span class="line">git shortlog [&lt;options&gt;] [&lt;revision range&gt;] [[\--] &lt;path&gt;…​]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span>                                                   <span class="comment"># 显示提交日志</span></span><br><span class="line">git <span class="built_in">log</span> -3                                                <span class="comment"># 显示3行日志 -n为n行</span></span><br><span class="line">git <span class="built_in">log</span> --<span class="built_in">stat</span>                                            <span class="comment"># 显示提交日志及相关变动文件</span></span><br><span class="line">git <span class="built_in">log</span> -p -m</span><br><span class="line">git <span class="built_in">log</span> v2.0                                              <span class="comment"># 显示v2.0的日志</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=format:<span class="string">'%h %s'</span> --graph                   <span class="comment"># 图示提交日志</span></span><br><span class="line">git <span class="built_in">log</span> --oneline --number 							      <span class="comment"># : 每条log只显示一行,显示number条.</span></span><br><span class="line">git <span class="built_in">log</span> --oneline --graph                                 <span class="comment"># :可以图形化地表示出分支合并历史.</span></span><br><span class="line">git <span class="built_in">log</span> branchname                                        <span class="comment"># 可以显示特定分支的log.</span></span><br><span class="line">git <span class="built_in">log</span> --oneline branch1 ^branch2                        <span class="comment"># 可以查看在分支1,却不在分支2中的提交.^表示排除这个分支(Window下可能要给^branch2加上引号).</span></span><br><span class="line">git <span class="built_in">log</span> --decorate                                        <span class="comment"># 会显示出tag信息.</span></span><br><span class="line">git <span class="built_in">log</span> --author=[author name]                            <span class="comment"># 可以指定作者的提交历史.</span></span><br><span class="line">git <span class="built_in">log</span> --since --before --until --after                  <span class="comment"># 根据提交时间筛选log.</span></span><br><span class="line">git <span class="built_in">log</span> --no-merges                                       <span class="comment"># 可以将merge的commits排除在外.</span></span><br><span class="line">git <span class="built_in">log</span> --grep=keywords                                   <span class="comment"># 根据commit信息过滤log</span></span><br><span class="line">git <span class="built_in">log</span> -p:                                               <span class="comment"># 每一个提交都是一个快照(snapshot),Git会把每次提交的diff计算出来,作为一个patch显示给你看.另一种方法是git show [SHA].</span></span><br><span class="line">git <span class="built_in">log</span> --<span class="built_in">stat</span>:                                           <span class="comment"># 同样是用来看改动的相对信息的,--stat比-p的输出更简单一些.</span></span><br><span class="line">git <span class="built_in">log</span> -SmethodName                                      <span class="comment"># (注意S和后面的词之间没有等号分隔).</span></span><br><span class="line">git <span class="built_in">log</span> --grep --author                                   <span class="comment"># 是OR的关系,即满足一条即被返回,如果你想让它们是AND的关系,可以加上--all-match的option.</span></span><br><span class="line">git reflog                                                <span class="comment"># 显示所有提交，包括孤立节点</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git reflog [show] [<span class="built_in">log</span>-options] [&lt;ref&gt;]</span><br><span class="line">git reflog expire [--expire=&lt;time&gt;] [--expire-unreachable=&lt;time&gt;]</span><br><span class="line">	[--rewrite] [--updateref] [--stale-fix]</span><br><span class="line">	[--dry-run] [--verbose] [--all | &lt;refs&gt;…​]</span><br><span class="line">git reflog delete [--rewrite] [--updateref]</span><br><span class="line">	[--dry-run] [--verbose] ref@&#123;specifier&#125;…​</span><br><span class="line">git reflog exists &lt;ref&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="show"><a href="#show" class="headerlink" title="show"></a>show</h2><p>Shows one or more objects (blobs, trees, tags and commits).</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show [options] &lt;object&gt;…​</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git show dfb02e6e4f2f7b573337763e5c0013802e392818         <span class="comment"># 显示某个提交的详细内容</span></span><br><span class="line">git show dfb02                                            <span class="comment"># 可只用commitid的前几位</span></span><br><span class="line">git show HEAD                                             <span class="comment"># 显示HEAD提交日志</span></span><br><span class="line">git show HEAD^                                            <span class="comment"># 显示HEAD的父（上一个版本）的提交日志 ^^为上两个版本 ^5为上5个版本</span></span><br><span class="line">git show HEAD@&#123;5&#125;</span><br><span class="line">git show HEAD~3</span><br><span class="line">git show v2.0                                             <span class="comment"># 显示v2.0的日志及详细内容</span></span><br><span class="line">git show master@&#123;yesterday&#125;                               <span class="comment"># 显示master分支昨天的状态</span></span><br><span class="line">git show -s --pretty=raw 2be7fcb476</span><br><span class="line">git show-branch                                           <span class="comment"># 图示当前分支历史</span></span><br><span class="line">git show-branch --all                                     <span class="comment"># 图示所有分支历史</span></span><br></pre></td></tr></table></figure>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git grep <span class="string">"delete from"</span>                                    <span class="comment"># 文件中搜索文本“delete from”</span></span><br><span class="line">git grep -e <span class="string">'#define'</span> --and -e SORT_DIRENT</span><br></pre></td></tr></table></figure>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><ul>
+<li>git gc</li>
+<li>git fsck</li>
+<li>git cherry-pick ff44785404a8e                             # 合并提交ff44785404a8e的修改</li>
+<li>git whatchanged                                           # 显示提交历史对应的文件修改</li>
+</ul>
+<h2 id="内部命令"><a href="#内部命令" class="headerlink" title="内部命令"></a>内部命令</h2><ul>
+<li>cat-file</li>
+<li>commit-tree</li>
+<li>count-objects</li>
+<li>diff-index</li>
+<li>for-each-ref</li>
+<li>hash-object</li>
+<li>ls-files</li>
+<li>merge-base</li>
+<li>read-tree</li>
+<li>rev-list</li>
+<li>rev-parse</li>
+<li>show-ref</li>
+<li>symbolic-ref</li>
+<li>update-index</li>
+<li>update-ref</li>
+<li>verify-pack</li>
+<li><p>write-tree</p>
+</li>
+<li><p>git ls-files                                              # 列出git index包含的文件</p>
+</li>
+<li>git ls-tree HEAD                                          # 内部命令：显示某个git对象</li>
+<li>git rev-parse v2.0                                        # 内部命令：显示某个ref对于的SHA1 HASH</li>
+</ul>
+
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/Git命令/">#Git命令</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+    <div class="comments">
+        
+<div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+
+    </div>
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/posts/Git命令/">Git命令</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/posts/GIT对象模型/">GIT对象模型</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/posts/JavaScript深度/">JavaScript深度</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/posts/JavaScript基础/">JavaScript基础</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
+    <h2>Categories</h2>
+    <ul>
+        
+        <li>
+            <a class="footer-post" href="/categories/未分类/">未分类</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Syntax/">Syntax</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/Syntax/JavaScript/">JavaScript</a>
+        </li>
+        
+        <li>
+            <a class="footer-post" href="/categories/GIT/">GIT</a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/liuyanjie">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:liuyj619@gmail.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'liuyanjie';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+</body>
+
+</html>
