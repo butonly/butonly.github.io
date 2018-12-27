@@ -1,181 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<!-- Head tag -->
+ <!DOCTYPE HTML>
+<html >
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!--Description-->
+  <meta charset="UTF-8">
+  
+    <title>JavaScript基础 | Liuyanjie&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
-        <meta name="description" content="JavaScript BaseJavaScript 基础知识整理
-数据类型基本类型 PrimitiveUndefined、Null、Boolean、Number、String、Symbol(ES2015)
-原始类型 和 原始值
-基本类型的值 是不可变的，我们无法给它们添加属性。
-基本类型的值 不是一">
+    <meta name="author" content="Liu Yanjie">
     
 
-    <!--Author-->
     
-        <meta name="author" content="Liu Yanjie">
+    <meta name="description" content="JavaScript BaseJavaScript 基础知识整理 数据类型基本类型 PrimitiveUndefined、Null、Boolean、Number、String、Symbol(ES2015) 原始类型 和 原始值 基本类型的值 是不可变的，我们无法给它们添加属性。 基本类型的值 不是一个对象，也没有方法。 1234567891011121314var str = &apos;~~~~~&apos;;st">
+<meta name="keywords" content="JavaScript,JavaScript基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript基础">
+<meta property="og:url" content="/posts/JavaScript基础/index.html">
+<meta property="og:site_name" content="Liuyanjie&#39;s Blog">
+<meta property="og:description" content="JavaScript BaseJavaScript 基础知识整理 数据类型基本类型 PrimitiveUndefined、Null、Boolean、Number、String、Symbol(ES2015) 原始类型 和 原始值 基本类型的值 是不可变的，我们无法给它们添加属性。 基本类型的值 不是一个对象，也没有方法。 1234567891011121314var str = &apos;~~~~~&apos;;st">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/basic-object.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/prototype-chain.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/constructor-proto-chain.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/javascript-prototype.png">
+<meta property="og:updated_time" content="2018-12-27T14:41:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript基础">
+<meta name="twitter:description" content="JavaScript BaseJavaScript 基础知识整理 数据类型基本类型 PrimitiveUndefined、Null、Boolean、Number、String、Symbol(ES2015) 原始类型 和 原始值 基本类型的值 是不可变的，我们无法给它们添加属性。 基本类型的值 不是一个对象，也没有方法。 1234567891011121314var str = &apos;~~~~~&apos;;st">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/basic-object.png">
+<meta name="twitter:creator" content="@ryxcxyr">
+<link rel="publisher" href="101963751496807079381">
+
     
-
-    <!--Open Graph Title-->
+    <link rel="alternative" href="/rss.xml" title="Liuyanjie&#39;s Blog" type="application/atom+xml">
     
-        <meta property="og:title" content="JavaScript基础"/>
     
-
-    <!--Open Graph Description-->
+    <link rel="icon" href="/img/favicon.ico">
     
-
-    <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Liuyanjie&#39;s Blog"/>
-
-    <!--Type page-->
     
-        <meta property="og:type" content="article" />
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-
-    <!--Page Cover-->
-    
-
-    <meta name="twitter:card" content="summary" />
-    
-
-    <!-- Title -->
-    
-    <title>JavaScript基础 - Liuyanjie&#39;s Blog</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
-
-    <!-- Google Analytics -->
-    
-
-
 </head>
 
-
-<body>
-
-<div class="bg-gradient"></div>
-<div class="bg-pattern"></div>
-
-<!-- Menu -->
-<!--Menu Links and Overlay-->
-<div class="menu-bg">
-    <div class="menu-container">
-        <ul>
-            
-            <li class="menu-item">
-                <a href="/">
-                    Home
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/archives">
-                    Archives
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/about.html">
-                    About
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/tags">
-                    Tags
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/categories">
-                    Categories
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/contact.html">
-                    Contact
-                </a>
-            </li>
-            
-        </ul>
-    </div>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Liuyanjie&#39;s Blog" title="Liuyanjie&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Liuyanjie&#39;s Blog">Liuyanjie&#39;s Blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
 </div>
-
-<!--Hamburger Icon-->
-<nav>
-    <a href="#menu"></a>
-</nav>
-
-<div class="container">
-
-    <!-- Main Content -->
-    <div class="row">
-    <div class="col-sm-12">
-
-        <!--Title and Logo-->
-        <header>
-    <div class="logo">
-        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
-        
-    </div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/posts/JavaScript基础/" title="JavaScript基础" itemprop="url">JavaScript基础</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/101963751496807079381?rel=author" title="Liu Yanjie" target="_blank" itemprop="author">Liu Yanjie</a>
+		
+  <p class="article-time">
+    <time datetime="2018-04-11T22:05:14.000Z" itemprop="datePublished"> Published 2018-04-12</time>
+    
+  </p>
 </header>
-
-        <section class="main">
-            
-<div class="post">
-
-    <div class="post-header">
-        <h1 class="title">
-            <a href="/posts/JavaScript基础/">
-                JavaScript基础
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-04-12</span>
-            
-            
-                <a href="#disqus_thread" class="comments">Comments</a>
-            
-            
-                <span class="category">
-                    <a href="/categories/Syntax/">Syntax</a>
-                </span>
-            
-        </div>
-    </div>
-
-    <div class="content">
-
-        <!-- Gallery -->
-        
-
-        <!-- Post Content -->
-        <h1 id="JavaScript-Base"><a href="#JavaScript-Base" class="headerlink" title="JavaScript Base"></a>JavaScript Base</h1><p>JavaScript 基础知识整理</p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript-Base"><span class="toc-number">1.</span> <span class="toc-text">JavaScript Base</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">1.1.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本类型-Primitive"><span class="toc-number">1.1.1.</span> <span class="toc-text">基本类型 Primitive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Boolean、Number、String、Symbol"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Boolean、Number、String、Symbol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Undefined、Null"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">Undefined、Null</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用类型"><span class="toc-number">1.1.2.</span> <span class="toc-text">引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object-对象"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Object{} - 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Function-函数对象"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Function - 函数对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Array-复合类型-（引用，指针）"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">Array[] - 复合类型 （引用，指针）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类数组对象"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">类数组对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型识别"><span class="toc-number">1.1.3.</span> <span class="toc-text">类型识别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#识别方法"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">识别方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Example"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">Example</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型转换"><span class="toc-number">1.1.4.</span> <span class="toc-text">类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#显式转换"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">显式转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隐式转换"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">隐式转换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#void"><span class="toc-number">1.2.</span> <span class="toc-text">void</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Operator"><span class="toc-number">1.3.</span> <span class="toc-text">Operator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object"><span class="toc-number">1.4.</span> <span class="toc-text">Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链（prototype-chain）"><span class="toc-number">1.5.</span> <span class="toc-text">原型链（prototype-chain）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链-lookup-规则："><span class="toc-number">1.5.1.</span> <span class="toc-text">原型链 lookup 规则：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proto"><span class="toc-number">1.5.2.</span> <span class="toc-text">__proto__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性类型"><span class="toc-number">1.5.3.</span> <span class="toc-text">属性类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据属性"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">数据属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问器属性-getter-setter"><span class="toc-number">1.5.3.2.</span> <span class="toc-text">访问器属性: getter setter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#应用："><span class="toc-number">1.5.3.3.</span> <span class="toc-text">应用：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ECMAScript5-对象保护功能"><span class="toc-number">1.5.4.</span> <span class="toc-text">ECMAScript5 对象保护功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-number">1.6.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象构造"><span class="toc-number">1.7.</span> <span class="toc-text">对象构造</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂模式"><span class="toc-number">1.7.1.</span> <span class="toc-text">工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数模式"><span class="toc-number">1.7.2.</span> <span class="toc-text">构造函数模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型模式"><span class="toc-number">1.7.3.</span> <span class="toc-text">原型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合构造函数和原型模式-默认模式"><span class="toc-number">1.7.4.</span> <span class="toc-text">组合构造函数和原型模式 - [默认模式]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态原型模式"><span class="toc-number">1.7.5.</span> <span class="toc-text">动态原型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展模式-（寄生模式）"><span class="toc-number">1.7.6.</span> <span class="toc-text">扩展模式 （寄生模式）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#稳妥构造函数模式"><span class="toc-number">1.7.7.</span> <span class="toc-text">稳妥构造函数模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">1.8.</span> <span class="toc-text">继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-number">1.8.1.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合继承"><span class="toc-number">1.8.2.</span> <span class="toc-text">组合继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型式继承"><span class="toc-number">1.8.3.</span> <span class="toc-text">原型式继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#寄生式继承"><span class="toc-number">1.8.4.</span> <span class="toc-text">寄生式继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#寄生组合式继承"><span class="toc-number">1.8.5.</span> <span class="toc-text">寄生组合式继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象构造和原型链总结"><span class="toc-number">1.9.</span> <span class="toc-text">对象构造和原型链总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.10.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.10.1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="JavaScript-Base"><a href="#JavaScript-Base" class="headerlink" title="JavaScript Base"></a>JavaScript Base</h1><p>JavaScript 基础知识整理</p>
 <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="基本类型-Primitive"><a href="#基本类型-Primitive" class="headerlink" title="基本类型 Primitive"></a>基本类型 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive" target="_blank" rel="noopener">Primitive</a></h3><p><code>Undefined、Null、Boolean、Number、String、Symbol(ES2015)</code></p>
 <p>原始类型 和 原始值</p>
 <p>基本类型的值 是不可变的，我们无法给它们添加属性。</p>
@@ -210,7 +142,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p><code>Object、Function、String、Number、Error、Regexp、Map、Set</code> …</p>
+<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p><code>Object、Function、String、Number、Error、Regexp、Map、Set</code> …</p>
 <p>JavaScript 中一切都可以被当做对象！但是只有引用类型才是真正的对象，基本类型除了 <code>null</code> 和 <code>undefined</code> 之外，都可以像对象一样使用，因为他们有包装类型。</p>
 <h4 id="Object-对象"><a href="#Object-对象" class="headerlink" title="Object{} - 对象"></a>Object{} - 对象</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> boolObj = <span class="keyword">new</span> <span class="built_in">Object</span>(&#123;&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(obj <span class="keyword">instanceof</span> <span class="built_in">Object</span>);         <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(boolObj <span class="keyword">instanceof</span> <span class="built_in">Object</span>);     <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(obj === boolObj);               <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> obj);                    <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> boolObj);                <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
 <h4 id="Function-函数对象"><a href="#Function-函数对象" class="headerlink" title="Function - 函数对象"></a>Function - 函数对象</h4><p>Function 是一个构造函数，用于创建一个函数对象：</p>
@@ -237,9 +169,9 @@
 <p>如下创建一个类似数组，然后遍历该类似数组:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 不小心就引进了一个小bug</span></span><br><span class="line"><span class="keyword">while</span>(i++ &lt; 10) &#123; a[i] = i * i; &#125;</span><br><span class="line">while(i &lt; 10) &#123; a[i] = i * i; i++; &#125;</span><br><span class="line"></span><br><span class="line">a.length = i;</span><br><span class="line"></span><br><span class="line">var total = 0;</span><br><span class="line">for(var j = 0, len = a.length; j &lt; len; j++) &#123;</span><br><span class="line">  total += a[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="类型识别"><a href="#类型识别" class="headerlink" title="类型识别"></a>类型识别</h3><h4 id="识别方法"><a href="#识别方法" class="headerlink" title="识别方法"></a>识别方法</h4><ul>
-<li><p><code>typeof</code> (typeof x)</p>
+<li><p><code>typeof</code> (typeof x)（只能用于除<code>null</code>以外的原始类型）</p>
+<p>返回值：首字母小写的字符串形式</p>
 <ul>
-<li>返回值：首字母小写的字符串形式</li>
 <li>可以识别 <code>基本类型</code>，<code>null</code> 除外</li>
 <li>不能识别 <code>内置对象类型</code> (<code>Function</code> 除外)</li>
 <li>不能识别 <code>自定义类型</code></li>
@@ -249,22 +181,22 @@
 </li>
 </ul>
 <ul>
-<li><p><code>instanceof</code> (x instanceof X)</p>
+<li><p><code>instanceof</code> (<code>x instanceof X</code>)，（不能用于原始类型）</p>
+<p>返回值：<code>true</code> 或 <code>false</code></p>
 <ul>
-<li>返回值：<code>true</code> 或 <code>false</code></li>
 <li>不能识别 <code>基本类型</code>，会返回 <code>false</code>。 <code>(true instanceof Boolean) -&gt; false</code></li>
 <li>可以识别 <code>内置对象类型</code></li>
 <li>可以识别 <code>自定义类型</code> 及其 <code>父类型</code></li>
-<li>不能识别 <code>undefined</code>、<code>null</code>，因为无 <code>Undefined</code>、<code>Null</code> 包装类型</li>
+<li>不能识别 <code>undefined</code>、<code>null</code>，因为无 <code>Undefined</code>、<code>Null</code> 包装类型</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li><p><code>Object.prototype.toString</code></p>
+<li><p><code>Object.prototype.toString</code> （自定义类型需要实现 <code>toString</code> 方法方可识别）</p>
 <p>eq.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">type</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj).slice(<span class="number">8</span>, <span class="number">-1</span>).toLowerCase();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回值：<code>[object TypeX]</code> 的字符串形式</p>
 <ul>
-<li>返回值：<code>[object TypeX]</code> 的字符串形式</li>
 <li>可以识别 <code>基本类型</code></li>
 <li>可以识别 <code>内置对象类型</code></li>
 <li>可以识别 <code>自定义类型</code>，但是需要重载 <code>toString</code> 方法</li>
@@ -273,12 +205,12 @@
 </li>
 </ul>
 <ul>
-<li><p><code>.prototype.constructor</code></p>
+<li><p><code>.prototype.constructor</code> （不能用于 <code>null</code> 和 <code>undefined</code> ）</p>
 <p>eq.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.constructor.name</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">type</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj.constructor.toString().replace(<span class="regexp">/^function (\w+)\(\).+$/</span>, <span class="string">'$1'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">type</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj.__proto__.constructor.toString().replace(<span class="regexp">/^function (\w+)\(\).+$/</span>, <span class="string">'$1'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回值：<code>function TypeX(){[native code]}</code> 或者 <code>function TypeX(){}</code></p>
 <ul>
-<li>返回值：<code>function TypeX(){[native code]}</code> 或者 <code>function TypeX(){}</code></li>
 <li>可以识别 <code>基本类型</code></li>
 <li>可以识别 <code>内置对象类型</code></li>
 <li>可以识别 <code>自定义类型</code></li>
@@ -557,7 +489,7 @@
 <li>The <code>__proto__</code> property of <code>Object.prototype</code> is an <code>accessor property</code> (a getter function and a setter function) that exposes the internal <code>[[Prototype]]</code> (either an object or null) of the object through which it is accessed.</li>
 </ul>
 <p>项目中建议不要直接使用 <code>__proto__</code> 读写原型，而是使用 <code>Object.getPrototypeOf()、Object.create()</code> 读写原型。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Shape = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"><span class="keyword">var</span> proto = &#123;</span><br><span class="line">  say: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'hello world!'</span>); &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Shape.prototype = proto;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.prototype.getPrototype = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">this</span>) </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Shape = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"><span class="keyword">var</span> proto = &#123;</span><br><span class="line">  say: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'hello world!'</span>); &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Shape.prototype = proto;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.prototype.getPrototype = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.getPrototypeOf(<span class="keyword">this</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> circle = <span class="keyword">new</span> Shape();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'circle:'</span>, circle.__proto__ === Shape.prototype);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'circle:'</span>, <span class="built_in">Object</span>.getPrototypeOf(circle) === Shape.prototype);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'circle:'</span>, <span class="keyword">typeof</span> circle);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'circle:'</span>, circle <span class="keyword">instanceof</span> Shape);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'circle:'</span>, circle <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rectangle = <span class="built_in">Object</span>.create(proto);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ractangle:'</span>, rectangle.__proto__ === Shape.prototype);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ractangle:'</span>, <span class="built_in">Object</span>.getPrototypeOf(rectangle) === Shape.prototype);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ractangle:'</span>, <span class="keyword">typeof</span> rectangle);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ractangle:'</span>, rectangle <span class="keyword">instanceof</span> Shape);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ractangle:'</span>, rectangle <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> objPrototype = <span class="built_in">Object</span>.prototype;</span><br><span class="line"><span class="built_in">console</span>.log(objPrototype);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> objPrototype);</span><br><span class="line"><span class="built_in">console</span>.log(objPrototype.__proto__);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'__proto__:'</span>, <span class="string">'xxx'</span>.__proto__);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.prototype);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br><span class="line"><span class="built_in">console</span>.log([] <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125; <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br></pre></td></tr></table></figure>
@@ -751,183 +683,422 @@
 <p>但下面几种写法也是可以的：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">!<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;();</span><br><span class="line">+<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;();</span><br><span class="line">-<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;();</span><br><span class="line">~<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;();</span><br><span class="line">~(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)();</span><br><span class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;();</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;());</span><br></pre></td></tr></table></figure>
 <p>现在，在我们知道了对象的基础之后，让我们看看运行时程序的执行 <code>runtime program execution</code> 在ECMAScript中是如何实现的。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
 
-    </div>
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Syntax/">Syntax</a>►<a class="article-category-link" href="/categories/Syntax/JavaScript/">JavaScript</a>
+</div>
 
-    
 
-    
-        <div class="post-tags">
-            <i class="fa fa-tags" aria-hidden="true"></i>
-            <a href="/tags/JavaScript/">#JavaScript</a> <a href="/tags/JavaScript基础/">#JavaScript基础</a>
-        </div>
-    
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/JavaScript基础/">JavaScript基础</a>
+  </div>
 
-    <!-- Comments -->
-    
-    <div class="comments">
-        
-<div id="disqus_thread">
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="/posts/JavaScript基础/" data-title="JavaScript基础 | Liuyanjie&#39;s Blog" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/posts/JavaScript深度/" title="JavaScript深度">
+  <strong>上一篇：</strong><br/>
+  <span>
+  JavaScript深度</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript-Base"><span class="toc-number">1.</span> <span class="toc-text">JavaScript Base</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">1.1.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本类型-Primitive"><span class="toc-number">1.1.1.</span> <span class="toc-text">基本类型 Primitive</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Boolean、Number、String、Symbol"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Boolean、Number、String、Symbol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Undefined、Null"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">Undefined、Null</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用类型"><span class="toc-number">1.1.2.</span> <span class="toc-text">引用类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object-对象"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Object{} - 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Function-函数对象"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Function - 函数对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Array-复合类型-（引用，指针）"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">Array[] - 复合类型 （引用，指针）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类数组对象"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">类数组对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型识别"><span class="toc-number">1.1.3.</span> <span class="toc-text">类型识别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#识别方法"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">识别方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Example"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">Example</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型转换"><span class="toc-number">1.1.4.</span> <span class="toc-text">类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#显式转换"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">显式转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隐式转换"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">隐式转换</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#void"><span class="toc-number">1.2.</span> <span class="toc-text">void</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Operator"><span class="toc-number">1.3.</span> <span class="toc-text">Operator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object"><span class="toc-number">1.4.</span> <span class="toc-text">Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链（prototype-chain）"><span class="toc-number">1.5.</span> <span class="toc-text">原型链（prototype-chain）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链-lookup-规则："><span class="toc-number">1.5.1.</span> <span class="toc-text">原型链 lookup 规则：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proto"><span class="toc-number">1.5.2.</span> <span class="toc-text">__proto__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性类型"><span class="toc-number">1.5.3.</span> <span class="toc-text">属性类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据属性"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">数据属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问器属性-getter-setter"><span class="toc-number">1.5.3.2.</span> <span class="toc-text">访问器属性: getter setter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#应用："><span class="toc-number">1.5.3.3.</span> <span class="toc-text">应用：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ECMAScript5-对象保护功能"><span class="toc-number">1.5.4.</span> <span class="toc-text">ECMAScript5 对象保护功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-number">1.6.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象构造"><span class="toc-number">1.7.</span> <span class="toc-text">对象构造</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂模式"><span class="toc-number">1.7.1.</span> <span class="toc-text">工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数模式"><span class="toc-number">1.7.2.</span> <span class="toc-text">构造函数模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型模式"><span class="toc-number">1.7.3.</span> <span class="toc-text">原型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合构造函数和原型模式-默认模式"><span class="toc-number">1.7.4.</span> <span class="toc-text">组合构造函数和原型模式 - [默认模式]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态原型模式"><span class="toc-number">1.7.5.</span> <span class="toc-text">动态原型模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展模式-（寄生模式）"><span class="toc-number">1.7.6.</span> <span class="toc-text">扩展模式 （寄生模式）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#稳妥构造函数模式"><span class="toc-number">1.7.7.</span> <span class="toc-text">稳妥构造函数模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">1.8.</span> <span class="toc-text">继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-number">1.8.1.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组合继承"><span class="toc-number">1.8.2.</span> <span class="toc-text">组合继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型式继承"><span class="toc-number">1.8.3.</span> <span class="toc-text">原型式继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#寄生式继承"><span class="toc-number">1.8.4.</span> <span class="toc-text">寄生式继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#寄生组合式继承"><span class="toc-number">1.8.5.</span> <span class="toc-text">寄生组合式继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象构造和原型链总结"><span class="toc-number">1.9.</span> <span class="toc-text">对象构造和原型链总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.10.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数声明和函数表达式"><span class="toc-number">1.10.1.</span> <span class="toc-text">函数声明和函数表达式</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="liuyanjie" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
 </div>
 
 
 
-    </div>
-    
-
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/GIT/" title="GIT">GIT<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Syntax/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Syntax/" title="Syntax">Syntax<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GIT/VCS/" title="VCS">VCS<sup>2</sup></a></li>
+		  
+		
+		</ul>
 </div>
-        </section>
 
-    </div>
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git命令/" title="Git命令">Git命令<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
 </div>
 
 
-</div>
-
-<!-- Footer -->
-<div class="push"></div>
-
-<footer class="footer-content">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
-                <h2>About</h2>
-                <p>
-                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
-                </p>
-            </div>
-            
-    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
-        <h2>Recent Posts</h2>
-        <ul>
-            
-            <li>
-                <a class="footer-post" href="/posts/GIT对象模型/">GIT对象模型</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/posts/Git命令/">Git命令</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/posts/JavaScript深度/">JavaScript深度</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/posts/JavaScript基础/">JavaScript基础</a>
-            </li>
-            
-        </ul>
-    </div>
-
-
-
-            
-<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
-    <h2>Categories</h2>
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
     <ul>
-        
-        <li>
-            <a class="footer-post" href="/categories/GIT/">GIT</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Syntax/">Syntax</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/GIT/VCS/">VCS</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Syntax/JavaScript/">JavaScript</a>
-        </li>
         
     </ul>
 </div>
 
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="list-inline footer-social-icons">
-                    
-                    <li class="list-inline-item">
-                        <a href="https://github.com/liuyanjie">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-github"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="mailto:liuyj619@gmail.com">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-envelope-o"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="\#">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-rss"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="footer-copyright">
-                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
-                </div>
-            </div>
-        </div>
+  
+
+
+  <div class="rsspart">
+	<a href="/rss.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
     </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Liuyanjie. <br/>
+			This is my blog</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/liuyanjie" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/5954388" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/ryxcxyr" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/liuyj619" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		<a href="http://www.zhihu.com/people/ryxc-liu-yan-jie" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/101963751496807079381?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:liuyj619@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="Liu Yanjie">Liu Yanjie</a>
+		
+		
+		</p>
+</div>
 </footer>
-
-<!-- After footer scripts -->
-
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-
-<!-- Tween Max -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
-
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
-<!-- Custom JavaScript -->
-<script src="/js/main.js"></script>
-
-<!-- Disqus Comments -->
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'liuyanjie';
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
 
-    (function(){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
 </script>
 
 
 
-</body>
 
+<script type="text/javascript">
+
+var disqus_shortname = 'liuyanjie';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
 </html>

@@ -1,182 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<!-- Head tag -->
+ <!DOCTYPE HTML>
+<html >
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!--Description-->
+  <meta charset="UTF-8">
+  
+    <title>JavaScript深度 | Liuyanjie&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
-        <meta name="description" content="JavaScript DeepFocus on concepts，not syntax.
-关注概念的理解，而不是语法。
-执行上下文堆栈
-EC(执行环境或者执行上下文，Execution Context)
-ECS(执行环境堆栈或者执行上下文堆栈，Execution Context Stack)
-VO(">
+    <meta name="author" content="Liu Yanjie">
     
 
-    <!--Author-->
     
-        <meta name="author" content="Liu Yanjie">
+    <meta name="description" content="JavaScript DeepFocus on concepts，not syntax. 关注概念的理解，而不是语法。 执行上下文堆栈 EC(执行环境或者执行上下文，Execution Context) ECS(执行环境堆栈或者执行上下文堆栈，Execution Context Stack) VO(变量对象，Variable Object) AO(活动对象，Active Object) Scope">
+<meta name="keywords" content="JavaScript,JavaScript执行上下文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript深度">
+<meta property="og:url" content="/posts/JavaScript深度/index.html">
+<meta property="og:site_name" content="Liuyanjie&#39;s Blog">
+<meta property="og:description" content="JavaScript DeepFocus on concepts，not syntax. 关注概念的理解，而不是语法。 执行上下文堆栈 EC(执行环境或者执行上下文，Execution Context) ECS(执行环境堆栈或者执行上下文堆栈，Execution Context Stack) VO(变量对象，Variable Object) AO(活动对象，Active Object) Scope">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/caller-chain.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/ec-stack.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/ec-stack-changes.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/execution-context.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/variable-object.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/activation-object.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/scope-chain.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/scope-chain-with.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/shared-scope.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/estree.png">
+<meta property="og:updated_time" content="2018-12-27T14:41:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript深度">
+<meta name="twitter:description" content="JavaScript DeepFocus on concepts，not syntax. 关注概念的理解，而不是语法。 执行上下文堆栈 EC(执行环境或者执行上下文，Execution Context) ECS(执行环境堆栈或者执行上下文堆栈，Execution Context Stack) VO(变量对象，Variable Object) AO(活动对象，Active Object) Scope">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/caller-chain.png">
+<meta name="twitter:creator" content="@ryxcxyr">
+<link rel="publisher" href="101963751496807079381">
+
     
-
-    <!--Open Graph Title-->
+    <link rel="alternative" href="/rss.xml" title="Liuyanjie&#39;s Blog" type="application/atom+xml">
     
-        <meta property="og:title" content="JavaScript深度"/>
     
-
-    <!--Open Graph Description-->
+    <link rel="icon" href="/img/favicon.ico">
     
-
-    <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Liuyanjie&#39;s Blog"/>
-
-    <!--Type page-->
     
-        <meta property="og:type" content="article" />
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-
-    <!--Page Cover-->
-    
-
-    <meta name="twitter:card" content="summary" />
-    
-
-    <!-- Title -->
-    
-    <title>JavaScript深度 - Liuyanjie&#39;s Blog</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
-
-    <!-- Google Analytics -->
-    
-
-
 </head>
 
-
-<body>
-
-<div class="bg-gradient"></div>
-<div class="bg-pattern"></div>
-
-<!-- Menu -->
-<!--Menu Links and Overlay-->
-<div class="menu-bg">
-    <div class="menu-container">
-        <ul>
-            
-            <li class="menu-item">
-                <a href="/">
-                    Home
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/archives">
-                    Archives
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/about.html">
-                    About
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/tags">
-                    Tags
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/categories">
-                    Categories
-                </a>
-            </li>
-            
-            <li class="menu-item">
-                <a href="/contact.html">
-                    Contact
-                </a>
-            </li>
-            
-        </ul>
-    </div>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Liuyanjie&#39;s Blog" title="Liuyanjie&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Liuyanjie&#39;s Blog">Liuyanjie&#39;s Blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
 </div>
-
-<!--Hamburger Icon-->
-<nav>
-    <a href="#menu"></a>
-</nav>
-
-<div class="container">
-
-    <!-- Main Content -->
-    <div class="row">
-    <div class="col-sm-12">
-
-        <!--Title and Logo-->
-        <header>
-    <div class="logo">
-        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
-        
-    </div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/posts/JavaScript深度/" title="JavaScript深度" itemprop="url">JavaScript深度</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/101963751496807079381?rel=author" title="Liu Yanjie" target="_blank" itemprop="author">Liu Yanjie</a>
+		
+  <p class="article-time">
+    <time datetime="2018-05-02T00:00:00.000Z" itemprop="datePublished"> Published 2018-05-02</time>
+    
+  </p>
 </header>
-
-        <section class="main">
-            
-<div class="post">
-
-    <div class="post-header">
-        <h1 class="title">
-            <a href="/posts/JavaScript深度/">
-                JavaScript深度
-            </a>
-        </h1>
-        <div class="post-info">
-            
-                <span class="date">2018-05-02</span>
-            
-            
-                <a href="#disqus_thread" class="comments">Comments</a>
-            
-            
-                <span class="category">
-                    <a href="/categories/Syntax/">Syntax</a>
-                </span>
-            
-        </div>
-    </div>
-
-    <div class="content">
-
-        <!-- Gallery -->
-        
-
-        <!-- Post Content -->
-        <h1 id="JavaScript-Deep"><a href="#JavaScript-Deep" class="headerlink" title="JavaScript Deep"></a>JavaScript Deep</h1><p>Focus on concepts，not syntax.</p>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript-Deep"><span class="toc-number">1.</span> <span class="toc-text">JavaScript Deep</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#执行上下文堆栈"><span class="toc-number">1.1.</span> <span class="toc-text">执行上下文堆栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#执行上下文"><span class="toc-number">1.1.1.</span> <span class="toc-text">执行上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量对象（variable-object）"><span class="toc-number">1.1.2.</span> <span class="toc-text">变量对象（variable object）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#活动对象（activation-object）"><span class="toc-number">1.1.3.</span> <span class="toc-text">活动对象（activation object）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域链-scope-chain"><span class="toc-number">1.1.4.</span> <span class="toc-text">作用域链(scope chain)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包（closure）"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">闭包（closure）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#This"><span class="toc-number">1.1.5.</span> <span class="toc-text">This</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bind、call、apply"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">bind、call、apply</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行上下文总结"><span class="toc-number">1.1.6.</span> <span class="toc-text">执行上下文总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行过程"><span class="toc-number">1.2.</span> <span class="toc-text">执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#执行顺序"><span class="toc-number">1.2.1.</span> <span class="toc-text">执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键步骤"><span class="toc-number">1.2.2.</span> <span class="toc-text">关键步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键概念"><span class="toc-number">1.2.3.</span> <span class="toc-text">关键概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#词法分析"><span class="toc-number">1.2.4.</span> <span class="toc-text">词法分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟解析"><span class="toc-number">1.2.5.</span> <span class="toc-text">模拟解析</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="JavaScript-Deep"><a href="#JavaScript-Deep" class="headerlink" title="JavaScript Deep"></a>JavaScript Deep</h1><p>Focus on concepts，not syntax.</p>
 <p>关注概念的理解，而不是语法。</p>
 <h2 id="执行上下文堆栈"><a href="#执行上下文堆栈" class="headerlink" title="执行上下文堆栈"></a>执行上下文堆栈</h2><ul>
 <li>EC(执行环境或者执行上下文，Execution Context)</li>
@@ -245,7 +182,7 @@ VO(">
 <p>那么函数和它的变量对象是怎么样的？</p>
 <p>在函数上下文中，<code>变量对象</code> 是以 <code>活动对象</code> 来表示的。</p>
 <p>为什么全局上下文中不需要 <code>活动对象</code>，而 <code>变量对象</code> 就是 <code>全局对象本身</code>？</p>
-<p>因为 <code>全局上下文</code> 只有一个，用 <code>全局对象</code> 即可作为 <code>变量对象</code> 提供名字查找，而同一函数可能 会同时存在多个 <code>函数上下文</code>，每个上下文各不相同，且 <code>函数上下文</code> 与 <code>全局上下文</code> 又有不同，所以引入了 <code>活动对象</code> 来表示 <code>变量对象</code>。</p>
+<p>因为 <code>全局上下文</code> 只有一个，用 <code>全局对象</code> 即可作为 <code>变量对象</code> 提供名字查找，而同一函数可能 会同时存在多个 <code>函数上下文</code>，每个上下文各不相同，且 <code>函数上下文</code> 与 <code>全局上下文</code> 又有不同，所以引入了 <code>活动对象</code> 来表示 <code>变量对象</code>。</p>
 <h3 id="活动对象（activation-object）"><a href="#活动对象（activation-object）" class="headerlink" title="活动对象（activation object）"></a>活动对象（activation object）</h3><p>当一个函数被 <code>caller</code> 调用，一个特殊的对象，叫作 <code>活动对象</code>（activation object）将会被创建。</p>
 <p>这个对象中包含 <code>形参</code> 和 <code>arguments</code> 对象（是对形参的一个映射，但是值是通过索引来获取）。</p>
 <p><code>活动对象</code> 之后会做为函数上下文的 <code>变量对象</code> 来使用。</p>
@@ -259,7 +196,7 @@ VO(">
 <p>函数表达式baz还是没有被包含在 <code>变量/活动对象</code> 中。</p>
 <p>在ES5中 <code>变量对象</code> 和 <code>活动对象</code> 被并入了 <code>词法环境模型</code>（lexical environments model）。</p>
 <p>众所周知，在 ECMAScript 中我们可以使用内部函数，然后在这些内部函数中可以引用父函数的变量或者全局上下文中的变量。</p>
-<p>当我们把 <code>变量对象</code> 命名为 执行上下文的 <code>作用域对象</code>，与上面讨论的原型链相似，作用域对象 可以 形成一条链，叫作 <code>作用域链</code>。</p>
+<p>当我们把 <code>变量对象</code> 命名为 执行上下文的 <code>作用域对象</code>，与上面讨论的原型链相似，作用域对象 可以 形成一条链，叫作 <code>作用域链</code>。</p>
 <h3 id="作用域链-scope-chain"><a href="#作用域链-scope-chain" class="headerlink" title="作用域链(scope chain)"></a>作用域链(scope chain)</h3><p><code>作用域链</code> 是一个 <code>作用域对象</code>（即：<code>变量/活动对象</code>） 列表，代码中出现的标识符在这个列表中进行查找。</p>
 <p>这个规则还是与原型链同样简单：</p>
 <p>如果一个变量在函数自身的 <code>作用域对象</code>中没有找到，那么将会查找它父函数（外层函数）的 <code>作用域对象</code>，以此类推。</p>
@@ -286,7 +223,7 @@ VO(">
 <p>我们可以给出如下的结构：</p>
 <p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/scope-chain-with.png" alt="scope-chain-with"></p>
 <blockquote>
-<p>在 <code>GlobalVO</code> 向上查找时，会同时存在 <code>__parent__</code> 和 <code>__proto__</code>，即 <code>作用域链</code> 和 <code>原型链</code> 在引擎内部的表示对象上有了交点，在查找 <code>__parent__</code> 之前，首先查找 <code>__proto__</code> 链，此时，<code>作用域链</code> 已到达终点，也不需要继续查找。只在 <code>GlobalVO</code> <code>作用域链</code> 和 <code>原型链</code> 才会有交点。</p>
+<p>在 <code>GlobalVO</code> 向上查找时，会同时存在 <code>__parent__</code> 和 <code>__proto__</code>，即 <code>作用域链</code> 和 <code>原型链</code> 在引擎内部的表示对象上有了交点，在查找 <code>__parent__</code> 之前，首先查找 <code>__proto__</code> 链，此时，<code>作用域链</code> 已到达终点，也不需要继续查找。只在 <code>GlobalVO</code> <code>作用域链</code> 和 <code>原型链</code> 才会有交点。</p>
 </blockquote>
 <blockquote>
 <p>注意，不是在所有的实现中 <code>全局对象</code> 都是继承自 <code>Object.prototype</code>，但是通常 是这样的。</p>
@@ -302,7 +239,7 @@ VO(">
 <p>为了在即使 <code>父函数上下文销毁</code> 的情况下也能访问其中的变量，内部函数在被创建的时候会在它的 <code>[[Scope]]</code> 属性中保存 <code>父函数的作用域链</code>。</p>
 <p>所以当函数被调用的时候，它上下文的作用域链会被格式化成 <code>活动对象</code> 与 <code>[[Scope]]</code> 属性的和：</p>
 <p><code>Scope chain = AO + [[Scope]]</code>。</p>
-<p>函数在创建时会保存父函数的 <code>作用域链</code>，这个保存下来的 <code>作用域链</code> 将会在未来的函数调用时用来 <code>查找变量</code>。</p>
+<p>函数在创建时会保存父函数的 <code>作用域链</code>，这个保存下来的 <code>作用域链</code> 将会在未来的函数调用时用来 <code>查找变量</code>。</p>
 <p>如果从对象引用层面来理解，<code>[[Scope]]</code> 被另外一个对象（函数）引用，引擎不会回收这些资源，所以闭包容易带来内存泄漏的隐患。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// "foo" returns a function and this returned function uses free variable "x"</span></span><br><span class="line"><span class="keyword">var</span> returnedFunction = foo();</span><br><span class="line"><span class="comment">// global variable "x"</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">20</span>;</span><br><span class="line"><span class="comment">// execution of the returned function</span></span><br><span class="line">returnedFunction(); <span class="comment">// 10, but not 20</span></span><br></pre></td></tr></table></figure>
 <p>这个类型的作用域叫作 <code>静态（或者词法）作用域</code>。我们看到 <code>变量x</code> 在返回的bar函数的 <code>[[Scope]]</code> 属性中被找到。</p>
@@ -330,17 +267,17 @@ VO(">
 <p>然后我们移动到下个部分，考虑一下执行上下文的最后一个属性，关于 this 值的概念。</p>
 <h3 id="This"><a href="#This" class="headerlink" title="This"></a>This</h3><p><code>this</code> 是一个与执行上下文相关的特殊对象。因此，它可以叫作 <code>上下文对象</code>，也就是用来指明执行上下文是在对象上触发的。</p>
 <p>任何对象都可以做为上下文中的 <code>this</code> 的值。在一些对 ECMAScript 执行上下文和部分 <code>this</code> 的描述中的所产生误解，<code>this</code> 经常被错误的描述成是变量对象的一个属性。</p>
-<p>正确的是：<code>this是执行上下文的一个属性，而不是变量对象的一个属性</code>。这个特性非常重要，因为如果 <code>this</code> 是变量对象的属性，<code>this</code> 会参与标识符解析过程，然而，<code>this</code> 从不会参与到标识符解析过程。</p>
+<p>正确的是：<code>this是执行上下文的一个属性，而不是变量对象的一个属性</code>。这个特性非常重要，因为如果 <code>this</code> 是变量对象的属性，<code>this</code> 会参与标识符解析过程，然而，<code>this</code> 从不会参与到标识符解析过程。</p>
 <p>换句话说，在代码中当访问 <code>this</code> 的时候，它的值是直接从 <code>执行上下文</code> 中获取的，并不需要任何作用域链查找。<code>this</code> 的值只在进入上下文的时候进行一次确定。</p>
 <p>顺便说一下，与 ECMAScript 相反，Python 的方法都会拥有一个被当作简单变量的 <code>self</code> 参数，这个变量的值在各个方法中是相同的的并且在执行过程中可以被更改成其他值。<br>在 ECMAScript 中，给 <code>this</code> 赋一个新值是不可能的，因为，它不是一个变量并且不存在于变量对象中。</p>
-<p>在全局上下文中，<code>this</code> 就等于 <code>全局对象</code> 本身，这也意味着 <code>this</code> 就是 <code>全局变量对象</code>：</p>
+<p>在全局上下文中，<code>this</code> 就等于 <code>全局对象</code> 本身，这也意味着 <code>this</code> 就是 <code>全局变量对象</code>：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(x, <span class="keyword">this</span>.x, <span class="built_in">window</span>.x);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line">f(); <span class="comment">// 输出了全局对象</span></span><br></pre></td></tr></table></figure>
 <p>在函数上下文的情况下，对函数的每次调用，其中的 <code>this</code> 值可能是不同的。这个 <code>this</code> 值是通过函数调用表达式（也就是函数被调用的方式）的形式由 <code>caller</code> 所提供的。</p>
 <p>让我们通过例子看一下，对于一个代码相同的函数，<code>this</code> 值是如何在不同的调用中（函数触发的不同方式），由 <code>caller</code> 给出不同的结果的：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">foo(); <span class="comment">// global object</span></span><br><span class="line">foo.prototype.constructor(); <span class="comment">// foo.prototype</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = &#123; <span class="attr">baz</span>: foo &#125;;</span><br><span class="line">bar.baz(); <span class="comment">// bar</span></span><br><span class="line"></span><br><span class="line">(bar.baz)();            <span class="comment">// also bar</span></span><br><span class="line">(bar.baz = bar.baz)();  <span class="comment">// but here is global object</span></span><br><span class="line">(bar.baz, bar.baz)();   <span class="comment">// also global object</span></span><br><span class="line">(<span class="literal">false</span> || bar.baz)();   <span class="comment">// also global object</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> otherFoo = bar.baz;</span><br><span class="line">otherFoo();             <span class="comment">// again global object</span></span><br></pre></td></tr></table></figure>
 <h4 id="bind、call、apply"><a href="#bind、call、apply" class="headerlink" title="bind、call、apply"></a><code>bind</code>、<code>call</code>、<code>apply</code></h4><p><code>call apply</code> 给了代码在控制 <code>this</code> 的能力。</p>
 <p><code>bind</code> 是基于 <code>call apply</code> 实现的高阶函数。</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind" target="_blank" rel="noopener">bind Polyfill</a>：fun.bind(thisArg[, arg1[, arg2[, …]]])<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// console.log(Function.prototype.apply.bind.call === Function.prototype.call);</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Function</span>.prototype.bind) &#123;</span><br><span class="line">  <span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">oThis</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">      <span class="comment">// closest thing possible to the ECMAScript 5</span></span><br><span class="line">      <span class="comment">// internal IsCallable function</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Function.prototype.bind - what is trying to be bound is not callable'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> aArgs   = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>),</span><br><span class="line">        fToBind = <span class="keyword">this</span>,</span><br><span class="line">        fNOP    = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">        fBound  = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> fToBind.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fNOP ? <span class="keyword">this</span> : oThis, aArgs.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数拥有 prototype</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.prototype) &#123;</span><br><span class="line">      <span class="comment">// native functions don't have a prototype</span></span><br><span class="line">      fNOP.prototype = <span class="keyword">this</span>.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果 this 是构造函数，fBound 继承相关属性</span></span><br><span class="line">    <span class="keyword">return</span> fBound;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind" target="_blank" rel="noopener">bind Polyfill</a>：fun.bind(thisArg[, arg1[, arg2[, …]]])<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// console.log(Function.prototype.apply.bind.call === Function.prototype.call);</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Function</span>.prototype.bind) &#123;</span><br><span class="line">  <span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">oThis</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">      <span class="comment">// closest thing possible to the ECMAScript 5</span></span><br><span class="line">      <span class="comment">// internal IsCallable function</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Function.prototype.bind - what is trying to be bound is not callable'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> aArgs   = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>),</span><br><span class="line">        fToBind = <span class="keyword">this</span>,</span><br><span class="line">        fNOP    = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">        fBound  = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> fToBind.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fNOP ? <span class="keyword">this</span> : oThis, aArgs.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数拥有 prototype</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.prototype) &#123;</span><br><span class="line">      <span class="comment">// native functions don't have a prototype</span></span><br><span class="line">      fNOP.prototype = <span class="keyword">this</span>.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果 this 是构造函数，fBound 继承相关属性</span></span><br><span class="line">    <span class="keyword">return</span> fBound;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>关于 <code>this</code> 绑定</p>
 <p>在 JavaScript 中，<code>this</code> 和 <code>函数</code> 之间的绑定时松散的，体现在我们可以轻易的通过 <code>call</code>、<code>apply</code> <code>指定</code> 或 <code>修改</code> <code>this</code>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#id'</span>).foreach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  $(<span class="keyword">this</span>).click();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -444,183 +381,430 @@ VO(">
 <p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/estree.png" alt="ESTree"></p>
 <p>上面的模拟代码生成了JS解析过程所产生的用于在执行阶段使用的信息，但是并不代表解释器和这个一样的。</p>
 <p>这些分析工具有很多，他们大都用于 <code>代码压缩</code>、<code>代码混淆</code>、<code>代码转换（ES6-&gt;ES5，babel，ts-&gt;js）</code>、<code>代码优化</code>、<code>学习研究</code> 等。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
 
-    </div>
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Syntax/">Syntax</a>►<a class="article-category-link" href="/categories/Syntax/JavaScript/">JavaScript</a>
+</div>
 
-    
 
-    
-        <div class="post-tags">
-            <i class="fa fa-tags" aria-hidden="true"></i>
-            <a href="/tags/JavaScript/">#JavaScript</a> <a href="/tags/JavaScript执行上下文、变量对象、活动对象、词法作用域、闭包、执行过程/">#JavaScript执行上下文、变量对象、活动对象、词法作用域、闭包、执行过程</a>
-        </div>
-    
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/JavaScript执行上下文/">JavaScript执行上下文</a>
+  </div>
 
-    <!-- Comments -->
-    
-    <div class="comments">
-        
-<div id="disqus_thread">
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="/posts/JavaScript深度/" data-title="JavaScript深度 | Liuyanjie&#39;s Blog" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/posts/Git命令工作机制/" title="Git命令工作机制">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Git命令工作机制</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/posts/JavaScript基础/"  title="JavaScript基础">
+ <strong>下一篇：</strong><br/> 
+ <span>JavaScript基础
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript-Deep"><span class="toc-number">1.</span> <span class="toc-text">JavaScript Deep</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#执行上下文堆栈"><span class="toc-number">1.1.</span> <span class="toc-text">执行上下文堆栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#执行上下文"><span class="toc-number">1.1.1.</span> <span class="toc-text">执行上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量对象（variable-object）"><span class="toc-number">1.1.2.</span> <span class="toc-text">变量对象（variable object）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#活动对象（activation-object）"><span class="toc-number">1.1.3.</span> <span class="toc-text">活动对象（activation object）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域链-scope-chain"><span class="toc-number">1.1.4.</span> <span class="toc-text">作用域链(scope chain)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#闭包（closure）"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">闭包（closure）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#This"><span class="toc-number">1.1.5.</span> <span class="toc-text">This</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bind、call、apply"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">bind、call、apply</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行上下文总结"><span class="toc-number">1.1.6.</span> <span class="toc-text">执行上下文总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行过程"><span class="toc-number">1.2.</span> <span class="toc-text">执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#执行顺序"><span class="toc-number">1.2.1.</span> <span class="toc-text">执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键步骤"><span class="toc-number">1.2.2.</span> <span class="toc-text">关键步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关键概念"><span class="toc-number">1.2.3.</span> <span class="toc-text">关键概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#词法分析"><span class="toc-number">1.2.4.</span> <span class="toc-text">词法分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟解析"><span class="toc-number">1.2.5.</span> <span class="toc-text">模拟解析</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="liuyanjie" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
 </div>
 
 
 
-    </div>
-    
-
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/GIT/" title="GIT">GIT<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Syntax/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Syntax/" title="Syntax">Syntax<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GIT/VCS/" title="VCS">VCS<sup>2</sup></a></li>
+		  
+		
+		</ul>
 </div>
-        </section>
 
-    </div>
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git命令/" title="Git命令">Git命令<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
 </div>
 
 
-</div>
-
-<!-- Footer -->
-<div class="push"></div>
-
-<footer class="footer-content">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
-                <h2>About</h2>
-                <p>
-                    This theme was developed by <a href="https://github.com/klugjo">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
-                </p>
-            </div>
-            
-    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
-        <h2>Recent Posts</h2>
-        <ul>
-            
-            <li>
-                <a class="footer-post" href="/posts/GIT对象模型/">GIT对象模型</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/posts/Git命令/">Git命令</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/posts/JavaScript深度/">JavaScript深度</a>
-            </li>
-            
-            <li>
-                <a class="footer-post" href="/posts/JavaScript基础/">JavaScript基础</a>
-            </li>
-            
-        </ul>
-    </div>
-
-
-
-            
-<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 footer-categories">
-    <h2>Categories</h2>
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
     <ul>
-        
-        <li>
-            <a class="footer-post" href="/categories/GIT/">GIT</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Syntax/">Syntax</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/GIT/VCS/">VCS</a>
-        </li>
-        
-        <li>
-            <a class="footer-post" href="/categories/Syntax/JavaScript/">JavaScript</a>
-        </li>
         
     </ul>
 </div>
 
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="list-inline footer-social-icons">
-                    
-                    <li class="list-inline-item">
-                        <a href="https://github.com/liuyanjie">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-github"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="mailto:liuyj619@gmail.com">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-envelope-o"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="list-inline-item">
-                        <a href="\#">
-                            <span class="footer-icon-container">
-                                <i class="fa fa-rss"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="footer-copyright">
-                    @Untitled. All right reserved | Design & Hexo <a href="http://www.codeblocq.com/">Jonathan Klughertz</a>
-                </div>
-            </div>
-        </div>
+  
+
+
+  <div class="rsspart">
+	<a href="/rss.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
     </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Liuyanjie. <br/>
+			This is my blog</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/liuyanjie" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/5954388" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/ryxcxyr" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/liuyj619" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		<a href="http://www.zhihu.com/people/ryxc-liu-yan-jie" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/101963751496807079381?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:liuyj619@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="Liu Yanjie">Liu Yanjie</a>
+		
+		
+		</p>
+</div>
 </footer>
-
-<!-- After footer scripts -->
-
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-
-<!-- Tween Max -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
-
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
-<!-- Custom JavaScript -->
-<script src="/js/main.js"></script>
-
-<!-- Disqus Comments -->
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
 
 <script type="text/javascript">
-    var disqus_shortname = 'liuyanjie';
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
 
-    (function(){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
 </script>
 
 
 
-</body>
 
+<script type="text/javascript">
+
+var disqus_shortname = 'liuyanjie';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
 </html>
