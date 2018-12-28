@@ -11,13 +11,13 @@
     
 
     
-    <meta name="description" content="Git原理分析GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计">
+    <meta name="description" content="GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
 <meta name="keywords" content="GIT,GIT对象模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git深入理解-对象模型">
 <meta property="og:url" content="/posts/Git深入理解-对象模型/index.html">
 <meta property="og:site_name" content="Liuyanjie&#39;s Blog">
-<meta property="og:description" content="Git原理分析GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计">
+<meta property="og:description" content="GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tree.png">
@@ -25,10 +25,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tag.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-c-t-b.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png">
-<meta property="og:updated_time" content="2018-12-28T15:20:52.000Z">
+<meta property="og:updated_time" content="2018-12-28T16:24:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git深入理解-对象模型">
-<meta name="twitter:description" content="Git原理分析GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计">
+<meta name="twitter:description" content="GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
 <meta name="twitter:creator" content="@ryxcxyr">
 <link rel="publisher" href="101963751496807079381">
@@ -105,11 +105,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git原理分析"><span class="toc-number">1.</span> <span class="toc-text">Git原理分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GIT对象模型"><span class="toc-number">1.1.</span> <span class="toc-text">GIT对象模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SHA"><span class="toc-number">1.1.1.</span> <span class="toc-text">SHA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.1.2.</span> <span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#blob-文件-对象"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">blob (文件) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tree-目录-对象"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">tree (目录) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-提交-对象"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">commit (提交) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tag-标签-对象"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">tag (标签) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-gt-tree-gt-blob"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">commit -&gt; tree -&gt; blob</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与其他版本控制系统的区别"><span class="toc-number">1.1.3.</span> <span class="toc-text">与其他版本控制系统的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一步一步了解Git在做什么"><span class="toc-number">1.2.</span> <span class="toc-text">一步一步了解Git在做什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化仓库"><span class="toc-number">1.2.1.</span> <span class="toc-text">初始化仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加一个文件README-md"><span class="toc-number">1.2.2.</span> <span class="toc-text">增加一个文件README.md</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续添加文件"><span class="toc-number">1.2.3.</span> <span class="toc-text">继续添加文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再添加一个带有目录文件"><span class="toc-number">1.2.4.</span> <span class="toc-text">再添加一个带有目录文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始创建分支"><span class="toc-number">1.2.5.</span> <span class="toc-text">开始创建分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打标签"><span class="toc-number">1.2.6.</span> <span class="toc-text">打标签</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GIT对象模型"><span class="toc-number">1.</span> <span class="toc-text">GIT对象模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SHA"><span class="toc-number">1.1.</span> <span class="toc-text">SHA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.2.</span> <span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#blob-文件-对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">blob (文件) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tree-目录-对象"><span class="toc-number">1.2.2.</span> <span class="toc-text">tree (目录) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-提交-对象"><span class="toc-number">1.2.3.</span> <span class="toc-text">commit (提交) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tag-标签-对象"><span class="toc-number">1.2.4.</span> <span class="toc-text">tag (标签) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-gt-tree-gt-blob"><span class="toc-number">1.2.5.</span> <span class="toc-text">commit -&gt; tree -&gt; blob</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与其他版本控制系统的区别"><span class="toc-number">1.3.</span> <span class="toc-text">与其他版本控制系统的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一步一步了解Git在做什么"><span class="toc-number">2.</span> <span class="toc-text">一步一步了解Git在做什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化仓库"><span class="toc-number">2.1.</span> <span class="toc-text">初始化仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加一个文件README-md"><span class="toc-number">2.2.</span> <span class="toc-text">增加一个文件README.md</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续添加文件"><span class="toc-number">2.3.</span> <span class="toc-text">继续添加文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再添加一个带有目录文件"><span class="toc-number">2.4.</span> <span class="toc-text">再添加一个带有目录文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始创建分支"><span class="toc-number">2.5.</span> <span class="toc-text">开始创建分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打标签"><span class="toc-number">2.6.</span> <span class="toc-text">打标签</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="Git原理分析"><a href="#Git原理分析" class="headerlink" title="Git原理分析"></a>Git原理分析</h1><h2 id="GIT对象模型"><a href="#GIT对象模型" class="headerlink" title="GIT对象模型"></a>GIT对象模型</h2><h3 id="SHA"><a href="#SHA" class="headerlink" title="SHA"></a>SHA</h3><p>所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:</p>
+		<h2 id="GIT对象模型"><a href="#GIT对象模型" class="headerlink" title="GIT对象模型"></a>GIT对象模型</h2><h3 id="SHA"><a href="#SHA" class="headerlink" title="SHA"></a>SHA</h3><p>所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:</p>
 <blockquote>
 <p>6ff87c4664981e4397625791c8ea3bbb5f2279a3</p>
 </blockquote>
@@ -303,6 +303,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/HEAD</span><br><span class="line">ref: refs/heads/master</span><br></pre></td></tr></table></figure>
 <p><a href="images/git-obj-model.svg">svg版</a></p>
 <p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png" alt="git-obj-model"></p>
+<p>源文件地址：<a href="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md" target="_blank" rel="noopener">https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -348,9 +349,9 @@
 
 
 <div class="next">
-<a href="/posts/JavaScript深度/" title="JavaScript深度">
+<a href="/posts/JavaScript深入理解-执行上下文/" title="JavaScript深入理解-执行上下文">
  <strong>下一篇：</strong><br> 
- <span>JavaScript深度
+ <span>JavaScript深入理解-执行上下文
 </span>
 </a>
 </div>
@@ -373,7 +374,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git原理分析"><span class="toc-number">1.</span> <span class="toc-text">Git原理分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GIT对象模型"><span class="toc-number">1.1.</span> <span class="toc-text">GIT对象模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SHA"><span class="toc-number">1.1.1.</span> <span class="toc-text">SHA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.1.2.</span> <span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#blob-文件-对象"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">blob (文件) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tree-目录-对象"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">tree (目录) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-提交-对象"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">commit (提交) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tag-标签-对象"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">tag (标签) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-gt-tree-gt-blob"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">commit -&gt; tree -&gt; blob</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与其他版本控制系统的区别"><span class="toc-number">1.1.3.</span> <span class="toc-text">与其他版本控制系统的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一步一步了解Git在做什么"><span class="toc-number">1.2.</span> <span class="toc-text">一步一步了解Git在做什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化仓库"><span class="toc-number">1.2.1.</span> <span class="toc-text">初始化仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加一个文件README-md"><span class="toc-number">1.2.2.</span> <span class="toc-text">增加一个文件README.md</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续添加文件"><span class="toc-number">1.2.3.</span> <span class="toc-text">继续添加文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再添加一个带有目录文件"><span class="toc-number">1.2.4.</span> <span class="toc-text">再添加一个带有目录文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始创建分支"><span class="toc-number">1.2.5.</span> <span class="toc-text">开始创建分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打标签"><span class="toc-number">1.2.6.</span> <span class="toc-text">打标签</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GIT对象模型"><span class="toc-number">1.</span> <span class="toc-text">GIT对象模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SHA"><span class="toc-number">1.1.</span> <span class="toc-text">SHA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.2.</span> <span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#blob-文件-对象"><span class="toc-number">1.2.1.</span> <span class="toc-text">blob (文件) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tree-目录-对象"><span class="toc-number">1.2.2.</span> <span class="toc-text">tree (目录) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-提交-对象"><span class="toc-number">1.2.3.</span> <span class="toc-text">commit (提交) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tag-标签-对象"><span class="toc-number">1.2.4.</span> <span class="toc-text">tag (标签) 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-gt-tree-gt-blob"><span class="toc-number">1.2.5.</span> <span class="toc-text">commit -&gt; tree -&gt; blob</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与其他版本控制系统的区别"><span class="toc-number">1.3.</span> <span class="toc-text">与其他版本控制系统的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一步一步了解Git在做什么"><span class="toc-number">2.</span> <span class="toc-text">一步一步了解Git在做什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化仓库"><span class="toc-number">2.1.</span> <span class="toc-text">初始化仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加一个文件README-md"><span class="toc-number">2.2.</span> <span class="toc-text">增加一个文件README.md</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继续添加文件"><span class="toc-number">2.3.</span> <span class="toc-text">继续添加文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再添加一个带有目录文件"><span class="toc-number">2.4.</span> <span class="toc-text">再添加一个带有目录文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始创建分支"><span class="toc-number">2.5.</span> <span class="toc-text">开始创建分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打标签"><span class="toc-number">2.6.</span> <span class="toc-text">打标签</span></a></li></ol></li></ol>
  
   </div>
 
@@ -396,7 +397,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/GIT/" title="GIT">GIT<sup>5</sup></a></li>
+			<li><a href="/categories/GIT/" title="GIT">GIT<sup>3</sup></a></li>
 		  
 		
 		  
@@ -404,19 +405,11 @@
 		  
 		
 		  
-			<li><a href="/categories/Syntax/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/Language/" title="Language">Language<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Syntax/" title="Syntax">Syntax<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/GIT/VCS/" title="VCS">VCS<sup>5</sup></a></li>
+			<li><a href="/categories/GIT/VCS/" title="VCS">VCS<sup>3</sup></a></li>
 		  
 		
 		</ul>
@@ -429,27 +422,27 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/GIT/" title="GIT">GIT<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Git命令/" title="Git命令">Git命令<sup>3</sup></a></li>
+				<li><a href="/tags/Git命令/" title="Git命令">Git命令<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>2</sup></a></li>
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>2</sup></a></li>
+				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>2</sup></a></li>
+				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>1</sup></a></li>
 			
 		
 		</ul>

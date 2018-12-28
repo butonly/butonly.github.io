@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="Git Working Mechanism仓库创建Git是一个分布式的版本控制系统，这意味着在Git中版本库有 本地版本库 和 远程版本库 之分。 每个远程仓库可以有多个本地仓库，同时一个本地版本库可以同时对应多个远程版本库，多个远程版本库是从一个最原始的版本库 Fork（实际上也是clone）产生的，Fork 出来的版本库和本地 Clone 的仓库是类似的，他们有一个相同的 上游仓库（即原始仓库">
+    <meta name="description" content="仓库创建Git是一个分布式的版本控制系统，这意味着在Git中版本库有 本地版本库 和 远程版本库 之分。 每个远程仓库可以有多个本地仓库，同时一个本地版本库可以同时对应多个远程版本库，多个远程版本库是从一个最原始的版本库 Fork（实际上也是clone）产生的，Fork 出来的版本库和本地 Clone 的仓库是类似的，他们有一个相同的 上游仓库（即原始仓库），这些版本库直接可以通过 PullReq">
 <meta name="keywords" content="GIT,Git命令">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git深入理解-命令工作机制">
 <meta property="og:url" content="/posts/Git深入理解-命令工作机制/index.html">
 <meta property="og:site_name" content="Liuyanjie&#39;s Blog">
-<meta property="og:description" content="Git Working Mechanism仓库创建Git是一个分布式的版本控制系统，这意味着在Git中版本库有 本地版本库 和 远程版本库 之分。 每个远程仓库可以有多个本地仓库，同时一个本地版本库可以同时对应多个远程版本库，多个远程版本库是从一个最原始的版本库 Fork（实际上也是clone）产生的，Fork 出来的版本库和本地 Clone 的仓库是类似的，他们有一个相同的 上游仓库（即原始仓库">
+<meta property="og:description" content="仓库创建Git是一个分布式的版本控制系统，这意味着在Git中版本库有 本地版本库 和 远程版本库 之分。 每个远程仓库可以有多个本地仓库，同时一个本地版本库可以同时对应多个远程版本库，多个远程版本库是从一个最原始的版本库 Fork（实际上也是clone）产生的，Fork 出来的版本库和本地 Clone 的仓库是类似的，他们有一个相同的 上游仓库（即原始仓库），这些版本库直接可以通过 PullReq">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-28T15:20:52.000Z">
+<meta property="og:updated_time" content="2018-12-28T16:24:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git深入理解-命令工作机制">
-<meta name="twitter:description" content="Git Working Mechanism仓库创建Git是一个分布式的版本控制系统，这意味着在Git中版本库有 本地版本库 和 远程版本库 之分。 每个远程仓库可以有多个本地仓库，同时一个本地版本库可以同时对应多个远程版本库，多个远程版本库是从一个最原始的版本库 Fork（实际上也是clone）产生的，Fork 出来的版本库和本地 Clone 的仓库是类似的，他们有一个相同的 上游仓库（即原始仓库">
+<meta name="twitter:description" content="仓库创建Git是一个分布式的版本控制系统，这意味着在Git中版本库有 本地版本库 和 远程版本库 之分。 每个远程仓库可以有多个本地仓库，同时一个本地版本库可以同时对应多个远程版本库，多个远程版本库是从一个最原始的版本库 Fork（实际上也是clone）产生的，Fork 出来的版本库和本地 Clone 的仓库是类似的，他们有一个相同的 上游仓库（即原始仓库），这些版本库直接可以通过 PullReq">
 <meta name="twitter:creator" content="@ryxcxyr">
 <link rel="publisher" href="101963751496807079381">
 
@@ -98,11 +98,11 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-Working-Mechanism"><span class="toc-number">1.</span> <span class="toc-text">Git Working Mechanism</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库创建"><span class="toc-number">1.1.</span> <span class="toc-text">仓库创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Init"><span class="toc-number">1.1.1.</span> <span class="toc-text">Init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clone"><span class="toc-number">1.1.2.</span> <span class="toc-text">Clone</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库维护"><span class="toc-number">1.2.</span> <span class="toc-text">仓库维护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RefSpec"><span class="toc-number">1.2.1.</span> <span class="toc-text">RefSpec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-remote"><span class="toc-number">1.2.2.</span> <span class="toc-text">git remote</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-fetch"><span class="toc-number">1.2.3.</span> <span class="toc-text">git fetch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-pull"><span class="toc-number">1.2.4.</span> <span class="toc-text">git pull</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-push"><span class="toc-number">1.2.5.</span> <span class="toc-text">git push</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-submodule"><span class="toc-number">1.2.6.</span> <span class="toc-text">git submodule</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支管理"><span class="toc-number">1.3.</span> <span class="toc-text">分支管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-branch"><span class="toc-number">1.3.1.</span> <span class="toc-text">git-branch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-tag"><span class="toc-number">1.3.2.</span> <span class="toc-text">git-tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout"><span class="toc-number">1.3.3.</span> <span class="toc-text">git-checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-merge"><span class="toc-number">1.3.4.</span> <span class="toc-text">git-merge</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-number">1.4.</span> <span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-add"><span class="toc-number">1.4.1.</span> <span class="toc-text">git add</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rm"><span class="toc-number">1.4.2.</span> <span class="toc-text">git rm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-mv"><span class="toc-number">1.4.3.</span> <span class="toc-text">git mv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-diff"><span class="toc-number">1.4.4.</span> <span class="toc-text">git diff</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-commit"><span class="toc-number">1.4.5.</span> <span class="toc-text">git commit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-status"><span class="toc-number">1.4.6.</span> <span class="toc-text">git status</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-reset"><span class="toc-number">1.4.7.</span> <span class="toc-text">git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-revert"><span class="toc-number">1.4.8.</span> <span class="toc-text">git revert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rebase"><span class="toc-number">1.4.9.</span> <span class="toc-text">git rebase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-cherry-pick"><span class="toc-number">1.4.10.</span> <span class="toc-text">git cherry-pick</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库创建"><span class="toc-number">1.</span> <span class="toc-text">仓库创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Init"><span class="toc-number">1.1.</span> <span class="toc-text">Init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clone"><span class="toc-number">1.2.</span> <span class="toc-text">Clone</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库维护"><span class="toc-number">2.</span> <span class="toc-text">仓库维护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RefSpec"><span class="toc-number">2.1.</span> <span class="toc-text">RefSpec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-remote"><span class="toc-number">2.2.</span> <span class="toc-text">git remote</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-fetch"><span class="toc-number">2.3.</span> <span class="toc-text">git fetch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-pull"><span class="toc-number">2.4.</span> <span class="toc-text">git pull</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-push"><span class="toc-number">2.5.</span> <span class="toc-text">git push</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-submodule"><span class="toc-number">2.6.</span> <span class="toc-text">git submodule</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支管理"><span class="toc-number">3.</span> <span class="toc-text">分支管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-branch"><span class="toc-number">3.1.</span> <span class="toc-text">git-branch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-tag"><span class="toc-number">3.2.</span> <span class="toc-text">git-tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout"><span class="toc-number">3.3.</span> <span class="toc-text">git-checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-merge"><span class="toc-number">3.4.</span> <span class="toc-text">git-merge</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-number">4.</span> <span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-add"><span class="toc-number">4.1.</span> <span class="toc-text">git add</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rm"><span class="toc-number">4.2.</span> <span class="toc-text">git rm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-mv"><span class="toc-number">4.3.</span> <span class="toc-text">git mv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-diff"><span class="toc-number">4.4.</span> <span class="toc-text">git diff</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-commit"><span class="toc-number">4.5.</span> <span class="toc-text">git commit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-status"><span class="toc-number">4.6.</span> <span class="toc-text">git status</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-reset"><span class="toc-number">4.7.</span> <span class="toc-text">git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-revert"><span class="toc-number">4.8.</span> <span class="toc-text">git revert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rebase"><span class="toc-number">4.9.</span> <span class="toc-text">git rebase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-cherry-pick"><span class="toc-number">4.10.</span> <span class="toc-text">git cherry-pick</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="Git-Working-Mechanism"><a href="#Git-Working-Mechanism" class="headerlink" title="Git Working Mechanism"></a>Git Working Mechanism</h1><h2 id="仓库创建"><a href="#仓库创建" class="headerlink" title="仓库创建"></a>仓库创建</h2><p>Git是一个分布式的版本控制系统，这意味着在Git中版本库有 <code>本地版本库</code> 和 <code>远程版本库</code> 之分。</p>
+		<h2 id="仓库创建"><a href="#仓库创建" class="headerlink" title="仓库创建"></a>仓库创建</h2><p>Git是一个分布式的版本控制系统，这意味着在Git中版本库有 <code>本地版本库</code> 和 <code>远程版本库</code> 之分。</p>
 <p>每个远程仓库可以有多个本地仓库，同时一个本地版本库可以同时对应多个远程版本库，多个远程版本库是从一个最原始的版本库 <code>Fork</code>（实际上也是<code>clone</code>）产生的，<code>Fork</code> 出来的版本库和本地 <code>Clone</code> 的仓库是类似的，他们有一个相同的 <code>上游仓库</code>（即原始仓库），这些版本库直接可以通过 <code>PullRequest</code> 或 <code>MergeRequest</code> 操作进行仓库的交互。</p>
 <p>本地仓库对应的远程仓库记录在 <code>.git/config</code> 文件中。本地仓库可以与多个的远程仓库 <code>pull/push</code> 代码。</p>
 <h3 id="Init"><a href="#Init" class="headerlink" title="Init"></a><a href="https://git-scm.com/docs/git-init" target="_blank" rel="noopener">Init</a></h3><blockquote>
@@ -659,7 +659,8 @@
 <li>保持与上游分支同步，同步上游分支的最新版本</li>
 <li>合并时存在冲突，通过变基操作解决冲突</li>
 </ol>
-<h3 id="git-cherry-pick"><a href="#git-cherry-pick" class="headerlink" title="git cherry-pick"></a>git cherry-pick</h3>  
+<h3 id="git-cherry-pick"><a href="#git-cherry-pick" class="headerlink" title="git cherry-pick"></a>git cherry-pick</h3><p>源文件地址：<a href="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-working-mechanism.md" target="_blank" rel="noopener">https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-working-mechanism.md</a></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -695,10 +696,10 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/posts/Git命令工作机制/" title="Git命令工作机制">
+ <a href="/posts/Git学习资料整理/" title="Git学习资料整理">
   <strong>上一篇：</strong><br>
   <span>
-  Git命令工作机制</span>
+  Git学习资料整理</span>
 </a>
 </div>
 
@@ -729,7 +730,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-Working-Mechanism"><span class="toc-number">1.</span> <span class="toc-text">Git Working Mechanism</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库创建"><span class="toc-number">1.1.</span> <span class="toc-text">仓库创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Init"><span class="toc-number">1.1.1.</span> <span class="toc-text">Init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clone"><span class="toc-number">1.1.2.</span> <span class="toc-text">Clone</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库维护"><span class="toc-number">1.2.</span> <span class="toc-text">仓库维护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RefSpec"><span class="toc-number">1.2.1.</span> <span class="toc-text">RefSpec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-remote"><span class="toc-number">1.2.2.</span> <span class="toc-text">git remote</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-fetch"><span class="toc-number">1.2.3.</span> <span class="toc-text">git fetch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-pull"><span class="toc-number">1.2.4.</span> <span class="toc-text">git pull</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-push"><span class="toc-number">1.2.5.</span> <span class="toc-text">git push</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-submodule"><span class="toc-number">1.2.6.</span> <span class="toc-text">git submodule</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支管理"><span class="toc-number">1.3.</span> <span class="toc-text">分支管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-branch"><span class="toc-number">1.3.1.</span> <span class="toc-text">git-branch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-tag"><span class="toc-number">1.3.2.</span> <span class="toc-text">git-tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout"><span class="toc-number">1.3.3.</span> <span class="toc-text">git-checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-merge"><span class="toc-number">1.3.4.</span> <span class="toc-text">git-merge</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-number">1.4.</span> <span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-add"><span class="toc-number">1.4.1.</span> <span class="toc-text">git add</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rm"><span class="toc-number">1.4.2.</span> <span class="toc-text">git rm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-mv"><span class="toc-number">1.4.3.</span> <span class="toc-text">git mv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-diff"><span class="toc-number">1.4.4.</span> <span class="toc-text">git diff</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-commit"><span class="toc-number">1.4.5.</span> <span class="toc-text">git commit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-status"><span class="toc-number">1.4.6.</span> <span class="toc-text">git status</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-reset"><span class="toc-number">1.4.7.</span> <span class="toc-text">git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-revert"><span class="toc-number">1.4.8.</span> <span class="toc-text">git revert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rebase"><span class="toc-number">1.4.9.</span> <span class="toc-text">git rebase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-cherry-pick"><span class="toc-number">1.4.10.</span> <span class="toc-text">git cherry-pick</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库创建"><span class="toc-number">1.</span> <span class="toc-text">仓库创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Init"><span class="toc-number">1.1.</span> <span class="toc-text">Init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clone"><span class="toc-number">1.2.</span> <span class="toc-text">Clone</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#仓库维护"><span class="toc-number">2.</span> <span class="toc-text">仓库维护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RefSpec"><span class="toc-number">2.1.</span> <span class="toc-text">RefSpec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-remote"><span class="toc-number">2.2.</span> <span class="toc-text">git remote</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-fetch"><span class="toc-number">2.3.</span> <span class="toc-text">git fetch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-pull"><span class="toc-number">2.4.</span> <span class="toc-text">git pull</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-push"><span class="toc-number">2.5.</span> <span class="toc-text">git push</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-submodule"><span class="toc-number">2.6.</span> <span class="toc-text">git submodule</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分支管理"><span class="toc-number">3.</span> <span class="toc-text">分支管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-branch"><span class="toc-number">3.1.</span> <span class="toc-text">git-branch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-tag"><span class="toc-number">3.2.</span> <span class="toc-text">git-tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-checkout"><span class="toc-number">3.3.</span> <span class="toc-text">git-checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-merge"><span class="toc-number">3.4.</span> <span class="toc-text">git-merge</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-number">4.</span> <span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-add"><span class="toc-number">4.1.</span> <span class="toc-text">git add</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rm"><span class="toc-number">4.2.</span> <span class="toc-text">git rm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-mv"><span class="toc-number">4.3.</span> <span class="toc-text">git mv</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-diff"><span class="toc-number">4.4.</span> <span class="toc-text">git diff</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-commit"><span class="toc-number">4.5.</span> <span class="toc-text">git commit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-status"><span class="toc-number">4.6.</span> <span class="toc-text">git status</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-reset"><span class="toc-number">4.7.</span> <span class="toc-text">git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-revert"><span class="toc-number">4.8.</span> <span class="toc-text">git revert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-rebase"><span class="toc-number">4.9.</span> <span class="toc-text">git rebase</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-cherry-pick"><span class="toc-number">4.10.</span> <span class="toc-text">git cherry-pick</span></a></li></ol></li></ol>
  
   </div>
 
@@ -752,7 +753,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/GIT/" title="GIT">GIT<sup>5</sup></a></li>
+			<li><a href="/categories/GIT/" title="GIT">GIT<sup>3</sup></a></li>
 		  
 		
 		  
@@ -760,19 +761,11 @@
 		  
 		
 		  
-			<li><a href="/categories/Syntax/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
-		  
-		
-		  
 			<li><a href="/categories/Language/" title="Language">Language<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/Syntax/" title="Syntax">Syntax<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/GIT/VCS/" title="VCS">VCS<sup>5</sup></a></li>
+			<li><a href="/categories/GIT/VCS/" title="VCS">VCS<sup>3</sup></a></li>
 		  
 		
 		</ul>
@@ -785,27 +778,27 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>4</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/GIT/" title="GIT">GIT<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Git命令/" title="Git命令">Git命令<sup>3</sup></a></li>
+				<li><a href="/tags/Git命令/" title="Git命令">Git命令<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>2</sup></a></li>
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>2</sup></a></li>
+				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>2</sup></a></li>
+				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>1</sup></a></li>
 			
 		
 		</ul>
