@@ -4,7 +4,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>GIT对象模型 | Liuyanjie&#39;s Blog</title>
+    <title>Git深入理解-对象模型 | Liuyanjie&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Liu Yanjie">
@@ -12,10 +12,10 @@
 
     
     <meta name="description" content="Git原理分析GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计">
-<meta name="keywords" content="GIT对象模型">
+<meta name="keywords" content="GIT,GIT对象模型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GIT对象模型">
-<meta property="og:url" content="/posts/GIT对象模型/index.html">
+<meta property="og:title" content="Git深入理解-对象模型">
+<meta property="og:url" content="/posts/Git深入理解-对象模型/index.html">
 <meta property="og:site_name" content="Liuyanjie&#39;s Blog">
 <meta property="og:description" content="Git原理分析GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计">
 <meta property="og:locale" content="default">
@@ -25,9 +25,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tag.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-c-t-b.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png">
-<meta property="og:updated_time" content="2018-12-27T14:41:22.000Z">
+<meta property="og:updated_time" content="2018-12-28T15:20:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GIT对象模型">
+<meta name="twitter:title" content="Git深入理解-对象模型">
 <meta name="twitter:description" content="Git原理分析GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
 <meta name="twitter:creator" content="@ryxcxyr">
@@ -89,14 +89,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/posts/GIT对象模型/" title="GIT对象模型" itemprop="url">GIT对象模型</a>
+      <a href="/posts/Git深入理解-对象模型/" title="Git深入理解-对象模型" itemprop="url">Git深入理解-对象模型</a>
   </h1>
   <p class="article-author">By
        
 		<a href="https://plus.google.com/101963751496807079381?rel=author" title="Liu Yanjie" target="_blank" itemprop="author">Liu Yanjie</a>
 		
   </p><p class="article-time">
-    <time datetime="2018-05-07T00:00:00.000Z" itemprop="datePublished"> Published 2018-05-07</time>
+    <time datetime="2018-05-06T00:00:00.000Z" itemprop="datePublished"> Published 2018-05-06</time>
     
   </p>
 </header>
@@ -316,7 +316,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/GIT对象模型/">GIT对象模型</a>
+  <span></span> <a href="/tags/GIT/">GIT</a><a href="/tags/GIT对象模型/">GIT对象模型</a>
   </div>
 
 </div>
@@ -325,7 +325,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/posts/GIT对象模型/" data-title="GIT对象模型 | Liuyanjie&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="/posts/Git深入理解-对象模型/" data-title="Git深入理解-对象模型 | Liuyanjie&#39;s Blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -339,18 +339,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/posts/Git学习资料整理/" title="Git学习资料整理">
+ <a href="/posts/Git深入理解-命令工作机制/" title="Git深入理解-命令工作机制">
   <strong>上一篇：</strong><br>
   <span>
-  Git学习资料整理</span>
+  Git深入理解-命令工作机制</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/posts/Git命令工作机制/" title="Git命令工作机制">
+<a href="/posts/JavaScript深度/" title="JavaScript深度">
  <strong>下一篇：</strong><br> 
- <span>Git命令工作机制
+ <span>JavaScript深度
 </span>
 </a>
 </div>

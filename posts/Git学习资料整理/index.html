@@ -1,0 +1,585 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>Git学习资料整理 | Liuyanjie&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Liu Yanjie">
+    
+
+    
+    <meta name="description" content="Git知识体系 Reference ProGitV2  整理内容 GIT对象模型 Git工作机制  GIT学习 learngitbranching git-cheatsheet A Visual Git Reference  Books ProGit第一版（中文版） git-recipes Git Community Book 中文版 Think Like (a) Git GotGitHub  G">
+<meta name="keywords" content="GIT,Git命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git学习资料整理">
+<meta property="og:url" content="/posts/Git学习资料整理/index.html">
+<meta property="og:site_name" content="Liuyanjie&#39;s Blog">
+<meta property="og:description" content="Git知识体系 Reference ProGitV2  整理内容 GIT对象模型 Git工作机制  GIT学习 learngitbranching git-cheatsheet A Visual Git Reference  Books ProGit第一版（中文版） git-recipes Git Community Book 中文版 Think Like (a) Git GotGitHub  G">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-28T15:20:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git学习资料整理">
+<meta name="twitter:description" content="Git知识体系 Reference ProGitV2  整理内容 GIT对象模型 Git工作机制  GIT学习 learngitbranching git-cheatsheet A Visual Git Reference  Books ProGit第一版（中文版） git-recipes Git Community Book 中文版 Think Like (a) Git GotGitHub  G">
+<meta name="twitter:creator" content="@ryxcxyr">
+<link rel="publisher" href="101963751496807079381">
+
+    
+    <link rel="alternative" href="/rss.xml" title="Liuyanjie&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Liuyanjie&#39;s Blog" title="Liuyanjie&#39;s Blog"></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Liuyanjie&#39;s Blog">Liuyanjie&#39;s Blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/posts/Git学习资料整理/" title="Git学习资料整理" itemprop="url">Git学习资料整理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/101963751496807079381?rel=author" title="Liu Yanjie" target="_blank" itemprop="author">Liu Yanjie</a>
+		
+  </p><p class="article-time">
+    <time datetime="2018-12-28T00:00:00.000Z" itemprop="datePublished"> Published 2018-12-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git知识体系"><span class="toc-number">1.</span> <span class="toc-text">Git知识体系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#整理内容"><span class="toc-number">1.1.</span> <span class="toc-text">整理内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GIT学习"><span class="toc-number">1.2.</span> <span class="toc-text">GIT学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Books"><span class="toc-number">1.3.</span> <span class="toc-text">Books</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github-Repo"><span class="toc-number">1.4.</span> <span class="toc-text">Github-Repo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Flow"><span class="toc-number">1.5.</span> <span class="toc-text">Git-Flow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Skills"><span class="toc-number">1.6.</span> <span class="toc-text">Git-Skills</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StackOverflow"><span class="toc-number">1.7.</span> <span class="toc-text">StackOverflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Refs"><span class="toc-number">1.8.</span> <span class="toc-text">Refs</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Git知识体系"><a href="#Git知识体系" class="headerlink" title="Git知识体系"></a>Git知识体系</h1><ul>
+<li><a href="https://git-scm.com/docs" target="_blank" rel="noopener">Reference</a></li>
+<li><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">ProGitV2</a></li>
+</ul>
+<h2 id="整理内容"><a href="#整理内容" class="headerlink" title="整理内容"></a>整理内容</h2><ul>
+<li><a href="./git-object-model.md">GIT对象模型</a></li>
+<li><a href="./git-working-mechanism.md">Git工作机制</a></li>
+</ul>
+<h2 id="GIT学习"><a href="#GIT学习" class="headerlink" title="GIT学习"></a>GIT学习</h2><ul>
+<li><a href="http://learngitbranching.js.org/" target="_blank" rel="noopener">learngitbranching</a></li>
+<li><a href="http://ndpsoftware.com/git-cheatsheet.html" target="_blank" rel="noopener">git-cheatsheet</a></li>
+<li><a href="http://marklodato.github.io/visual-git-guide/index-en.html" target="_blank" rel="noopener">A Visual Git Reference</a></li>
+</ul>
+<h2 id="Books"><a href="#Books" class="headerlink" title="Books"></a>Books</h2><ul>
+<li><a href="http://www.kancloud.cn/thinkphp/pro-git" target="_blank" rel="noopener">ProGit第一版（中文版）</a></li>
+<li><a href="https://github.com/geeeeeeeeek/git-recipes/wiki" target="_blank" rel="noopener">git-recipes</a></li>
+<li><a href="http://gitbook.liuhui998.com/index.html" target="_blank" rel="noopener">Git Community Book 中文版</a></li>
+<li><a href="http://think-like-a-git.net/" target="_blank" rel="noopener">Think Like (a) Git</a></li>
+<li><a href="http://www.worldhello.net/gotgithub/" target="_blank" rel="noopener">GotGitHub</a></li>
+</ul>
+<h2 id="Github-Repo"><a href="#Github-Repo" class="headerlink" title="Github-Repo"></a>Github-Repo</h2><ul>
+<li><a href="https://github.com/nvie/gitflow" target="_blank" rel="noopener">gitflow</a></li>
+<li><a href="https://github.com/danielkummer/git-flow-cheatsheet" target="_blank" rel="noopener">git-flow-cheatsheet</a></li>
+<li><a href="https://github.com/xirong/my-git" target="_blank" rel="noopener">my-git</a></li>
+</ul>
+<h2 id="Git-Flow"><a href="#Git-Flow" class="headerlink" title="Git-Flow"></a>Git-Flow</h2><ul>
+<li><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="noopener">a-successful-git-branching-model</a></li>
+<li><a href="http://danielkummer.github.io/git-flow-cheatsheet/" target="_blank" rel="noopener">git-flow-cheatsheet</a></li>
+<li><a href="https://hackernoon.com/a-branching-and-releasing-strategy-that-fits-github-flow-be1b6c48eca2" target="_blank" rel="noopener">A Branching and Releasing Strategy That Fits GitHub Flow</a></li>
+</ul>
+<h2 id="Git-Skills"><a href="#Git-Skills" class="headerlink" title="Git-Skills"></a>Git-Skills</h2><ul>
+<li><a href="http://blog.dm4.tw/blog/2015/04/19/modify-git-commit-time/" target="_blank" rel="noopener">更改GitCommit時間</a></li>
+<li><a href="http://qa.helplib.com/93646" target="_blank" rel="noopener">在Git，怎么能更改一个旧的提交时间戳？</a></li>
+<li><a href="http://www.jianshu.com/p/884ff6252be5" target="_blank" rel="noopener">Git 清理无效的远程追踪分支</a></li>
+<li><a href="http://bbs.bugcode.cn/t/701" target="_blank" rel="noopener">如何删除已合并的所有git分支？</a></li>
+</ul>
+<h2 id="StackOverflow"><a href="#StackOverflow" class="headerlink" title="StackOverflow"></a>StackOverflow</h2><ul>
+<li><a href="http://stackoverflow.com/questions/462974/what-are-the-differences-between-double-dot-and-triple-dot-in-git-com#answer-24186641" target="_blank" rel="noopener">what-are-the-differences-between-double-dot-and-triple-dot-in-git-com</a></li>
+<li><a href="https://softwareengineering.stackexchange.com/questions/165725/git-branching-and-tagging-best-practices" target="_blank" rel="noopener">git-branching-and-tagging-best-practices</a></li>
+<li><a href="https://stackoverflow.com/questions/9810050/why-should-i-use-tags-vs-release-beta-branches-for-versioning" target="_blank" rel="noopener">why-should-i-use-tags-vs-release-beta-branches-for-versioning</a></li>
+<li><a href="https://stackoverflow.com/questions/26005031/what-does-git-push-do-exactly" target="_blank" rel="noopener">what-does-git-push-do-exactly</a></li>
+<li><a href="https://stackoverflow.com/questions/23303549/what-are-commit-ish-and-tree-ish-in-git" target="_blank" rel="noopener">What are commit-ish and tree-ish in Git?</a></li>
+<li><a href="https://stackoverflow.com/questions/6127328/how-can-i-delete-all-git-branches-which-have-been-merged" target="_blank" rel="noopener">how-can-i-delete-all-git-branches-which-have-been-merged</a></li>
+<li><a href="https://stackoverflow.com/questions/38034866/cant-push-to-remote-branch-cannot-be-resolved-to-branch" target="_blank" rel="noopener">cant-push-to-remote-branch-cannot-be-resolved-to-branch</a></li>
+</ul>
+<h2 id="Refs"><a href="#Refs" class="headerlink" title="Refs"></a>Refs</h2><ul>
+<li><a href="http://justinhileman.info/article/git-pretty/git-pretty.png" target="_blank" rel="noopener">git-pretty</a></li>
+<li><a href="http://www.bootcss.com/p/git-guide/" target="_blank" rel="noopener">git-简易指南</a></li>
+<li><a href="https://blog.coding.net/blog/principle-of-Git" target="_blank" rel="noopener">principle-of-Git</a></li>
+<li><a href="http://cs-cjl.com" target="_blank" rel="noopener">跟我一起学Git</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">常用Git命令清单</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/08/git-use-process.html" target="_blank" rel="noopener">Git使用规范流程</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="noopener">Git分支管理策略</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-workflow.html" target="_blank" rel="noopener">Git 工作流程</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2017/08/issue.html" target="_blank" rel="noopener">如何使用 Issue 管理软件项目？</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="noopener">Commit message 和 Change log 编写指南</a></li>
+<li><a href="http://insights.thoughtworkers.org/gitflow-consider-harmful/" target="_blank" rel="noopener">Gitflow有害论</a></li>
+<li><a href="https://ruby-china.org/topics/29263" target="_blank" rel="noopener">GIT 之我见 - 反驳 TW 洞见《GITFLOW 有害论》</a></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/GIT/">GIT</a>►<a class="article-category-link" href="/categories/GIT/VCS/">VCS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/GIT/">GIT</a><a href="/tags/Git命令/">Git命令</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="/posts/Git学习资料整理/" data-title="Git学习资料整理 | Liuyanjie&#39;s Blog" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/posts/GIT对象模型/" title="GIT对象模型">
+ <strong>下一篇：</strong><br> 
+ <span>GIT对象模型
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git知识体系"><span class="toc-number">1.</span> <span class="toc-text">Git知识体系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#整理内容"><span class="toc-number">1.1.</span> <span class="toc-text">整理内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GIT学习"><span class="toc-number">1.2.</span> <span class="toc-text">GIT学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Books"><span class="toc-number">1.3.</span> <span class="toc-text">Books</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github-Repo"><span class="toc-number">1.4.</span> <span class="toc-text">Github-Repo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Flow"><span class="toc-number">1.5.</span> <span class="toc-text">Git-Flow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Skills"><span class="toc-number">1.6.</span> <span class="toc-text">Git-Skills</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StackOverflow"><span class="toc-number">1.7.</span> <span class="toc-text">StackOverflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Refs"><span class="toc-number">1.8.</span> <span class="toc-text">Refs</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github Card</p>
+<div class="github-card" data-github="liuyanjie" data-theme="medium"></div>
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+</div>
+
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/GIT/" title="GIT">GIT<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Language/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Syntax/JavaScript/" title="JavaScript">JavaScript<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Language/" title="Language">Language<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Syntax/" title="Syntax">Syntax<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/GIT/VCS/" title="VCS">VCS<sup>5</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GIT/" title="GIT">GIT<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git命令/" title="Git命令">Git命令<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://blog.xizhibei.me" target="_blank" title="须臾之学">须臾之学</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello, I&#39;m Liuyanjie. <br>
+			This is my blog</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		<a href="https://github.com/liuyanjie" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/5954388" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		<a href="https://twitter.com/ryxcxyr" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		
+		<a href="https://www.linkedin.com/in/liuyj619" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		
+		<a href="http://www.zhihu.com/people/ryxc-liu-yan-jie" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/101963751496807079381?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:liuyj619@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="Liu Yanjie">Liu Yanjie</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'liuyanjie';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
