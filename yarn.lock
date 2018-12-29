@@ -392,7 +392,7 @@ cheerio@0.22.0:
     lodash.reject "^4.4.0"
     lodash.some "^4.4.0"
 
-chokidar@^1.5.2:
+chokidar@^1.5.2, chokidar@^1.6.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
   integrity sha1-eY5ol3gVHIB2tLNg5e3SjNortGg=
@@ -1103,12 +1103,37 @@ hexo-generator-category@^0.1.3:
     hexo-pagination "0.0.2"
     object-assign "^2.0.0"
 
+hexo-generator-feed@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/hexo-generator-feed/-/hexo-generator-feed-1.2.2.tgz#9516d1596509b157f4d044fb49b2bae398b82ba7"
+  integrity sha512-4jcvVhFgpEFRJ7A+KhBSfWoQaewRBjcVWEO4OmBgnvaZOm6XwK+b5ZXx/8BpujCLHbjXWzglXhiT7qFFS/nvzw==
+  dependencies:
+    nunjucks "^3.0.0"
+    object-assign "^4.1.1"
+
 hexo-generator-index@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/hexo-generator-index/-/hexo-generator-index-0.2.1.tgz#9042229fcac79aaf700575da19332bf3f7ee5c5d"
   integrity sha1-kEIin8rHmq9wBXXaGTMr8/fuXF0=
   dependencies:
     hexo-pagination "0.0.2"
+    object-assign "^4.0.1"
+
+hexo-generator-search@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/hexo-generator-search/-/hexo-generator-search-2.4.0.tgz#f5abbbbbe35299f52c2554bb89845d0a4fab6c9b"
+  integrity sha512-470q6Cpu6xHIPMXN+rQjCQkn/ii4e8XJRBXCmKs+B1jGQNrT7K3geqfyd5pqGiGi6bh5yY+mNqwGw5r2sZZtzA==
+  dependencies:
+    nunjucks "^3.0.1"
+    utils-merge "^1.0.0"
+
+hexo-generator-sitemap@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hexo-generator-sitemap/-/hexo-generator-sitemap-1.2.0.tgz#3018f8d7d1e2e42b3f71a65a7316ffcf583bc3f3"
+  integrity sha1-MBj419Hi5Cs/caZacxb/z1g7w/M=
+  dependencies:
+    minimatch "^3.0.0"
+    nunjucks "^2.3.0"
     object-assign "^4.0.1"
 
 hexo-generator-tag@^0.2.0:
@@ -1739,7 +1764,7 @@ mime@^1.6.0:
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
-"minimatch@2 || 3", minimatch@^3.0.2, minimatch@^3.0.4:
+"minimatch@2 || 3", minimatch@^3.0.0, minimatch@^3.0.2, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
@@ -1966,7 +1991,16 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nunjucks@^3.1.2:
+nunjucks@^2.3.0:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/nunjucks/-/nunjucks-2.5.2.tgz#ea7d346e785b8a4874666c3cca9e18c577fba22c"
+  integrity sha1-6n00bnhbikh0Zmw8yp4YxXf7oiw=
+  dependencies:
+    asap "^2.0.3"
+    chokidar "^1.6.0"
+    yargs "^3.32.0"
+
+nunjucks@^3.0.0, nunjucks@^3.0.1, nunjucks@^3.1.2:
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/nunjucks/-/nunjucks-3.1.6.tgz#6e3a3420c77ceae937ae323e9e2995383d6410fb"
   integrity sha512-aHCt5arZUqHnRNjfDBCq+fI/O3J2sxx+xZdz6mCNvwAgJVCtHM/VAv2++figjGeFyrZ1dVcJ1dCJwMxY8iYoqQ==
