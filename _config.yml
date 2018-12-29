@@ -114,9 +114,8 @@ theme_config:
   - category
   - tag
   - links
-  # - douban
   - rss
-  # - weibo
+  - tagcloud
   ## provide eight widgets:github-card,category,tag,rss,archive,tagcloud,links,weibo
   
   #### RSS 
@@ -124,11 +123,11 @@ theme_config:
   
   #### Image
   imglogo:
-    enable: false               ## display image logo true/false.
-    src: img/jacman.png         ## `.svg` and `.png` are recommended,please put image into the theme folder `/jacman/source/img`.
-  favicon: img/avatar.png       ## size:32px*32px,`.ico` is recommended,please put image into the theme folder `/jacman/source/img`.     
-  apple_icon: img/jacman.jpg    ## size:114px*114px,please put image into the theme folder `/jacman/source/img`.
-  author_img: img/author.png    ## size:220px*220px.display author avatar picture.if don't want to display,please don't set this.
+    enable: true               ## display image logo true/false.
+    src: img/jacman.png         ## `.svg` and `.png` are recommended, please put image into the theme folder `/jacman/source/img`.
+  favicon: img/avatar.png       ## size:32px*32px,`.ico` is recommended, please put image into the theme folder `/jacman/source/img`.     
+  apple_icon: img/jacman.jpg    ## size:114px*114px, please put image into the theme folder `/jacman/source/img`.
+  author_img:     ## size:220px*220px. display author avatar picture.if don't want to display,please don't set this.
   banner_img: img/banner.jpg    ## size:1920px*200px+. Banner Picture
   
   ### Theme Color 
@@ -154,7 +153,7 @@ theme_config:
   #### Author information
   author:
     intro_line1:  "Not every technical problems should be resolved through technical means." ## your introduction on the bottom of the page
-    # intro_line2:  "This is my blog"       ## the 2nd line
+    intro_line2:  "Fighting"       ## the 2nd line
     # weibo: 2176287895                   ## e.g. wuchong1014 or 2176287895 for http://weibo.com/2176287895
     # weibo_verifier: b3593ceb            ## e.g. b3593ceb Your weibo-show widget verifier ,if you use weibo-show it is needed.
     tsina:                                ## e.g. 2176287895  Your weibo ID,It will be used in share button.
