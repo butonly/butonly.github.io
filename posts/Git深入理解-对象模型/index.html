@@ -1,13 +1,13 @@
 
  <!DOCTYPE HTML>
-<html>
+<html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>Git深入理解-对象模型 | Liuyanjie&#39;s Blog</title>
+    <title>Git深入理解-对象模型 | lyj&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
-    <meta name="author" content="Liu Yanjie">
+    <meta name="author" content="lyj">
     
 
     
@@ -16,9 +16,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git深入理解-对象模型">
 <meta property="og:url" content="/posts/Git深入理解-对象模型/index.html">
-<meta property="og:site_name" content="Liuyanjie&#39;s Blog">
+<meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tree.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-commit.png">
@@ -30,14 +30,13 @@
 <meta name="twitter:title" content="Git深入理解-对象模型">
 <meta name="twitter:description" content="GIT对象模型SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
-<meta name="twitter:creator" content="@ryxcxyr">
 <link rel="publisher" href="101963751496807079381">
 
     
-    <link rel="alternative" href="/rss.xml" title="Liuyanjie&#39;s Blog" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="lyj&#39;s blog" type="application/atom+xml">
     
     
-    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" href="/img/avatar.png">
     
     
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
@@ -51,12 +50,8 @@
       
 <div>
 		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="Liuyanjie&#39;s Blog" title="Liuyanjie&#39;s Blog"></a>
-			</div>
-			
 			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Liuyanjie&#39;s Blog">Liuyanjie&#39;s Blog</a></h1>
+				<h1 class="site-name"><a href="/" title="lyj&#39;s blog">lyj&#39;s blog</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
@@ -71,10 +66,9 @@
 					
 					<li>
  					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
-						<input type="hidden" name="q" value="site:">
+						<input type="search" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search">
 					</form>
 					
 					</li>
@@ -93,7 +87,7 @@
   </h1>
   <p class="article-author">By
        
-		<a href="https://plus.google.com/101963751496807079381?rel=author" title="Liu Yanjie" target="_blank" itemprop="author">Liu Yanjie</a>
+		<a href="https://plus.google.com/101963751496807079381?rel=author" title="lyj" target="_blank" itemprop="author">lyj</a>
 		
   </p><p class="article-time">
     <time datetime="2018-05-06T00:00:00.000Z" itemprop="datePublished"> Published 2018-05-06</time>
@@ -133,11 +127,11 @@
 <h4 id="commit-提交-对象"><a href="#commit-提交-对象" class="headerlink" title="commit (提交) 对象"></a>commit (提交) 对象</h4><p>一个 <code>commit</code> 只指向一个 <code>tree</code>，它用来标记项目某一个特定时间点的状态。<code>commit</code> 保存了树根的 <code>对象名</code>。</p>
 <p>它包括一些关于时间点的元数据，如 <code>时间戳</code>、<code>最近一次提交的作者</code>、<code>指向上次提交（commits）的指针</code> 等等。</p>
 <p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-commit.png" alt="tree"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p 830f4857e9f579818c5e69104d3e2cc30f1f0d0d</span><br><span class="line">tree f25061fa4f8b3bffbf8ebcc3ab2351efdad2f605</span><br><span class="line">parent 06e13701ac86eb09c2035329a5e1c18f95898cf2</span><br><span class="line">author liuyanjie &lt;x@gmail.com&gt; 1526828841 +0800</span><br><span class="line">committer liuyanjie &lt;x@gmail.com&gt; 1526828841 +0800</span><br><span class="line"></span><br><span class="line">commit message</span><br></pre></td></tr></table></figure>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p <span class="number">830</span>f<span class="number">4857e9</span>f<span class="number">579818</span><span class="keyword">c</span><span class="number">5e69104</span>d<span class="number">3e2</span><span class="keyword">cc</span><span class="number">30</span>f<span class="number">1</span>f<span class="number">0</span>d<span class="number">0</span>d</span><br><span class="line">tree f<span class="number">25061</span>fa<span class="number">4</span>f<span class="number">8</span>b<span class="number">3</span>bffbf<span class="number">8</span>ebcc<span class="number">3</span>ab<span class="number">2351</span>efdad<span class="number">2</span>f<span class="number">605</span></span><br><span class="line">parent <span class="number">06e13701</span>ac<span class="number">86</span>eb<span class="number">09</span><span class="keyword">c</span><span class="number">2035329</span>a<span class="number">5e1</span><span class="keyword">c</span><span class="number">18</span>f<span class="number">95898</span>cf<span class="number">2</span></span><br><span class="line">author liuyanjie &lt;<span class="keyword">x</span><span class="title">@gmail.com</span>&gt; <span class="number">1526828841</span> +<span class="number">0800</span></span><br><span class="line">committer liuyanjie &lt;<span class="keyword">x</span><span class="title">@gmail.com</span>&gt; <span class="number">1526828841</span> +<span class="number">0800</span></span><br><span class="line"></span><br><span class="line">commit message</span><br></pre></td></tr></table></figure>
 <h4 id="tag-标签-对象"><a href="#tag-标签-对象" class="headerlink" title="tag (标签) 对象"></a>tag (标签) 对象</h4><p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tag.png" alt="tag"></p>
 <p>一个 <code>tag</code> 是来标记某一个 <code>commit</code> 的方法。</p>
 <p>实际上 <code>tag</code> 本身是文件名，内容是 <code>commit</code> 的对象名。<code>tag</code> 是 <code>commit</code> 的别名，类似于域名和ip地址的关系。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/tags/v0.0.0</span><br><span class="line">830f4857e9f579818c5e69104d3e2cc30f1f0d0d</span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/tags/v0<span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="number">830</span>f4857e9f579818c5e69104d3e2cc30f1f0d0d</span><br></pre></td></tr></table></figure>
 <h4 id="commit-gt-tree-gt-blob"><a href="#commit-gt-tree-gt-blob" class="headerlink" title="commit -&gt; tree -&gt; blob"></a>commit -&gt; tree -&gt; blob</h4><p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-c-t-b.png" alt="object-c-t-b"></p>
 <p>从图上可以看出：一个 <code>commit</code> 指向了一棵由 <code>tree</code> 和 <code>blob</code> 构成的 Git 对象树。</p>
 <h3 id="与其他版本控制系统的区别"><a href="#与其他版本控制系统的区别" class="headerlink" title="与其他版本控制系统的区别"></a>与其他版本控制系统的区别</h3><p>Git与你熟悉的大部分版本控制系统的差别是很大的。</p>
@@ -216,7 +210,7 @@
 <p>查看 <code>.git/refs/tags/v0.0.1</code> 文件内容，可以看到内容恰好是新增的 objects <code>对象名</code>，所以可想而知 <code>ccf8</code> 是一个 <code>tag</code> 类型的对象</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/tags/v0.0.1</span><br><span class="line">ccf88a6f1649213499841c33f9bb36d1d8756fb7</span><br></pre></td></tr></table></figure>
 <p>查看新增的 <code>ccf8</code> 文件内容，文件指向了 <code>commit</code> 对象 <code>033f</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p ccf8</span><br><span class="line">object 033fa1ab71f0d54f348f07a3a0ffcefd52804df5</span><br><span class="line">type commit</span><br><span class="line">tag v0.0.1</span><br><span class="line">tagger liuyanjie &lt;x@gmail.com&gt; 1527523284 +0800</span><br><span class="line"></span><br><span class="line">tag v0.0.1</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p ccf8</span><br><span class="line">object 033fa1ab71f0d54f348f07a3a0ffcefd52804df5</span><br><span class="line">type commit</span><br><span class="line">tag v0.0.1</span><br><span class="line">tagger liuyanjie &lt;x@gmail.com&gt; 1527523284 +0800</span><br><span class="line"></span><br><span class="line">tag v0.0.1</span><br></pre></td></tr></table></figure>
 <p>通过以上查看 <code>.git</code> 目录的变化过程，可以大致分析出Git是如何存储这些文件内容的。</p>
 <p>上面只执行了 <code>git add</code> 和 <code>git commit</code> 两条操作。</p>
 <h3 id="继续添加文件"><a href="#继续添加文件" class="headerlink" title="继续添加文件"></a>继续添加文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"# CHANGELOG"</span> &gt; CHANGELOG.md</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"# CONTRIBUTING"</span> &gt; CONTRIBUTING.md</span><br><span class="line"></span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line"></span><br><span class="line">	CHANGELOG.md</span><br><span class="line">	CONTRIBUTING.md</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">"git add"</span> to track)</span><br><span class="line"></span><br><span class="line">$ git add CHANGELOG.md CONTRIBUTING.md</span><br><span class="line"></span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span><br><span class="line"></span><br><span class="line">	new file:   CHANGELOG.md</span><br><span class="line">	new file:   CONTRIBUTING.md</span><br></pre></td></tr></table></figure>
@@ -326,7 +320,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/posts/Git深入理解-对象模型/" data-title="Git深入理解-对象模型 | Liuyanjie&#39;s Blog" data-tsina="" class="share clearfix">
+	  <div data-url="/posts/Git深入理解-对象模型/" data-title="Git深入理解-对象模型 | lyj&#39;s blog" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -383,15 +377,6 @@
 <aside class="clearfix">
 
   
-<div class="github-card">
-<p class="asidetitle">Github Card</p>
-<div class="github-card" data-github="liuyanjie" data-theme="medium"></div>
-<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
-</div>
-
-
-
-  
 <div class="categorieslist">
 	<p class="asidetitle">Categories</p>
 		<ul>
@@ -434,15 +419,15 @@
 			
 		
 			
+				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -462,6 +447,10 @@
     </ul>
 </div>
 
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
 </aside>
 </div>
     </div>
@@ -474,8 +463,8 @@
 	
 	
 	<section class="info">
-		<p> Hello, I&#39;m Liuyanjie. <br>
-			This is my blog</p>
+		<p> Not every technical problems should be resolved through technical means. <br>
+			</p>
 	</section>
 	 
 	<div class="social-font">
@@ -487,15 +476,9 @@
 		<a href="http://stackoverflow.com/users/5954388" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
 		
 		
-		<a href="https://twitter.com/ryxcxyr" target="_blank" class="icon-twitter" title="twitter"></a>
 		
 		
 		
-		<a href="https://www.linkedin.com/in/liuyj619" target="_blank" class="icon-linkedin" title="linkedin"></a>
-		
-		
-		
-		<a href="http://www.zhihu.com/people/ryxc-liu-yan-jie" target="_blank" class="icon-zhihu" title="知乎"></a>
 		
 		
 		<a href="https://plus.google.com/101963751496807079381?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
@@ -506,11 +489,17 @@
 	</div>
 			
 		
+				<div class="cc-license">
+          <a href="http://creativecommons.org/licenses/by-nc/4.0" class="cc-opacity" target="_blank">
+            <img src="/img/cc-by-nc.svg" alt="Creative Commons">
+          </a>
+        </div>
+    
 
 		<p class="copyright">
 		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
 		
-		<a href="/about" target="_blank" title="Liu Yanjie">Liu Yanjie</a>
+		<a href="/about" target="_blank" title="lyj">lyj</a>
 		
 		
 		</p>
@@ -551,6 +540,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 
@@ -699,7 +693,26 @@ $(document).ready(function(){
 
 <!-- Analytics Begin -->
 
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-131498998-1', '');  
+ga('send', 'pageview');
+</script>
 
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?4cd57e104d0d9f5862dd91d0acdb9eee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 
 
 
@@ -716,6 +729,35 @@ $(document).ready(function(){
 
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <!-- MathJax End -->
