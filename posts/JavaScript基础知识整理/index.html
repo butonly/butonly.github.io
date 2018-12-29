@@ -161,7 +161,7 @@
 <p>事实上很多数组算法对于类似数组的对象和真正的数组对象都是适用的, 只要不尝试对数组添加元素或者改变 <code>length属性</code>, 就可以把类似数组的对象当作真正的数组来对待。</p>
 <p>特别地，函数中的 <code>Arguments</code> 对象就是一个 <code>类数组</code> 的对象; 而 <code>getElementsByTagName()</code> 返回的DOM结点列表也是类似数组的对象。</p>
 <p>如下创建一个类似数组，然后遍历该类似数组:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 不小心就引进了一个小bug</span></span><br><span class="line"><span class="keyword">while</span>(i++ &lt; 10) &#123; a[i] = i * i; &#125;</span><br><span class="line">while(i &lt; 10) &#123; a[i] = i * i; i++; &#125;</span><br><span class="line"></span><br><span class="line">a.length = i;</span><br><span class="line"></span><br><span class="line">var total = 0;</span><br><span class="line">for(var j = 0, len = a.length; j &lt; len; j++) &#123;</span><br><span class="line">  total += a[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 不小心就引进了一个小bug</span></span><br><span class="line"><span class="keyword">while</span>(i++ <span class="xml"><span class="tag">&lt; <span class="attr">10</span>) &#123; <span class="attr">a</span>[<span class="attr">i</span>] = <span class="string">i</span> * <span class="attr">i</span>; &#125;</span></span></span><br><span class="line"><span class="xml">while(i <span class="tag">&lt; <span class="attr">10</span>) &#123; <span class="attr">a</span>[<span class="attr">i</span>] = <span class="string">i</span> * <span class="attr">i</span>; <span class="attr">i</span>++; &#125;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">a.length = i;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">var total = 0;</span></span><br><span class="line"><span class="xml">for(var j = 0, len = a.length; j <span class="tag">&lt; <span class="attr">len</span>; <span class="attr">j</span>++) &#123;</span></span></span><br><span class="line"><span class="xml">  total += a[j];</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
 <h3 id="类型识别"><a href="#类型识别" class="headerlink" title="类型识别"></a>类型识别</h3><h4 id="识别方法"><a href="#识别方法" class="headerlink" title="识别方法"></a>识别方法</h4><ul>
 <li><p><code>typeof</code> (typeof x)（只能用于除<code>null</code>以外的原始类型）</p>
 <p>返回值：首字母小写的字符串形式</p>
@@ -791,15 +791,15 @@
 			
 		
 			
-				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/GIT对象模型/" title="GIT对象模型">GIT对象模型<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/JavaScript执行上下文/" title="JavaScript执行上下文">JavaScript执行上下文<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JavaScript基础/" title="JavaScript基础">JavaScript基础<sup>1</sup></a></li>
 			
 		
 		</ul>
