@@ -95,11 +95,14 @@ theme: hexo-theme-next
 stylus:
   compress: true
 
-symbols_count_time:
-  symbols: true
-  time: true
-  total_symbols: true
-  total_time: true
+# $ export HEXO_ALGOLIA_INDEXING_KEY=459ace1d7f5aabfa15b4f89baba340b3 # Use Git Bash
+# $ hexo clean
+# $ hexo algolia
+algolia:
+  applicationID: FRAAR0AUP0
+  apiKey: 459ace1d7f5aabfa15b4f89baba340b3
+  indexName: blog.butonly.com
+  chunkSize: 5000
 
 theme_config:
   # ---------------------------------------------------------------
@@ -227,7 +230,7 @@ theme_config:
   index_with_subtitle: true
   
   # Automatically add external URL with BASE64 encrypt & decrypt.
-  exturl: false
+  exturl: true
   
   
   # ---------------------------------------------------------------
@@ -294,22 +297,22 @@ theme_config:
   
   social_icons:
     enable: true
-    icons_only: false
+    icons_only: true
     transition: true
   
   # Follow me on GitHub banner in right-top corner.
   # Usage: `permalink || title`
   # Value before `||` delimeter is the target permalink.
   # Value after `||` delimeter is the title and aria-label name.
-  github_banner: https://github.com/liuyanjie || Follow me on GitHub
+  # github_banner: https://github.com/liuyanjie || Follow me on GitHub
   
   # Blog rolls
   links_icon: link
   links_title: Links
   links_layout: block
-  #links_layout: inline
-  #links:
-    #Title: http://example.com
+  # links_layout: inline
+  # links:
+  #   Title: http://example.com
   
   # Sidebar Avatar
   avatar:
@@ -405,7 +408,7 @@ theme_config:
   symbols_count_time:
     separated_meta: true
     item_text_post: true
-    item_text_total: false
+    item_text_total: true
     awl: 4
     wpm: 275
   
@@ -476,7 +479,7 @@ theme_config:
   #   image: Images's url, replace it with specific image
   custom_logo:
     enabled: false
-    image: /img/avatar.png
+    image: logo.png
   
   # Code Highlight theme
   # Available values: normal | night | night eighties | night blue | night bright
@@ -601,7 +604,7 @@ theme_config:
   # Pangu Support
   # Dependencies: https://github.com/theme-next/theme-next-pangu
   # For more information: https://github.com/vinta/pangu.js
-  pangu: false
+  pangu: true
   
   # Swiftype Search API Key
   #swiftype_key:
@@ -611,7 +614,7 @@ theme_config:
     enable: true
     shortname: liuyanjie
     count: true
-    lazyload: false
+    lazyload: true
   
   # changyan
   changyan:
@@ -739,7 +742,7 @@ theme_config:
   #tencent_mta:
   
   # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
-  baidu_push: true
+  baidu_push: false
   
   # Application Insights
   # See https://azure.microsoft.com/en-us/services/application-insights
@@ -798,7 +801,7 @@ theme_config:
   # visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
   # visit https://firebase.google.com/docs/firestore/ to get more information about firestore
   firestore:
-    enable: true
+    enable: false
     collection: articles #required, a string collection name to access firestore database
     apiKey: AIzaSyDgS8GXPvVxTQ_R2PPMJB3GYmC5fEGFkeI #required
     projectId: blog-25ee2 #required
@@ -934,7 +937,7 @@ theme_config:
   # Please, choose only any one variant, do not need to install both.
   # For install 2.x: https://github.com/theme-next/theme-next-fancybox
   # For install 3.x: https://github.com/theme-next/theme-next-fancybox3
-  fancybox: false
+  fancybox: true
   
   # Added switch option for separated repo in 6.0.0.
   # Dependencies: https://github.com/theme-next/theme-next-fastclick
@@ -946,7 +949,7 @@ theme_config:
   
   # Progress bar in the top during page loading.
   # Dependencies: https://github.com/theme-next/theme-next-pace
-  pace: false
+  pace: true
   # Themes list:
   # pace-theme-big-counter | pace-theme-bounce | pace-theme-barber-shop | pace-theme-center-atom
   # pace-theme-center-circle | pace-theme-center-radar | pace-theme-center-simple | pace-theme-corner-indicator
@@ -999,7 +1002,7 @@ theme_config:
     # Example:
     # jquery: //cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js
     # jquery: //cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js
-    jquery:
+    jquery: //cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js
   
     # Internal version: 2.1.5
     # See: http://fancyapps.com/fancybox
@@ -1008,58 +1011,58 @@ theme_config:
     # fancybox_css: //cdn.jsdelivr.net/npm/fancybox@3.0.0/dist/css/jquery.fancybox.min.css
     # fancybox: //cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js
     # fancybox_css: //cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css
-    fancybox:
-    fancybox_css:
+    fancybox: //cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js
+    fancybox_css: //cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css
   
     # Internal version: 1.0.6
     # See: https://github.com/ftlabs/fastclick
     # Example:
     # fastclick: //cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js
     # fastclick: //cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js
-    fastclick:
+    fastclick: //cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js
   
     # Internal version: 1.9.7
     # See: https://github.com/tuupola/jquery_lazyload
     # Example:
     # lazyload: //cdn.jsdelivr.net/npm/jquery_lazyload@1.9.7/jquery.lazyload.min.js
     # lazyload: //cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js
-    lazyload:
+    lazyload: //cdn.jsdelivr.net/npm/jquery_lazyload@1.9.7/jquery.lazyload.min.js
   
     # Internal version: 1.2.1
     # See: http://VelocityJS.org
     # Example:
     # velocity: https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js
     # velocity: https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js
-    velocity:
+    velocity: https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js
   
     # Internal version: 1.2.1
     # See: http://VelocityJS.org
     # Example:
     # velocity_ui: //cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js
     # velocity_ui: //cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js
-    velocity_ui:
+    velocity_ui: //cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js
   
     # Internal version: 0.7.9
     # See: https://faisalman.github.io/ua-parser-js
     # Example:
     # ua_parser: //cdn.jsdelivr.net/npm/ua-parser-js@0.7.17/src/ua-parser.min.js
     # ua_parser: //cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.9/ua-parser.min.js
-    ua_parser:
+    ua_parser: //cdn.jsdelivr.net/npm/ua-parser-js@0.7.17/src/ua-parser.min.js
   
     # Internal version: 4.6.2
     # See: http://fontawesome.io
     # Example:
     # fontawesome: //cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
     # fontawesome: //cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css
-    fontawesome:
+    fontawesome: //cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css
   
     # Internal version: 2.4.1
     # See: https://www.algolia.com
     # Example:
     # algolia_instant_js: //cdn.jsdelivr.net/npm/instantsearch.js@2.4.1/dist/instantsearch.js
     # algolia_instant_css: //cdn.jsdelivr.net/npm/instantsearch.js@2.4.1/dist/instantsearch.min.css
-    algolia_instant_js:
-    algolia_instant_css:
+    algolia_instant_js: //cdn.jsdelivr.net/npm/instantsearch.js@2.4.1/dist/instantsearch.js
+    algolia_instant_css: //cdn.jsdelivr.net/npm/instantsearch.js@2.4.1/dist/instantsearch.min.css
   
     # Internal version: 1.0.2
     # See: https://github.com/HubSpot/pace
@@ -1068,16 +1071,16 @@ theme_config:
     # pace: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js
     # pace_css: //cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css
     # pace_css: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css
-    pace:
-    pace_css:
+    pace: //cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js
+    pace_css: //cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css
   
     # Internal version: 1.0.0
     # See: https://github.com/theme-next/theme-next-canvas-nest
     # Example:
     # canvas_nest: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js
     # canvas_nest_nomobile: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest-nomobile.min.js
-    canvas_nest:
-    canvas_nest_nomobile:
+    canvas_nest: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js
+    canvas_nest_nomobile: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest-nomobile.min.js
   
     # Internal version: 1.0.0
     # See: https://github.com/theme-next/theme-next-three
@@ -1086,10 +1089,10 @@ theme_config:
     # three_waves: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/three-waves.min.js
     # canvas_lines: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/canvas_lines.min.js
     # canvas_sphere: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/canvas_sphere.min.js
-    three:
-    three_waves:
-    canvas_lines:
-    canvas_sphere:
+    three: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/three.min.js
+    three_waves: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/three-waves.min.js
+    canvas_lines: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/canvas_lines.min.js
+    canvas_sphere: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/canvas_sphere.min.js
   
     # Internal version: 1.0.0
     # See: https://github.com/zproo/canvas-ribbon
@@ -1104,54 +1107,54 @@ theme_config:
     # Example:
     # pangu: //cdn.jsdelivr.net/npm/pangu@3.3.0/dist/browser/pangu.min.js
     # pangu: //cdnjs.cloudflare.com/ajax/libs/pangu/3.3.0/pangu.min.js
-    pangu:
+    pangu: //cdn.jsdelivr.net/npm/pangu@3.3.0/dist/browser/pangu.min.js
   
     # needMoreShare2
     # See: https://github.com/revir/need-more-share2
     # Example:
     # needmoreshare2_js: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1.0.0/needsharebutton.min.js
     # needmoreshare2_css: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1.0.0/needsharebutton.min.css
-    needmoreshare2_js:
-    needmoreshare2_css:
+    needmoreshare2_js: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1.0.0/needsharebutton.min.js
+    needmoreshare2_css: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1.0.0/needsharebutton.min.css
   
     # bookmark
     # See: https://github.com/theme-next/theme-next-bookmark
     # Example:
     # bookmark: //cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1.0.0/bookmark.min.js
-    bookmark:
+    bookmark: //cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1.0.0/bookmark.min.js
   
     # reading_progress
     # See: https://github.com/theme-next/theme-next-reading-progress
     # Example:
     # reading_progress: //cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1.1/reading_progress.min.js
-    reading_progress:
+    reading_progress: //cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1.1/reading_progress.min.js
   
     # Internal version: 3.11.1
     # See: https://www.npmjs.com/package/leancloud-storage
     # Example:
     # leancloud: //cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js
-    leancloud:
+    leancloud: //cdn.jsdelivr.net/npm/leancloud-storage@3.11.1/dist/av-min.js
   
     # Internal version: 1.3.4
     # See: https://github.com/xCss/Valine
     # Example:
     # valine: //cdn.jsdelivr.net/npm/valine@1.3.4/dist/Valine.min.js
     # valine: //cdnjs.cloudflare.com/ajax/libs/valine/1.3.4/Valine.min.js
-    valine:
+    valine: //cdn.jsdelivr.net/npm/valine@1.3.4/dist/Valine.min.js
   
     # Internal version: 1.4.0
     # See: https://github.com/gitalk/gitalk
     # Example:
     # gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js
     # gitalk_css: //cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css
-    gitalk_js:
-    gitalk_css:
+    gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js
+    gitalk_css: //cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.css
   
     # Internal version: 0.7.3
     # See: https://github.com/emn178/js-md5
     # Example:
     # md5: //cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js
-    md5:
+    md5: //cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js
   
   # Assets
   css: css
