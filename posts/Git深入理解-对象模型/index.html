@@ -66,6 +66,25 @@
 
 
 
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
 
 
 
@@ -411,15 +430,6 @@
     </header>
 
     
-  
-  
-  
-  
-
-  
-
-    <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZQ==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
-
 
 
     <main id="main" class="main">
@@ -562,34 +572,6 @@
 
           
 
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">28k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">25 分钟</span>
-              
-            </div>
           
 
           
@@ -796,12 +778,12 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global alias.lg <span class="string">"log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit --date=relative"</span></span><br><span class="line">git lg</span><br></pre></td></tr></table></figure>
 <h3 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ git tag -a v0.0.2 -m <span class="string">"v0.0.2"</span></span><br><span class="line">v0.0.1</span><br><span class="line">v0.0.2</span><br><span class="line"></span><br><span class="line">$ cat .git/refs/tags/v0.0.2</span><br><span class="line">174c530154ab3b4d4d322bcbd66cdde18882eb00</span><br><span class="line"></span><br><span class="line">$ git cat-file -p 174c</span><br><span class="line">object 5a68c7402c30ae44fd82dadba2d8f148efb75541</span><br><span class="line"><span class="built_in">type</span> commit</span><br><span class="line">tag v0.0.2</span><br><span class="line">tagger liuyanjie &lt;x@gmail.com&gt; 1527559851 +0800</span><br><span class="line"></span><br><span class="line">v0.0.2</span><br><span class="line"></span><br><span class="line">$ git cat-file -p 5a68</span><br><span class="line">tree 42564bab966d59e3501a1903c1cb2066adc2bd2d</span><br><span class="line">parent cc52745b13b00c672c7ac9b1dc42336953293b7a</span><br><span class="line">parent fd885cfcd548a24fabb2f5b49ea60beadc8c5912</span><br><span class="line">author liuyanjie &lt;x@gmail.com&gt; 1527559277 +0800</span><br><span class="line">committer liuyanjie &lt;x@gmail.com&gt; 1527559277 +0800</span><br><span class="line"></span><br><span class="line">Merge branch <span class="string">'feature-a'</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">$ tree .git</span><br><span class="line">.git</span><br><span class="line">├── COMMIT_EDITMSG</span><br><span class="line">├── HEAD</span><br><span class="line">├── ORIG_HEAD</span><br><span class="line">├── co.gitup.mac</span><br><span class="line">│   ├── cache.db</span><br><span class="line">│   ├── info.plist</span><br><span class="line">│   └── snapshots.data</span><br><span class="line">├── config</span><br><span class="line">├── description</span><br><span class="line">├── hooks</span><br><span class="line">│   ├── applypatch-msg.sample</span><br><span class="line">│   ├── commit-msg.sample</span><br><span class="line">│   ├── fsmonitor-watchman.sample</span><br><span class="line">│   ├── post-update.sample</span><br><span class="line">│   ├── pre-applypatch.sample</span><br><span class="line">│   ├── pre-commit.sample</span><br><span class="line">│   ├── pre-push.sample</span><br><span class="line">│   ├── pre-rebase.sample</span><br><span class="line">│   ├── pre-receive.sample</span><br><span class="line">│   ├── prepare-commit-msg.sample</span><br><span class="line">│   └── update.sample</span><br><span class="line">├── index</span><br><span class="line">├── info</span><br><span class="line">│   └── exclude</span><br><span class="line">├── logs</span><br><span class="line">│   ├── HEAD</span><br><span class="line">│   └── refs</span><br><span class="line">│       └── heads</span><br><span class="line">│           └── master</span><br><span class="line">├── objects</span><br><span class="line">│   ├── 03</span><br><span class="line">│   │   └── 3fa1ab71f0d54f348f07a3a0ffcefd52804df5</span><br><span class="line">│   ├── 17</span><br><span class="line">│   │   └── 4c530154ab3b4d4d322bcbd66cdde18882eb00</span><br><span class="line">│   ├── 28</span><br><span class="line">│   │   └── baf4f77fb49abf99c18bc1c12363d898f3ced7</span><br><span class="line">│   ├── 2b</span><br><span class="line">│   │   └── 9fc8524bac21d5d5c2f988b5793315ce93abc6</span><br><span class="line">│   ├── 2c</span><br><span class="line">│   │   └── affd90cd736e58f516e3988e3af84f5fa42b4f</span><br><span class="line">│   ├── 2f</span><br><span class="line">│   │   └── b9045bb558889ea2bd8cc5d8fe45e7247706da</span><br><span class="line">│   ├── 30</span><br><span class="line">│   │   └── be8054b61a4a124e4cd8a1201de8474cb45e12</span><br><span class="line">│   ├── 39</span><br><span class="line">│   │   └── a204af28de9b4f0411735e597e0da7416ca35a</span><br><span class="line">│   ├── 42</span><br><span class="line">│   │   └── 564bab966d59e3501a1903c1cb2066adc2bd2d</span><br><span class="line">│   ├── 44</span><br><span class="line">│   │   └── 2b821b9b4acb5b0e632042542b3b29e2cf721e</span><br><span class="line">│   ├── 48</span><br><span class="line">│   │   └── 1cab7467cdb697bf7affdba0f2a5673a03366d</span><br><span class="line">│   ├── 5a</span><br><span class="line">│   │   └── 68c7402c30ae44fd82dadba2d8f148efb75541</span><br><span class="line">│   ├── 5e</span><br><span class="line">│   │   └── e275ce022007c38d187c58aef13f8d9e04b553</span><br><span class="line">│   ├── 74</span><br><span class="line">│   │   └── ce19245be785772b33e1193df0d2c6a940ed10</span><br><span class="line">│   ├── 82</span><br><span class="line">│   │   └── e47e13f87031cab7c47b455744bc4ed3fdba3c</span><br><span class="line">│   ├── 96</span><br><span class="line">│   │   └── 09811e44367d44f2915435f4454716e1e535fd</span><br><span class="line">│   ├── 9d</span><br><span class="line">│   │   └── 23f8ad2ecc9f8e49d78174bcc6e4668ca7f031</span><br><span class="line">│   ├── a0</span><br><span class="line">│   │   └── cf709bc0991b5340080f944d02894dc1596d46</span><br><span class="line">│   ├── b9</span><br><span class="line">│   │   └── 8c36254dba6e169429c2be57b1bbeccb6e1f28</span><br><span class="line">│   ├── c1</span><br><span class="line">│   │   └── 067ba0a7ba51f937518c9bc051ea744ca748fe</span><br><span class="line">│   ├── c6</span><br><span class="line">│   │   └── b9e95b39b8cd8ead8bbf4b118104741017de1b</span><br><span class="line">│   ├── cc</span><br><span class="line">│   │   ├── 52745b13b00c672c7ac9b1dc42336953293b7a</span><br><span class="line">│   │   └── f88a6f1649213499841c33f9bb36d1d8756fb7</span><br><span class="line">│   ├── f3</span><br><span class="line">│   │   └── 954314c1026028e77ea3a765aadefa67b45195</span><br><span class="line">│   ├── fd</span><br><span class="line">│   │   └── 885cfcd548a24fabb2f5b49ea60beadc8c5912</span><br><span class="line">│   ├── info</span><br><span class="line">│   └── pack</span><br><span class="line">└── refs</span><br><span class="line">    ├── heads</span><br><span class="line">    │   └── master</span><br><span class="line">    └── tags</span><br><span class="line">        ├── v0.0.1</span><br><span class="line">        └── v0.0.2</span><br><span class="line"></span><br><span class="line">36 directories, 51 files</span><br></pre></td></tr></table></figure>
-<p><a href="https://stackoverflow.com/questions/964876/head-and-orig-head-in-git" target="_blank" rel="noopener">https://stackoverflow.com/questions/964876/head-and-orig-head-in-git</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvOTY0ODc2L2hlYWQtYW5kLW9yaWctaGVhZC1pbi1naXQ=" title="https://stackoverflow.com/questions/964876/head-and-orig-head-in-git">https://stackoverflow.com/questions/964876/head-and-orig-head-in-git<i class="fa fa-external-link"></i></span></p>
 <p>.git/HEAD 指明了当前活跃分支是哪个分支</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/HEAD</span><br><span class="line">ref: refs/heads/master</span><br></pre></td></tr></table></figure>
 <p><a href="images/git-obj-model.svg">svg版</a></p>
 <p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png" alt="git-obj-model"></p>
-<p>源文件地址：<a href="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md" target="_blank" rel="noopener">https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md</a></p>
+<p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md">https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -1046,23 +1028,19 @@
                 <span class="links-of-author-item">
                   
                   
-                    
-                  
                   
                     
                   
-                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZQ==" title="GitHub &rarr; https://github.com/liuyanjie"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZQ==" title="GitHub &rarr; https://github.com/liuyanjie"><i class="fa fa-fw fa-github"></i></span>
                 </span>
               
                 <span class="links-of-author-item">
                   
                   
-                    
-                  
                   
                     
                   
-                  <a href="/liuyj619@gmail.com" title="E-Mail &rarr; liuyj619@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  <a href="/liuyj619@gmail.com" title="E-Mail &rarr; liuyj619@gmail.com"><i class="fa fa-fw fa-envelope"></i></a>
                 </span>
               
             </div>
@@ -1135,21 +1113,7 @@
   <span class="author" itemprop="copyrightHolder">lyj</span>
 
   
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-    
-    <span title="站点总字数">116k</span>
-  
 
-  
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    
-    <span title="站点阅读时长">1:46</span>
   
 </div>
 

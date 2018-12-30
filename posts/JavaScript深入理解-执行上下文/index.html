@@ -66,6 +66,25 @@
 
 
 
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
 
 
 
@@ -415,15 +434,6 @@
     </header>
 
     
-  
-  
-  
-  
-
-  
-
-    <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZQ==" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
-
 
 
     <main id="main" class="main">
@@ -567,34 +577,6 @@
           
 
           
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">17k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">15 分钟</span>
-              
-            </div>
-          
 
           
 
@@ -636,7 +618,7 @@
 <p>一个触发其他上下文的上下文叫作 <code>caller</code>，被触发的上下文叫作 <code>callee</code>，<code>callee</code> 在同一时间可能是一些其他 <code>callee</code> 的 <code>caller</code>。</p>
 <p>当一个 <code>caller</code> 触发（调用）了一个 <code>callee</code> ，这个 <code>caller</code> 会暂缓自身的执行，然后把控制权传递给 <code>callee</code>，控制权转移。</p>
 <p>这个 <code>callee</code> 被push到 <code>执行上下文栈(ECS)</code> 中，并成为一个 <code>活动的</code> <code>执行上下文</code>，在 <code>callee</code> 的上下文结束后（<code>callee</code> 可能简单的返回或者由于异常而退出，一个抛出的但没有被捕获的异常可能退出一个或者多个上下文），它会把控制权返回给 <code>caller</code>，然后 <code>caller</code> 的上下文继续执行直到它结束，以此类推。</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/caller" target="_blank" rel="noopener">Caller</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvRnVuY3Rpb24vY2FsbGVy" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/caller">Caller<i class="fa fa-external-link"></i></span></p>
 <blockquote>
 <p>function.caller[Non-standard]<br>The function.caller property returns the function that invoked the specified function.<br>If the function f was invoked by the top level code, the value of f.caller is null, otherwise it’s the function that called f.<br>This property replaces the obsolete arguments.caller property of the arguments object.<br>The special property <code>__caller__</code>, which returned the activation object of the caller thus allowing to reconstruct the stack, was removed for security reasons.</p>
 </blockquote>
@@ -747,7 +729,7 @@
 <p><code>词法作用域/静态作用域</code>：变量的作用域是在 <code>定义时</code> 决定而不是 <code>运行时</code> 决定，也就是说 <code>词法作用域</code> 取决于源码，通过静态分析就能确定，因此词法作用域也叫做静态作用域。<code>with</code> 和 <code>eval</code> 除外，所以只能说JS的作用域机制非常接近 <code>词法作用域（Lexical scope）</code>。</p>
 <p>我们可以断定 <code>静态作用域</code> 是一门语言拥有 <code>闭包</code> 的必需条件。但是，一些语言可能会同时提供动态和静态作用域，允许程序员做选择－什么应该 <code>包含</code> 在内和什么不应包含在内。</p>
 <p>由于在 ECMAScript 中只使用了 <code>静态作用域</code>，所以：ECMAScript 完全支持闭包，技术上是通过函数的 <code>[[Scope]]</code> 属性实现的。</p>
-<p>现在我们可以给闭包下一个准确的定义：<a href="https://zh.wikipedia.org/wiki/闭包_(计算机科学" target="_blank" rel="noopener">闭包</a> )</p>
+<p>现在我们可以给闭包下一个准确的定义：<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kv6Zet5YyFXyjorqHnrpfmnLrnp5HlraY=" title="https://zh.wikipedia.org/wiki/闭包_(计算机科学">闭包<i class="fa fa-external-link"></i></span> )</p>
 <p>在计算机科学中，闭包（英语：Closure），又称词法闭包（Lexical Closure）或函数闭包（function closures），是引用了自由变量的函数。<br>这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。<br>所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。<br>闭包在运行时可以有多个实例，不同的引用环境和相同的函数组合可以产生不同的实例。</p>
 <p>闭包是一个代码块（在ECMAScript是一个函数）和以 <code>静态方式</code>/<code>词法方式</code> 进行存储的所有父作用域的一个集合体。所以，通过这些存储的作用域，函数可以很容易的找到 <code>自由变量</code>。</p>
 <p>闭包使得一个函数能够通过作用域链查找到另一个函数作用域中的变量。</p>
@@ -775,7 +757,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">foo(); <span class="comment">// global object</span></span><br><span class="line">foo.prototype.constructor(); <span class="comment">// foo.prototype</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = &#123; <span class="attr">baz</span>: foo &#125;;</span><br><span class="line">bar.baz(); <span class="comment">// bar</span></span><br><span class="line"></span><br><span class="line">(bar.baz)();            <span class="comment">// also bar</span></span><br><span class="line">(bar.baz = bar.baz)();  <span class="comment">// but here is global object</span></span><br><span class="line">(bar.baz, bar.baz)();   <span class="comment">// also global object</span></span><br><span class="line">(<span class="literal">false</span> || bar.baz)();   <span class="comment">// also global object</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> otherFoo = bar.baz;</span><br><span class="line">otherFoo();             <span class="comment">// again global object</span></span><br></pre></td></tr></table></figure>
 <h4 id="bind、call、apply"><a href="#bind、call、apply" class="headerlink" title="bind、call、apply"></a><code>bind</code>、<code>call</code>、<code>apply</code></h4><p><code>call apply</code> 给了代码在控制 <code>this</code> 的能力。</p>
 <p><code>bind</code> 是基于 <code>call apply</code> 实现的高阶函数。</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind" target="_blank" rel="noopener">bind Polyfill</a>：fun.bind(thisArg[, arg1[, arg2[, …]]])<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// console.log(Function.prototype.apply.bind.call === Function.prototype.call);</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Function</span>.prototype.bind) &#123;</span><br><span class="line">  <span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">oThis</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">      <span class="comment">// closest thing possible to the ECMAScript 5</span></span><br><span class="line">      <span class="comment">// internal IsCallable function</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Function.prototype.bind - what is trying to be bound is not callable'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> aArgs   = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>),</span><br><span class="line">        fToBind = <span class="keyword">this</span>,</span><br><span class="line">        fNOP    = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">        fBound  = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> fToBind.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fNOP ? <span class="keyword">this</span> : oThis, aArgs.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数拥有 prototype</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.prototype) &#123;</span><br><span class="line">      <span class="comment">// native functions don't have a prototype</span></span><br><span class="line">      fNOP.prototype = <span class="keyword">this</span>.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果 this 是构造函数，fBound 继承相关属性</span></span><br><span class="line">    <span class="keyword">return</span> fBound;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvRnVuY3Rpb24vYmluZA==" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">bind Polyfill<i class="fa fa-external-link"></i></span>：fun.bind(thisArg[, arg1[, arg2[, …]]])<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// console.log(Function.prototype.apply.bind.call === Function.prototype.call);</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">Function</span>.prototype.bind) &#123;</span><br><span class="line">  <span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">oThis</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">      <span class="comment">// closest thing possible to the ECMAScript 5</span></span><br><span class="line">      <span class="comment">// internal IsCallable function</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Function.prototype.bind - what is trying to be bound is not callable'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> aArgs   = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>),</span><br><span class="line">        fToBind = <span class="keyword">this</span>,</span><br><span class="line">        fNOP    = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">        fBound  = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> fToBind.apply(<span class="keyword">this</span> <span class="keyword">instanceof</span> fNOP ? <span class="keyword">this</span> : oThis, aArgs.concat(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)));</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数拥有 prototype</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.prototype) &#123;</span><br><span class="line">      <span class="comment">// native functions don't have a prototype</span></span><br><span class="line">      fNOP.prototype = <span class="keyword">this</span>.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    fBound.prototype = <span class="keyword">new</span> fNOP();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果 this 是构造函数，fBound 继承相关属性</span></span><br><span class="line">    <span class="keyword">return</span> fBound;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>关于 <code>this</code> 绑定</p>
 <p>在 JavaScript 中，<code>this</code> 和 <code>函数</code> 之间的绑定时松散的，体现在我们可以轻易的通过 <code>call</code>、<code>apply</code> <code>指定</code> 或 <code>修改</code> <code>this</code>。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#id'</span>).foreach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  $(<span class="keyword">this</span>).click();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -788,7 +770,7 @@
 <p>在全局上下文中，<code>this=全局对象本身=变量对象</code>。</p>
 <p>在函数上下文中，<code>this</code> 是 <code>执行上下文</code> 的一个属性。</p>
 <p>所以这也解释了一些现象，<code>全局作用域</code> 下的 <code>变量或函数</code> 成为了 <code>全局对象的属性</code>了，如上面示例的代码。</p>
-<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p><a href="https://www.nosuchfield.com/2017/07/16/Talk-about-compilation-principles-1/" target="_blank" rel="noopener">聊聊编译原理（一） - 词法分析</a><br><a href="https://www.nosuchfield.com/2017/07/30/Talk-about-compilation-principles-2/" target="_blank" rel="noopener">聊聊编译原理（二） - 语法分析</a></p>
+<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubm9zdWNoZmllbGQuY29tLzIwMTcvMDcvMTYvVGFsay1hYm91dC1jb21waWxhdGlvbi1wcmluY2lwbGVzLTEv" title="https://www.nosuchfield.com/2017/07/16/Talk-about-compilation-principles-1/">聊聊编译原理（一） - 词法分析<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cubm9zdWNoZmllbGQuY29tLzIwMTcvMDcvMzAvVGFsay1hYm91dC1jb21waWxhdGlvbi1wcmluY2lwbGVzLTIv" title="https://www.nosuchfield.com/2017/07/30/Talk-about-compilation-principles-2/">聊聊编译原理（二） - 语法分析<i class="fa fa-external-link"></i></span></p>
 <h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><ul>
 <li>编译型语言，编译步骤分为：<code>词法分析</code>、<code>语法分析</code>、<code>语义检查</code>、<code>代码优化</code> 和 <code>字节生成</code>。</li>
 <li>解释型语言，通过 <code>词法分析</code> 和 <code>语法分析</code> 得到 <code>语法分析树</code> 后，就可以开始 <code>解释执行</code> 了。</li>
@@ -879,7 +861,7 @@
 <p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/langs/ecmascript/images/estree.png" alt="ESTree"></p>
 <p>上面的模拟代码生成了JS解析过程所产生的用于在执行阶段使用的信息，但是并不代表解释器和这个一样的。</p>
 <p>这些分析工具有很多，他们大都用于 <code>代码压缩</code>、<code>代码混淆</code>、<code>代码转换（ES6-&gt;ES5，babel，ts-&gt;js）</code>、<code>代码优化</code>、<code>学习研究</code> 等。</p>
-<p>源文件地址：<a href="https://github.com/liuyanjie/knowledge/tree/master/langs/ecmascript/javascript-deep.md" target="_blank" rel="noopener">https://github.com/liuyanjie/knowledge/tree/master/langs/ecmascript/javascript-deep.md</a></p>
+<p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbGFuZ3MvZWNtYXNjcmlwdC9qYXZhc2NyaXB0LWRlZXAubWQ=" title="https://github.com/liuyanjie/knowledge/tree/master/langs/ecmascript/javascript-deep.md">https://github.com/liuyanjie/knowledge/tree/master/langs/ecmascript/javascript-deep.md<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -1117,23 +1099,19 @@
                 <span class="links-of-author-item">
                   
                   
-                    
-                  
                   
                     
                   
-                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZQ==" title="GitHub &rarr; https://github.com/liuyanjie"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZQ==" title="GitHub &rarr; https://github.com/liuyanjie"><i class="fa fa-fw fa-github"></i></span>
                 </span>
               
                 <span class="links-of-author-item">
                   
                   
-                    
-                  
                   
                     
                   
-                  <a href="/liuyj619@gmail.com" title="E-Mail &rarr; liuyj619@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  <a href="/liuyj619@gmail.com" title="E-Mail &rarr; liuyj619@gmail.com"><i class="fa fa-fw fa-envelope"></i></a>
                 </span>
               
             </div>
@@ -1206,21 +1184,7 @@
   <span class="author" itemprop="copyrightHolder">lyj</span>
 
   
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-    
-    <span title="站点总字数">116k</span>
-  
 
-  
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    
-    <span title="站点阅读时长">1:46</span>
   
 </div>
 
