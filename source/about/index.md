@@ -1,6 +1,6 @@
 ---
 title: About
-type: "about"
+type: about
 ---
 
-## lyj
+> 努力... 成为一名有自我修养的程序猿！

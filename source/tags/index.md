@@ -1,4 +1,4 @@
 ---
 title: All tags
-type: "tags"
+type: tags
 ---
