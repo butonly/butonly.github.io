@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>/about/index.html</loc>
+    <loc>https://blog.butonly.com/about/index.html</loc>
     
     <lastmod>2018-12-31T09:47:25.541Z</lastmod>
     
   </url>
   
   <url>
-    <loc>/tags/index.html</loc>
+    <loc>https://blog.butonly.com/tags/index.html</loc>
     
     <lastmod>2018-12-31T09:47:18.123Z</lastmod>
     
   </url>
   
   <url>
-    <loc>/categories/index.html</loc>
+    <loc>https://blog.butonly.com/categories/index.html</loc>
     
     <lastmod>2018-12-31T09:47:06.019Z</lastmod>
     
   </url>
   
   <url>
-    <loc>/posts/0/</loc>
+    <loc>https://blog.butonly.com/posts/0/</loc>
     
     <lastmod>2018-12-31T09:46:46.628Z</lastmod>
     
   </url>
   
   <url>
-    <loc>/manifest.json</loc>
+    <loc>https://blog.butonly.com/manifest.json</loc>
     
     <lastmod>2018-12-30T05:53:16.510Z</lastmod>
     
   </url>
   
   <url>
-    <loc>/search/index.html</loc>
+    <loc>https://blog.butonly.com/search/index.html</loc>
     
     <lastmod>2018-12-29T06:12:59.739Z</lastmod>
     
