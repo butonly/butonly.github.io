@@ -151,7 +151,7 @@
 <meta property="og:description" content="事件循环是 libuv 功能的核心部分。它的主要职责是对I/O进行轮询然后基于不同的事件源调度它们的回调。 事件循环主体数据结构在 libuv 中用 struct uv_loop_s 或类型别名 uv_loop_t 表示，文中统一使用 loop 表示其实例，它代表了事件循环，实际上它是事件循环所有资源的统一入口，所有在事件循环上运行的各类 Handle/Request 实例都被注册到 uv_loo">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://docs.libuv.org/en/v1.x/_images/loop_iteration.png">
-<meta property="og:updated_time" content="2019-04-23T15:38:41.000Z">
+<meta property="og:updated_time" content="2019-04-23T15:43:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（二）事件循环（Eventloop）">
 <meta name="twitter:description" content="事件循环是 libuv 功能的核心部分。它的主要职责是对I/O进行轮询然后基于不同的事件源调度它们的回调。 事件循环主体数据结构在 libuv 中用 struct uv_loop_s 或类型别名 uv_loop_t 表示，文中统一使用 loop 表示其实例，它代表了事件循环，实际上它是事件循环所有资源的统一入口，所有在事件循环上运行的各类 Handle/Request 实例都被注册到 uv_loo">
@@ -515,7 +515,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-23 23:38:41" itemprop="dateModified" datetime="2019-04-23T23:38:41+08:00">2019-04-23</time>
+                <time title="修改时间：2019-04-23 23:43:06" itemprop="dateModified" datetime="2019-04-23T23:43:06+08:00">2019-04-23</time>
               
             
           </span>
@@ -676,14 +676,7 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/0-libuv源码分析（一）全局概览/" rel="bookmark">libuv源码分析（一）全局概览</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
+      <div class="popular-posts-title"><a href="/posts/0-libuv源码分析（一）全局概览（Overview）/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
       
     </li>
   
@@ -691,6 +684,13 @@
       
       
       <div class="popular-posts-title"><a href="/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
       
     </li>
   
@@ -770,8 +770,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/0-libuv源码分析（一）全局概览/" rel="next" title="libuv源码分析（一）全局概览">
-                <i class="fa fa-chevron-left"></i> libuv源码分析（一）全局概览
+              <a href="/posts/0-libuv源码分析（一）全局概览（Overview）/" rel="next" title="libuv源码分析（一）全局概览（Overview）">
+                <i class="fa fa-chevron-left"></i> libuv源码分析（一）全局概览（Overview）
               </a>
             
           </div>
