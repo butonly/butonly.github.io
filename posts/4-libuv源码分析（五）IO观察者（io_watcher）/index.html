@@ -146,11 +146,11 @@
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（五）IO观察者（io_watcher）">
-<meta property="og:url" content="https://blog.butonly.com/posts/libuv源码分析（五）IO观察者（io_watcher）/index.html">
+<meta property="og:url" content="https://blog.butonly.com/posts/4-libuv源码分析（五）IO观察者（io_watcher）/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="在 libuv 内部，对所有IO操作进行了统一的抽象，在底层的操作系统IO操作基础上，结合事件循环机制，实现了IO观察者，对应结构体 uv__io_s。其他 handle 通过内嵌I/O观察者的方式获得IO的监测能力，例如有 uv_stream_t、uv_udp_t、uv_poll_t 及 uv_stream_t 的派生类型 uv_tcp_t、uv_pipe_t、uv_tty_t。uv_strea">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T15:25:49.000Z">
+<meta property="og:updated_time" content="2019-04-23T15:38:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（五）IO观察者（io_watcher）">
 <meta name="twitter:description" content="在 libuv 内部，对所有IO操作进行了统一的抽象，在底层的操作系统IO操作基础上，结合事件循环机制，实现了IO观察者，对应结构体 uv__io_s。其他 handle 通过内嵌I/O观察者的方式获得IO的监测能力，例如有 uv_stream_t、uv_udp_t、uv_poll_t 及 uv_stream_t 的派生类型 uv_tcp_t、uv_pipe_t、uv_tty_t。uv_strea">
@@ -162,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/posts/libuv源码分析（五）IO观察者（io_watcher）/">
+  <link rel="canonical" href="https://blog.butonly.com/posts/4-libuv源码分析（五）IO观察者（io_watcher）/">
 
 
 
@@ -453,7 +453,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/libuv源码分析（五）IO观察者（io_watcher）/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/4-libuv源码分析（五）IO观察者（io_watcher）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
@@ -496,12 +496,24 @@
                 
               
 
-              <time title="创建时间：2019-04-23 08:00:00 / 修改时间：23:25:49" itemprop="dateCreated datePublished" datetime="2019-04-23T08:00:00+08:00">2019-04-23</time>
+              <time title="创建时间：2019-04-24 07:00:05" itemprop="dateCreated datePublished" datetime="2019-04-24T07:00:05+08:00">2019-04-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-23 23:38:41" itemprop="dateModified" datetime="2019-04-23T23:38:41+08:00">2019-04-23</time>
               
             
           </span>
@@ -533,9 +545,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/libuv源码分析（五）IO观察者（io_watcher）/#comments" itemprop="discussionUrl">
+                <a href="/posts/4-libuv源码分析（五）IO观察者（io_watcher）/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/libuv源码分析（五）IO观察者（io_watcher）/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/4-libuv源码分析（五）IO观察者（io_watcher）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -683,35 +695,35 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/libuv源码分析（一）全局概览/" rel="bookmark">libuv源码分析（一）全局概览</a></div>
+      <div class="popular-posts-title"><a href="/posts/0-libuv源码分析（一）全局概览/" rel="bookmark">libuv源码分析（一）全局概览</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/libuv源码分析（七）异步唤醒（Async）/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
+      <div class="popular-posts-title"><a href="/posts/1-libuv源码分析（二）事件循环（Eventloop）/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/libuv源码分析（三）资源抽象：Handle 和 Request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
+      <div class="popular-posts-title"><a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/libuv源码分析（二）事件循环（Eventloop）/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
+      <div class="popular-posts-title"><a href="/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/libuv源码分析（八）线程池（Threadpool）/" rel="bookmark">libuv源码分析（八）线程池（Threadpool）</a></div>
+      <div class="popular-posts-title"><a href="/posts/5-libuv源码分析（六）流（Stream）/" rel="bookmark">libuv源码分析（六）流（Stream）</a></div>
       
     </li>
   
@@ -747,7 +759,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/libuv源码分析（五）IO观察者（io_watcher）/" title="libuv源码分析（五）IO观察者（io_watcher）">https://blog.butonly.com/posts/libuv源码分析（五）IO观察者（io_watcher）/</a>
+    <a href="https://blog.butonly.com/posts/4-libuv源码分析（五）IO观察者（io_watcher）/" title="libuv源码分析（五）IO观察者（io_watcher）">https://blog.butonly.com/posts/4-libuv源码分析（五）IO观察者（io_watcher）/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -777,8 +789,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/libuv源码分析（二）事件循环（Eventloop）/" rel="next" title="libuv源码分析（二）事件循环（Eventloop）">
-                <i class="fa fa-chevron-left"></i> libuv源码分析（二）事件循环（Eventloop）
+              <a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="next" title="libuv源码分析（四）定时器（Timer）">
+                <i class="fa fa-chevron-left"></i> libuv源码分析（四）定时器（Timer）
               </a>
             
           </div>
@@ -787,8 +799,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/libuv源码分析（三）资源抽象：Handle 和 Request/" rel="prev" title="libuv源码分析（三）资源抽象：Handle 和 Request">
-                libuv源码分析（三）资源抽象：Handle 和 Request <i class="fa fa-chevron-right"></i>
+              <a href="/posts/5-libuv源码分析（六）流（Stream）/" rel="prev" title="libuv源码分析（六）流（Stream）">
+                libuv源码分析（六）流（Stream） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1156,8 +1168,8 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://blog.butonly.com/posts/libuv源码分析（五）IO观察者（io_watcher）/";
-        this.page.identifier = "posts/libuv源码分析（五）IO观察者（io_watcher）/";
+        this.page.url = "https://blog.butonly.com/posts/4-libuv源码分析（五）IO观察者（io_watcher）/";
+        this.page.identifier = "posts/4-libuv源码分析（五）IO观察者（io_watcher）/";
         this.page.title = 'libuv源码分析（五）IO观察者（io_watcher）';
         };
       function loadComments () {
