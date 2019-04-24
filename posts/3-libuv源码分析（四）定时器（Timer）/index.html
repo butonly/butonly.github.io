@@ -142,18 +142,18 @@
 
 
 
-  <meta name="description" content="在事件循环中，处理的一个 handle 就是计时器，通过 uv__run_timers，我们可以找到 timer.c 文件，里面包含了 timer 的实现。 先来看一下 uv__run_timers 的实现源码： https://github.com/libuv/libuv/blob/v1.28.0/src/timer.c#L158 123456789101112131415161718void">
+  <meta name="description" content="源文件地址：https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md">
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（四）定时器（Timer）">
 <meta property="og:url" content="https://blog.butonly.com/posts/3-libuv源码分析（四）定时器（Timer）/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
-<meta property="og:description" content="在事件循环中，处理的一个 handle 就是计时器，通过 uv__run_timers，我们可以找到 timer.c 文件，里面包含了 timer 的实现。 先来看一下 uv__run_timers 的实现源码： https://github.com/libuv/libuv/blob/v1.28.0/src/timer.c#L158 123456789101112131415161718void">
+<meta property="og:description" content="源文件地址：https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T15:43:06.000Z">
+<meta property="og:updated_time" content="2019-04-23T17:28:40.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（四）定时器（Timer）">
-<meta name="twitter:description" content="在事件循环中，处理的一个 handle 就是计时器，通过 uv__run_timers，我们可以找到 timer.c 文件，里面包含了 timer 的实现。 先来看一下 uv__run_timers 的实现源码： https://github.com/libuv/libuv/blob/v1.28.0/src/timer.c#L158 123456789101112131415161718void">
+<meta name="twitter:description" content="源文件地址：https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md">
 
 
 
@@ -496,7 +496,7 @@
                 
               
 
-              <time title="创建时间：2019-04-24 07:00:04" itemprop="dateCreated datePublished" datetime="2019-04-24T07:00:04+08:00">2019-04-24</time>
+              <time title="创建时间：2019-04-23 15:00:04" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:04+08:00">2019-04-23</time>
             
 
             
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-23 23:43:06" itemprop="dateModified" datetime="2019-04-23T23:43:06+08:00">2019-04-23</time>
+                <time title="修改时间：2019-04-24 01:28:40" itemprop="dateModified" datetime="2019-04-24T01:28:40+08:00">2019-04-24</time>
               
             
           </span>
@@ -575,31 +575,7 @@
       
 
       
-        <p>在事件循环中，处理的一个 <code>handle</code> 就是计时器，通过 <code>uv__run_timers</code>，我们可以找到 <code>timer.c</code> 文件，里面包含了 timer 的实现。</p>
-<p>先来看一下 <code>uv__run_timers</code> 的实现源码：</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpYnV2L2xpYnV2L2Jsb2IvdjEuMjguMC9zcmMvdGltZXIuYyNMMTU4" title="https://github.com/libuv/libuv/blob/v1.28.0/src/timer.c#L158">https://github.com/libuv/libuv/blob/v1.28.0/src/timer.c#L158<i class="fa fa-external-link"></i></span></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uv__run_timers</span><span class="params">(<span class="keyword">uv_loop_t</span>* loop)</span> </span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">heap_node</span>* <span class="title">heap_node</span>;</span></span><br><span class="line">  <span class="keyword">uv_timer_t</span>* handle;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    heap_node = heap_min(timer_heap(loop));</span><br><span class="line">    <span class="keyword">if</span> (heap_node == <span class="literal">NULL</span>)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    handle = container_of(heap_node, <span class="keyword">uv_timer_t</span>, heap_node);</span><br><span class="line">    <span class="keyword">if</span> (handle-&gt;timeout &gt; loop-&gt;time)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    uv_timer_stop(handle);</span><br><span class="line">    uv_timer_again(handle);</span><br><span class="line">    handle-&gt;timer_cb(handle);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 libuv 中，timer是按超时时间 <code>timeout</code> 存放在最小堆中的，这样，最小的的堆顶就是 <code>timeout</code> 最小的那个 timer，也就是最先到达超时时间的那个定时任务。</p>
-<p>所以，在检查到期的定时任务时，只需要不断的获取堆顶的元素，并与当前时间比对：</p>
-<ol>
-<li>如果没有堆顶元素，则没有任何定时器存在，函数将直接返回。</li>
-<li>如果当前时间小于定时任务的超时间，那么堆顶timer未到到超时时间，非堆顶的timer更没有达到超时时间，整个uv__run_timers也就会退出。</li>
-<li><p>如果当前时间等于或大于定时任务的超时间，这个timer就是一定达到或超过执行时间的。这时，就可以从timer堆中将其取出，然后调用其回调函数<code>handle-&gt;timer_cb(handle)</code>处理定时任务，然后再次重复获取下一个出现在堆顶的timer，直到情况1或2成立。</p>
-<p>以下有两个主要注意的点：</p>
-<ol>
-<li>大于或等于实际上包含两种情形，这两种情形对于实际应用程序逻辑来说可能会出现天壤之别。<ol>
-<li>如果当前时间等于定时任务的超时间，就是最理想的状态了，因为定时任务会在定时器到来的时候准时被执行，与预期相符合。</li>
-<li>如果当前时间大于定时任务的超时间，则是非理想的状态了，然而这种情形缺是最出现的，因为很难保证当timer的超时时间到来时，程序搞好执行到此。</li>
-</ol>
-</li>
-<li>如果定时任务的回调函数<code>handle-&gt;timer_cb</code>执行时间过长，将会导致整个循环阻塞在此处，从而影响其他定时器的处理，进而也影响到整个时间循环的其他逻辑的处理，因为只有一个线程在处理各类型的回调任务。</li>
-</ol>
-</li>
-</ol>
-<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_init</span><span class="params">(<span class="keyword">uv_loop_t</span>* loop, <span class="keyword">uv_timer_t</span>* handle)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_start</span><span class="params">(<span class="keyword">uv_timer_t</span>* handle, uv_timer_cb cb, <span class="keyword">uint64_t</span> timeout, <span class="keyword">uint64_t</span> repeat)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_stop</span><span class="params">(<span class="keyword">uv_timer_t</span>* handle)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_again</span><span class="params">(<span class="keyword">uv_timer_t</span>* handle)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uv_timer_set_repeat</span><span class="params">(<span class="keyword">uv_timer_t</span>* handle, <span class="keyword">uint64_t</span> repeat)</span></span></span><br><span class="line"><span class="function">uint64_t <span class="title">uv_timer_get_repeat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">uv_timer_t</span>* handle)</span></span></span><br></pre></td></tr></table></figure>
-<p>uv_timer_t<br>void (<em>uv_timer_cb)(uv_timer_t</em> handle)</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_init</span><span class="params">(<span class="keyword">uv_loop_t</span>* loop, <span class="keyword">uv_timer_t</span>* handle)</span> </span>&#123;</span><br><span class="line">  uv__handle_init(loop, (<span class="keyword">uv_handle_t</span>*)handle, UV_TIMER);</span><br><span class="line">  handle-&gt;timer_cb = <span class="literal">NULL</span>;</span><br><span class="line">  handle-&gt;repeat = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di80LWxpYnV2LXRpbWVyLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md">https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md<i class="fa fa-external-link"></i></span></p>
+        <p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di80LWxpYnV2LXRpbWVyLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md">https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -771,17 +747,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -895,23 +862,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods"><span class="nav-number">1.</span> <span class="nav-text">Methods</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
