@@ -84,7 +84,8 @@ pagination_dir: page
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:liuyanjie/liuyanjie.github.io.git
+  # repo: git@github.com:liuyanjie/liuyanjie.github.io.git
+  repo: https://github.com/liuyanjie/liuyanjie.github.io.git
   branch: master
   # message: [message]
 
