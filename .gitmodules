@@ -1,6 +1,4 @@
-[submodule "themes/jacman"]
-	path = themes/jacman
-	url = https://github.com/wuchong/jacman.git
+
 [submodule "themes/hexo-theme-next"]
 	path = themes/hexo-theme-next
-	url = git@github.com:liuyanjie/hexo-theme-next.git
+	url = https://github.com/theme-next/hexo-theme-next.git
