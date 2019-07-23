@@ -146,7 +146,7 @@
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（一）全局概览（Overview）">
-<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview.md/index.html">
+<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="简介libuv 是一个专注于异步I/O的跨平台的程序库，它主要是用于支持 Node.js，但是也被如 Luvit、Julia、pyuv 等很多其他的库使用。它使得 异步I/O 变的简单。 libuv 对于经常接触 c 语言程序开发的开发人员来说，应该是非常容易的，但是对于没有没有相关经验的开发人员来说，阅读源码就比较吃力了，但是如果能阅读并理解 libuv，才能更深入的了解 Node.js 是怎样">
 <meta property="og:locale" content="zh-CN">
@@ -154,7 +154,7 @@
 <meta property="og:image" content="http://docs.libuv.org/en/v1.x/_images/loop_iteration.png">
 <meta property="og:image" content="https://i3.wp.com/upload-images.jianshu.io/upload_images/5618238-eaf3e05931531d7e.png">
 <meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/0*XTYvSNj_rT2UZwfm.png">
-<meta property="og:updated_time" content="2019-07-23T07:01:17.925Z">
+<meta property="og:updated_time" content="2019-07-23T07:48:36.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（一）全局概览（Overview）">
 <meta name="twitter:description" content="简介libuv 是一个专注于异步I/O的跨平台的程序库，它主要是用于支持 Node.js，但是也被如 Luvit、Julia、pyuv 等很多其他的库使用。它使得 异步I/O 变的简单。 libuv 对于经常接触 c 语言程序开发的开发人员来说，应该是非常容易的，但是对于没有没有相关经验的开发人员来说，阅读源码就比较吃力了，但是如果能阅读并理解 libuv，才能更深入的了解 Node.js 是怎样">
@@ -167,7 +167,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview.md/">
+  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview/">
 
 
 
@@ -312,7 +312,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">8</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">10</span></a>
 
   </li>
         
@@ -331,7 +331,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">1</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">2</span></a>
 
   </li>
         
@@ -350,7 +350,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">3</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">5</span></a>
 
   </li>
         
@@ -458,7 +458,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview.md/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
@@ -518,7 +518,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:01:17" itemprop="dateModified" datetime="2019-07-23T15:01:17+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
               
             
           </span>
@@ -550,9 +550,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/node.js/libuv/1-libuv-overview.md/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/1-libuv-overview/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/1-libuv-overview.md/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/1-libuv-overview/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -582,16 +582,16 @@
       
         <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>libuv 是一个专注于异步I/O的跨平台的程序库，它主要是用于支持 Node.js，但是也被如 Luvit、Julia、pyuv 等很多其他的库使用。它使得 异步I/O 变的简单。</p>
 <p>libuv 对于经常接触 <code>c</code> 语言程序开发的开发人员来说，应该是非常容易的，但是对于没有没有相关经验的开发人员来说，阅读源码就比较吃力了，但是如果能阅读并理解 <code>libuv</code>，才能更深入的了解 <code>Node.js</code> 是怎样工作的，以及 <code>Node.js</code> 中的事件驱动、非阻塞异步I/O是怎么一回事儿，它是怎么解决这些问题的，它有哪些不足。</p>
-<h2 id="基础要求"><a href="#基础要求" class="headerlink" title="基础要求"></a>基础要求</h2><p>阅读源代码需要 <code>c</code> 语言相关的知识和一定的系统编程基础，需要了解常见的系统API调用及相关机制。以下为详细说明：</p>
+<h2 id="基础要求"><a href="#基础要求" class="headerlink" title="基础要求"></a>基础要求</h2><p>阅读源代码需要 <code>c</code> 语言相关的知识和一定的系统编程基础，需要了解常见的系统API调用及相关机制。主要有以下几个方面：</p>
 <ol>
 <li>libuv 主要是用 <code>c</code> 实现的，所以需要有一定的 <code>c</code> 语言基础，尤其是宏、结构体、指针、函数指针、数组等内容，对 <code>c</code> 语言程序的内存布局有一定了解；</li>
 <li>libuv 内部包含 <code>堆</code> <code>队列</code> <code>树</code> 等基础的数据结构，需要有一定的了解；</li>
-<li>libuv 内部使用了很多与操作系统交互的系统API，所以需要对相应系统平台系统编程和操作系统原理有一定基础，了解进程、线程、文件系统、网络等，了解常见的异步IO模型，最好阅读过 <code>APUE</code>。</li>
+<li>libuv 内部使用了很多系统API，所以需要对相应系统平台系统编程和操作系统原理有一定了解，了解进程、线程、文件系统、网络等，了解常见的异步IO模型，最好阅读过 <code>APUE</code>。</li>
 </ol>
-<p>libuv 内部实现采用的大量的<code>宏</code>来复用代码，并配合使用强制类型等机制实现类似于高级语言中继承的效果，这依赖于 <code>c</code> 语言结构体内存布局，<code>宏</code>本身是非常不容易阅读的，增加了阅读源代码的难度。同时内部进行一定的抽象，需要一定的理解能力。</p>
-<p>libuv 支持多个平台，尤其是支持 <code>*nix</code> 和 <code>win</code> 两中设计实现差异很大的操作系统，其内部也大量使用宏进行条件编译，且部分功能在不同环境下的实现有可能完全不同，所以在阅读源码时只关注某一平台代码。本源码分析也仅针对 <code>linux</code> 环境的相关代码的分析。</p>
-<h2 id="设计概述"><a href="#设计概述" class="headerlink" title="设计概述"></a>设计概述</h2><p>本部分内容建议对照官方文档 <span class="exturl" data-url="aHR0cDovL2RvY3MubGlidXYub3JnL2VuL3YxLngvZGVzaWduLmh0bWw=" title="http://docs.libuv.org/en/v1.x/design.html">Design overview<i class="fa fa-external-link"></i></span> 阅读。</p>
-<p>libuv 最初是为 NodeJS 编写的跨平台支持库。它是围绕<code>事件驱动的异步I/O模型</code>设计的。提到异步非阻塞I/O模型，有经验的开发人员应该能很快意识到这是一种很常见的实现高并发的模型，这是一种不同于多进程/多线程的并发模型。并发模型可以参考知乎专栏<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80NDkxNzkyMA==" title="https://zhuanlan.zhihu.com/p/44917920">并发模型之间的比较<i class="fa fa-external-link"></i></span>或其他书籍或文章。</p>
+<p>libuv 内部实现采用的大量的<code>宏</code>来复用代码，并配合使用强制类型转换等机制实现类似于高级语言中继承的效果，这依赖于 <code>c</code> 语言结构体内存布局，<code>宏</code>本身是非常不容易阅读的，增加了阅读源代码的难度。同时内部进行一定的抽象，需要一定的理解能力。</p>
+<p>libuv 支持多个平台，尤其是支持 <code>*nix</code> 和 <code>win</code> 两种设计实现差异很大的操作系统，其内部也大量使用宏进行条件编译，且部分功能在不同环境下的实现有可能完全不同，所以在阅读源码时只关注某一平台代码。本源码分析也仅针对 <code>linux</code> 环境的相关代码的分析。</p>
+<h2 id="设计概述"><a href="#设计概述" class="headerlink" title="设计概述"></a>设计概述</h2><p>本部分内容主要来源于官方文档，建议对照官方文档 <span class="exturl" data-url="aHR0cDovL2RvY3MubGlidXYub3JnL2VuL3YxLngvZGVzaWduLmh0bWw=" title="http://docs.libuv.org/en/v1.x/design.html">Design overview<i class="fa fa-external-link"></i></span> 阅读。</p>
+<p>libuv 最初是为 NodeJS 编写的跨平台支持库。它是围绕<code>事件驱动的异步I/O模型</code>设计的。提到异步非阻塞I/O模型，有经验的开发人员应该能很快意识到这是一种很常见的实现高并发的模型，这是一种不同于多进程/多线程的并发模型。并发模型可以参考知乎专栏<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80NDkxNzkyMA==" title="https://zhuanlan.zhihu.com/p/44917920">并发模型之间的比较<i class="fa fa-external-link"></i></span>或其他资料。</p>
 <p>libuv 不仅仅在多种不同I/O轮询机制之上提供了的简单抽象——I/O观察者，更通过 <code>handles</code> 和 <code>streams</code> 为套接字和其他实体提供了更高级别的抽象，同时也提供了跨平台I/O和线程管理能力，还包含一些其他功能。</p>
 <p>下图说明了 libuv 的不同组成部分以及它们与哪些子系统相关：</p>
 <p><img src="http://docs.libuv.org/en/v1.x/_images/architecture.png" alt="architecture"></p>
@@ -603,14 +603,14 @@
 <li><code>TCP server handle</code> 在每一次有一个新的 <code>connection</code> 进来的时候都会调用一次它的回调。</li>
 </ul>
 <p><code>Requests</code> 一般代表一个短生命周期的<code>操作</code>。这些操作可以通过 handle 执行：<code>write requests</code> 用于在 handle 上写数据，所以 <code>request</code> 和 <code>handle</code> 可能存在一定的数据关联；或者也可以独立执行：<code>getaddrinfo requests</code> 不需要一个 <code>handle</code>，他们直接运行在事件循环中。</p>
-<p>相关的代码分析见：<a href="3-libuv-handle-and-request.md">Handle and Requst</a></p>
+<p>相关的代码分析在 <a href="3-libuv-handle-and-request.md">Handle and Requst</a> 部分进行。</p>
 <h3 id="The-I-O-loop"><a href="#The-I-O-loop" class="headerlink" title="The I/O loop"></a>The I/O loop</h3><p>I/O loop 也就是事件循环（Event Loop）是 libuv 的核心组成部分。它为所有 I/O 操作建立内容，实际上这意味着事件循环被绑定到一个单一的线程。可以运行多个不同的事件循环只要它们在不同的线程中。除非另有说明，事件循环（任何涉及事件循环和 handle 的API）并不是线程安全的。</p>
-<p>所有的异步操作的结果最终在事件循环中被处理，也就是通常所说的回调函数，在事件循环中被调用。</p>
+<p>所有的异步操作的结果最终在事件循环中被处理，也就是通常所说的回调函数，在事件循环中被调用。因为事件循环线程是单线程模式，所以所有用户代码都在一个线程中运行，libuv 更像是一个调度器，在合适的时候调度用户代码运行。此时，如果用户代码CPU密集型的耗时运算，将会阻塞事件循环。</p>
 <p>事件循环是非常常见的单线程异步I/O的处理方法：所有（网络）I/O都在非阻塞的套接字上执行，这些套接字使用给定平台上可用的最佳机制进行轮询：Linux 上使用 <code>epoll</code>，OSX 和其他 BSDs 系统上使用 <code>kqueue</code>，SunOS 使用 <code>event ports</code>，Windows 上使用 <code>IOCP</code>。以上I/O轮询作为事件循环迭代的一部分，事件循环将会被阻塞在I/O轮询（例如：linux 上的 <code>epoll_pwait</code> 调用），直到被添加到轮询器中的套接字有IO活动（事件），事件循环线程将会在有IO事件时被唤醒，关联的回调函数将会被调用表明套接字有新的连接，然后便可以在 <code>handles</code> 上进行读、写或其他想要进行的操作 <code>requests</code>。</p>
 <p>下图显示了事件循环的所有阶段：</p>
 <p><img src="http://docs.libuv.org/en/v1.x/_images/loop_iteration.png" alt="loop_iteration"></p>
 <p>图中主要有七个阶段，</p>
-<p>其中 <code>idle</code>、<code>prepare</code>、<code>check</code> 的实现完全相同，调用时间不同，类似于生命周期勾子，这几个阶段目的是允许开发者在事件循环的特定阶段执行代码，在 Node.js 用于性能信息收集。这三个阶段的实现代码比较简单，很容易理解。因源代码几乎完全使用宏实现，所以编辑器无法跳转到对应实现，搜索关键字也无法匹配，这里给出源文件路径：<code>src/unix/loop-watcher.c</code>，便于读者找到源文件。</p>
+<p>其中 <code>idle</code>、<code>prepare</code>、<code>check</code> 的实现完全相同，调用时间不同，类似于生命周期勾子，这几个阶段目的是允许开发者在事件循环的特定阶段执行代码，在 Node.js 主要用于性能信息收集。这三个阶段的实现代码比较简单，很容易理解。因源代码几乎完全使用宏实现，所以编辑器无法跳转到对应实现，搜索关键字也无法匹配，这里给出源文件路径：<code>src/unix/loop-watcher.c</code>，便于读者找到源文件。</p>
 <p>其余剩下的阶段就主要有 <code>Call pending callbacks</code> <code>Poll for I/O</code> <code>Call close callbacks</code>，这三个阶段主要用于处理IO操作等异步操作结果，阅读源码也主要是围绕着这三个阶段的代码展开的。</p>
 <p>各阶段用途描述：</p>
 <ol>
@@ -618,12 +618,12 @@
 <li>Call pending callbacks：处理上一轮事件循环中因出现错误或者逻辑需要等原因挂起的任务；</li>
 <li>Run idle handles；</li>
 <li>Run prepare handles；</li>
-<li>Poll for I/O：事件循环 则有可能 因为 <code>epoll_wait</code> 而阻塞在这里，这取决于 <code>timeout</code> 参数是否为 <code>0</code>，但是通常情况下，会阻塞到有关注的IO事件发送时回，这也直接避免了时间循环一直工作导致占用CPU的问题。这个阶段是整个 libuv 事件循环最重要的阶段。libuv 的大部分 <code>handle</code> 都依赖该阶段实现。</li>
+<li>Poll for I/O：事件循环 则有可能 因为 <code>epoll_wait</code> 而阻塞在这里，这取决于 <code>timeout</code> 参数是否为 <code>0</code>，但是通常情况下，会阻塞到有关注的IO事件发送时回，这也直接避免了时间循环一直工作导致占用CPU的问题。这个阶段是整个 libuv 事件循环最重要的阶段。libuv 的大部分 <code>handle</code> （都是I/O相关的）都依赖该阶段实现。</li>
 <li>Run check handles：</li>
 <li>Call close callbacks：清理被关闭的 <code>handles</code>。</li>
 </ol>
 <p>更多详细描述，请直接阅读<span class="exturl" data-url="aHR0cDovL2RvY3MubGlidXYub3JnL2VuL3YxLngvZGVzaWduLmh0bWwjdGhlLWktby1sb29w" title="http://docs.libuv.org/en/v1.x/design.html#the-i-o-loop">The I/O loop<i class="fa fa-external-link"></i></span>的详细描述。</p>
-<p>相关的代码分析见：<a href="2-libuv-event-loop.md">EventLoop</a></p>
+<p>相关的代码分析在 <a href="2-libuv-event-loop.md">EventLoop</a> 部分进行。</p>
 <h3 id="File-I-O"><a href="#File-I-O" class="headerlink" title="File I/O"></a>File I/O</h3><p>不同于网络IO，目前没有 libuv 可以依赖的平台特定（异步）文件IO机制，所以当前的方式是在线程池中运行阻塞式的文件IO操作。</p>
 <p>libuv 目前采用一个全局的线程池，所有事件循环都可以在向其任务队列提交任务，目前有3种类型的操作运行在线程中：</p>
 <ul>
@@ -633,12 +633,12 @@
 </ul>
 <p>有关跨平台文件I/O现状的详尽说明：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmxpYnRvcnJlbnQub3JnLzIwMTIvMTAvYXN5bmNocm9ub3VzLWRpc2staW8v" title="https://blog.libtorrent.org/2012/10/asynchronous-disk-io/">asynchronous disk I/O<i class="fa fa-external-link"></i></span></p>
 <p>线程池中的线程在工作完成之后，会向事件循环线程发送数据，然后再主线程中触发回调。</p>
-<h2 id="Reactor"><a href="#Reactor" class="headerlink" title="Reactor"></a>Reactor</h2><p>通过以上的介绍和描述，我们可以获知几个关键概念：<code>Event-Loop</code>、<code>Async I/O</code>, <code>Handle</code>、<code>Request</code>。</p>
+<h2 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h2><p>通过以上的介绍和描述，我们可以获知几个关键概念：<code>Event-Loop</code>、<code>Async I/O</code>, <code>Handle</code>、<code>Request</code>。</p>
 <ul>
-<li><code>Event-Loop</code> 是一个程序结构，用于在程序中 等待 和 派发 消息和事件。它实际是一个运行时概念，表示一个运行时逻辑。<code>Event-Loop</code> 是实现 <code>Event-Driven</code> 编程的基本结构。</li>
-<li><code>Async I/O</code> 相比 <code>Sync I/O</code>，异步I/O一个典型的特征是不会阻塞，因为IO操作通常比较慢，通常的同步IO操作，会导致程序逻辑阻塞在某一步IO操作，进而导致程序响应很慢。</li>
+<li><code>Event-Loop</code> 是一个程序结构，用于在程序中 <code>等待</code> 并 <code>派发</code> 消息和事件。它实际是一个运行时概念，表示一个运行时逻辑。<code>Event-Loop</code> 是实现 <code>Event-Driven</code> 编程的基本结构。</li>
+<li><code>Async I/O</code> 相比 <code>Sync I/O</code>，<code>Async I/O</code> 一个典型的特征是不会阻塞，因为I/O操作通常比较慢，同步I/O操作会导致程序阻塞在I/O操作上，进而导致程序响应很慢。<code>Async I/O</code> 就是为了避免阻塞的。</li>
 </ul>
-<p><code>Event-Loop</code> 和 <code>Async I/O</code> 是实现高性能IO的常见手段，这些都始于 <code>C10k</code> 问题，就是单服务器同时服务 10000 个客户端，当然现在远不止这些了。早期的服务器是基于进程/线程模型，每新来一个连接，就分配一个进程（线程）去处理这个连接，这是一个非常大的开销，容易达到系统软硬件瓶颈，另外，进程/线程切换上下文的成本也非常高。</p>
+<p><code>Event-Loop</code> 和 <code>Async I/O</code> 是实现高性能I/O的常见手段，这些都始于 <code>C10k</code> 问题，单服务器同时服务 10000 个客户端，当然现在远不止这些了。早期的服务器是基于进程/线程模型，每新来一个连接，就分配一个进程（线程）去处理这个连接，这是一个非常大的开销，容易达到系统软硬件瓶颈，另外，进程/线程切换上下文的成本也非常高。</p>
 <p>一般而言，大多数网络应用服务器端软件都是I/O密集型系统，服务器系统大部分的时间都花费在等待数据的输入输出上了，而不是计算，如果CPU把时间花在等待I/O操作上，就白白浪费了CPU的处理能力了，更重要的是，此时可能还有大量的客户端请求需要处理，而CPU却在等待I/O无法脱身。最终，以此方式工作的服务器吞吐量极低，需要更多的服务支撑业务，导致成本升高。</p>
 <p>为了充分利用CPU的计算能力，就需要避免让CPU等待I/O操作完成能够抽出身来做其他工作，例如，接收更多请求，等I/O操作完成之后再来进一步处理。这就有了 非阻塞I/O。异步I/O给编程带来了一定的麻烦，因为同步思维对于人来说更自然、更容易，也不易于调试，但是实际上限时世界原本偏向异步的。如何在I/O操作完成后能够让CPU回来继续完成工作也需要更复杂的流程逻辑控制，这些都带来了一定的设计难度。不过幸好，聪明的开发者设计了 <code>Event-Driven</code> 编程模型解决了此问题。基于此模型，也衍生出高性能IO常见实现模式：<code>Reactor</code> 模式，该模式有很多变体。Redis、Nginx、Netty、java.NIO都采用类似的模式来解决高并发的问题，libuv 自然也不例外，实现了事件驱动的异步IO。<code>Reactor</code> 模式采用同步I/O，<code>Proactor</code> 是一个采用异步I/O的模式。</p>
 <p><img src="https://i3.wp.com/upload-images.jianshu.io/upload_images/5618238-eaf3e05931531d7e.png" alt=""></p>
@@ -658,16 +658,16 @@
 </ul>
 <h2 id="libevent-vs-libev-vs-libuv"><a href="#libevent-vs-libev-vs-libuv" class="headerlink" title="libevent vs libev vs libuv"></a>libevent vs libev vs libuv</h2><ul>
 <li>libevent：名气最大，应用最广泛，历史悠久的跨平台事件库；</li>
-<li>libev：较libevent而言，设计更简练，性能更好，但对Windows支持不够好；</li>
-<li>libuv：开发node的过程中需要一个跨平台的事件库，他们首选了libev，但又要支持Windows，故重新封装了一套，linux下用libev实现，Windows下用IOCP实现；</li>
+<li>libev：较 libevent 而言，设计更简练，性能更好，但对 Windows 支持不够好；</li>
+<li>libuv：开发 node 的过程中需要一个跨平台的事件库，他们首选了 libev，但又要支持 Windows，故重新封装了一套，linux 下用 libev 实现，Windows下用 IOCP 实现；</li>
 </ul>
-<p>libevent、libev、libuv 都是c语言实现的事件驱动（<code>Event-Driven</code>）的异步I/O（<code>Async I/O</code>）库。</p>
+<p>libevent、libev、libuv 都是 c 语言实现的事件驱动（<code>Event-Driven</code>）的异步I/O（<code>Async I/O</code>）库。</p>
 <p>异步I/O（<code>Async I/O</code>）库本质上是提供异步I/O事件通知（Asynchronous Event Notification，AEN）的。异步事件通知机制就是根据发生的事件，调用相应的回调函数进行处理。</p>
 <ul>
-<li><strong>事件（Event）</strong>：事件是通知机制的核心，比如I/O事件、定时器事件、信号事件事件。有时候也称事件为事件处理器（EventHandler），这个名称更形象，因为Handler本身表示了包含处理所需数据（或数据的地址）和处理的方法（回调函数），更像是面向对象思想中的称谓。</li>
+<li><strong>事件（Event）</strong>：事件是通知机制的核心，比如I/O事件、定时器事件、信号事件事件。有时候也称事件为事件处理器（EventHandler），这个名称更形象，因为 Handler 本身表示了包含处理所需数据（或数据的地址）和处理的方法（回调函数），更像是面向对象思想中的称谓。</li>
 <li><strong>事件循环（EventLoop）</strong>：是事件驱动（<code>Event-Driven</code>）的核心，等待并分发事件。事件循环用于管理事件。</li>
 </ul>
-<p>对于应用程序来说，这些只是异步事件库提供的API，封装了异步事件库跟操作系统的交互，异步事件库会选择一种操作系统提供的机制来实现某一种事件，比如利用Unix/Linux平台的epoll机制实现网络IO事件，在同时存在多种机制可以利用时，异步事件库会采用最优机制。</p>
+<p>对于应用程序来说，这些只是异步事件库提供的API，封装了异步事件库跟操作系统的交互，异步事件库会选择一种操作系统提供的机制来实现某一种事件，比如利用 Unix/Linux 平台的 epoll 机制实现网络IO事件，在同时存在多种机制可以利用时，异步事件库会采用最优机制。</p>
 <p>该部分内容参考：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamlucWkxOTg3L2FydGljbGUvZGV0YWlscy83MTIxNDk3NA==" title="https://blog.csdn.net/lijinqi1987/article/details/71214974">网络库libevent、libev、libuv对比<i class="fa fa-external-link"></i></span></li>
@@ -737,35 +737,35 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer.md/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request.md/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/6-libuv-stream.md/" rel="bookmark">libuv源码分析（六）流（Stream）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/6-libuv-stream/" rel="bookmark">libuv源码分析（六）流（Stream）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/7-libuv-async.md/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/5-libuv-io-watcher/" rel="bookmark">libuv源码分析（五）IO观察者（io_watcher）</a></div>
       
     </li>
   
@@ -801,7 +801,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview.md/" title="libuv源码分析（一）全局概览（Overview）">https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview.md/</a>
+    <a href="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview/" title="libuv源码分析（一）全局概览（Overview）">https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -837,7 +837,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="prev" title="libuv源码分析（二）事件循环（Eventloop）">
+              <a href="/posts/node.js/libuv/2-libuv-event-loop/" rel="prev" title="libuv源码分析（二）事件循环（Eventloop）">
                 libuv源码分析（二）事件循环（Eventloop） <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -918,7 +918,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -933,7 +933,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -952,7 +954,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1026,7 +1032,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础要求"><span class="nav-number">2.</span> <span class="nav-text">基础要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计概述"><span class="nav-number">3.</span> <span class="nav-text">设计概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Handles-and-requests"><span class="nav-number">3.1.</span> <span class="nav-text">Handles and requests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-I-O-loop"><span class="nav-number">3.2.</span> <span class="nav-text">The I/O loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-I-O"><span class="nav-number">3.3.</span> <span class="nav-text">File I/O</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reactor"><span class="nav-number">4.</span> <span class="nav-text">Reactor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libevent-vs-libev-vs-libuv"><span class="nav-number">5.</span> <span class="nav-text">libevent vs libev vs libuv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">6.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本"><span class="nav-number">6.1.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">6.2.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名风格"><span class="nav-number">6.3.</span> <span class="nav-text">命名风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">6.4.</span> <span class="nav-text">数据结构</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础要求"><span class="nav-number">2.</span> <span class="nav-text">基础要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计概述"><span class="nav-number">3.</span> <span class="nav-text">设计概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Handles-and-requests"><span class="nav-number">3.1.</span> <span class="nav-text">Handles and requests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-I-O-loop"><span class="nav-number">3.2.</span> <span class="nav-text">The I/O loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-I-O"><span class="nav-number">3.3.</span> <span class="nav-text">File I/O</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reactor模式"><span class="nav-number">4.</span> <span class="nav-text">Reactor模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libevent-vs-libev-vs-libuv"><span class="nav-number">5.</span> <span class="nav-text">libevent vs libev vs libuv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">6.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本"><span class="nav-number">6.1.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">6.2.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名风格"><span class="nav-number">6.3.</span> <span class="nav-text">命名风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">6.4.</span> <span class="nav-text">数据结构</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1206,8 +1212,8 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview.md/";
-        this.page.identifier = "posts/node.js/libuv/1-libuv-overview.md/";
+        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview/";
+        this.page.identifier = "posts/node.js/libuv/1-libuv-overview/";
         this.page.title = 'libuv源码分析（一）全局概览（Overview）';
         };
       function loadComments () {

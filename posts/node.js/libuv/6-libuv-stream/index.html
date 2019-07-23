@@ -146,11 +146,11 @@
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（六）流（Stream）">
-<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/index.html">
+<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="Stream 提供一个全双工的通信信道的抽象，uv_stream_t 是一个抽象数据类型，libuv 提供了 uv_tcp_t、uv_pipe_t、uv_tty_t 3 个 Stream 实现。 uv_stream_tuv_stream_t 并未直接提供初始化函数，如同 uv_handle_t 一样，uv_stream_t 是在派生类型初始化的时候间接初始化的。派生类型的初始化函数中都调用了 uv">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-23T07:01:17.935Z">
+<meta property="og:updated_time" content="2019-07-23T07:48:36.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（六）流（Stream）">
 <meta name="twitter:description" content="Stream 提供一个全双工的通信信道的抽象，uv_stream_t 是一个抽象数据类型，libuv 提供了 uv_tcp_t、uv_pipe_t、uv_tty_t 3 个 Stream 实现。 uv_stream_tuv_stream_t 并未直接提供初始化函数，如同 uv_handle_t 一样，uv_stream_t 是在派生类型初始化的时候间接初始化的。派生类型的初始化函数中都调用了 uv">
@@ -162,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/">
+  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream/">
 
 
 
@@ -307,7 +307,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">8</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">10</span></a>
 
   </li>
         
@@ -326,7 +326,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">1</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">2</span></a>
 
   </li>
         
@@ -345,7 +345,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">3</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">5</span></a>
 
   </li>
         
@@ -453,7 +453,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:01:17" itemprop="dateModified" datetime="2019-07-23T15:01:17+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
               
             
           </span>
@@ -545,9 +545,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/node.js/libuv/6-libuv-stream.md/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/6-libuv-stream/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/6-libuv-stream.md/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/6-libuv-stream/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -656,35 +656,35 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer.md/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/1-libuv-overview/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request.md/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/1-libuv-overview.md/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/7-libuv-async.md/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/5-libuv-io-watcher/" rel="bookmark">libuv源码分析（五）IO观察者（io_watcher）</a></div>
       
     </li>
   
@@ -720,7 +720,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/" title="libuv源码分析（六）流（Stream）">https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/</a>
+    <a href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream/" title="libuv源码分析（六）流（Stream）">https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -750,7 +750,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/node.js/libuv/5-libuv-io-watcher.md/" rel="next" title="libuv源码分析（五）IO观察者（io_watcher）">
+              <a href="/posts/node.js/libuv/5-libuv-io-watcher/" rel="next" title="libuv源码分析（五）IO观察者（io_watcher）">
                 <i class="fa fa-chevron-left"></i> libuv源码分析（五）IO观察者（io_watcher）
               </a>
             
@@ -760,7 +760,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/node.js/libuv/7-libuv-async.md/" rel="prev" title="libuv源码分析（七）异步唤醒（Async）">
+              <a href="/posts/node.js/libuv/7-libuv-async/" rel="prev" title="libuv源码分析（七）异步唤醒（Async）">
                 libuv源码分析（七）异步唤醒（Async） <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -841,7 +841,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -856,7 +856,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -875,7 +877,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1129,8 +1135,8 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/";
-        this.page.identifier = "posts/node.js/libuv/6-libuv-stream.md/";
+        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream/";
+        this.page.identifier = "posts/node.js/libuv/6-libuv-stream/";
         this.page.title = 'libuv源码分析（六）流（Stream）';
         };
       function loadComments () {
