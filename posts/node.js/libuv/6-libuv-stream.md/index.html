@@ -146,11 +146,11 @@
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（六）流（Stream）">
-<meta property="og:url" content="https://blog.butonly.com/posts/5-libuv源码分析（六）流（Stream）/index.html">
+<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="Stream 提供一个全双工的通信信道的抽象，uv_stream_t 是一个抽象数据类型，libuv 提供了 uv_tcp_t、uv_pipe_t、uv_tty_t 3 个 Stream 实现。 uv_stream_tuv_stream_t 并未直接提供初始化函数，如同 uv_handle_t 一样，uv_stream_t 是在派生类型初始化的时候间接初始化的。派生类型的初始化函数中都调用了 uv">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T17:31:28.885Z">
+<meta property="og:updated_time" content="2019-07-23T07:01:17.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（六）流（Stream）">
 <meta name="twitter:description" content="Stream 提供一个全双工的通信信道的抽象，uv_stream_t 是一个抽象数据类型，libuv 提供了 uv_tcp_t、uv_pipe_t、uv_tty_t 3 个 Stream 实现。 uv_stream_tuv_stream_t 并未直接提供初始化函数，如同 uv_handle_t 一样，uv_stream_t 是在派生类型初始化的时候间接初始化的。派生类型的初始化函数中都调用了 uv">
@@ -162,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/posts/5-libuv源码分析（六）流（Stream）/">
+  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/">
 
 
 
@@ -453,7 +453,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/5-libuv源码分析（六）流（Stream）/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-24 01:31:28" itemprop="dateModified" datetime="2019-04-24T01:31:28+08:00">2019-04-24</time>
+                <time title="修改时间：2019-07-23 15:01:17" itemprop="dateModified" datetime="2019-07-23T15:01:17+08:00">2019-07-23</time>
               
             
           </span>
@@ -545,9 +545,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/5-libuv源码分析（六）流（Stream）/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/6-libuv-stream.md/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/5-libuv源码分析（六）流（Stream）/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/6-libuv-stream.md/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -641,7 +641,8 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_write2</span><span class="params">(<span class="keyword">uv_write_t</span>* req,</span></span></span><br><span class="line"><span class="function"><span class="params">              <span class="keyword">uv_stream_t</span>* stream,</span></span></span><br><span class="line"><span class="function"><span class="params">              <span class="keyword">const</span> <span class="keyword">uv_buf_t</span> bufs[],</span></span></span><br><span class="line"><span class="function"><span class="params">              <span class="keyword">unsigned</span> <span class="keyword">int</span> nbufs,</span></span></span><br><span class="line"><span class="function"><span class="params">              <span class="keyword">uv_stream_t</span>* send_handle,</span></span></span><br><span class="line"><span class="function"><span class="params">              uv_write_cb cb)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> empty_queue;</span><br><span class="line"></span><br><span class="line">  assert(nbufs &gt; <span class="number">0</span>);</span><br><span class="line">  assert((stream-&gt;type == UV_TCP ||</span><br><span class="line">          stream-&gt;type == UV_NAMED_PIPE ||</span><br><span class="line">          stream-&gt;type == UV_TTY) &amp;&amp;</span><br><span class="line">         <span class="string">"uv_write (unix) does not yet support other types of streams"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (uv__stream_fd(stream) &lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> UV_EBADF;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!(stream-&gt;flags &amp; UV_HANDLE_WRITABLE))</span><br><span class="line">    <span class="keyword">return</span> -EPIPE;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (send_handle) &#123;</span><br><span class="line">    <span class="keyword">if</span> (stream-&gt;type != UV_NAMED_PIPE || !((<span class="keyword">uv_pipe_t</span>*)stream)-&gt;ipc)</span><br><span class="line">      <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* XXX We abuse uv_write2() to send over UDP handles to child processes.</span></span><br><span class="line"><span class="comment">     * Don't call uv__stream_fd() on those handles, it's a macro that on OS X</span></span><br><span class="line"><span class="comment">     * evaluates to a function that operates on a uv_stream_t with a couple of</span></span><br><span class="line"><span class="comment">     * OS X specific fields. On other Unices it does (handle)-&gt;io_watcher.fd,</span></span><br><span class="line"><span class="comment">     * which works but only by accident.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">if</span> (uv__handle_fd((<span class="keyword">uv_handle_t</span>*) send_handle) &lt; <span class="number">0</span>)</span><br><span class="line">      <span class="keyword">return</span> UV_EBADF;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(__CYGWIN__) || defined(__MSYS__)</span></span><br><span class="line">    <span class="comment">/* Cygwin recvmsg always sets msg_controllen to zero, so we cannot send it.</span></span><br><span class="line"><span class="comment">       See https://github.com/mirror/newlib-cygwin/blob/86fc4bf0/winsup/cygwin/fhandler_socket.cc#L1736-L1743 */</span></span><br><span class="line">    <span class="keyword">return</span> UV_ENOSYS;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* It's legal for write_queue_size &gt; 0 even when the write_queue is empty;</span></span><br><span class="line"><span class="comment">   * it means there are error-state requests in the write_completed_queue that</span></span><br><span class="line"><span class="comment">   * will touch up write_queue_size later, see also uv__write_req_finish().</span></span><br><span class="line"><span class="comment">   * We could check that write_queue is empty instead but that implies making</span></span><br><span class="line"><span class="comment">   * a write() syscall when we know that the handle is in error mode.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  empty_queue = (stream-&gt;write_queue_size == <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Initialize the req */</span></span><br><span class="line">  uv__req_init(stream-&gt;loop, req, UV_WRITE);</span><br><span class="line">  req-&gt;cb = cb;</span><br><span class="line">  req-&gt;handle = stream;</span><br><span class="line">  req-&gt;error = <span class="number">0</span>;</span><br><span class="line">  req-&gt;send_handle = send_handle;</span><br><span class="line">  QUEUE_INIT(&amp;req-&gt;<span class="built_in">queue</span>);</span><br><span class="line"></span><br><span class="line">  req-&gt;bufs = req-&gt;bufsml;</span><br><span class="line">  <span class="keyword">if</span> (nbufs &gt; ARRAY_SIZE(req-&gt;bufsml))</span><br><span class="line">    req-&gt;bufs = uv__malloc(nbufs * <span class="keyword">sizeof</span>(bufs[<span class="number">0</span>]));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (req-&gt;bufs == <span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span> UV_ENOMEM;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">memcpy</span>(req-&gt;bufs, bufs, nbufs * <span class="keyword">sizeof</span>(bufs[<span class="number">0</span>]));</span><br><span class="line">  req-&gt;nbufs = nbufs;</span><br><span class="line">  req-&gt;write_index = <span class="number">0</span>;</span><br><span class="line">  stream-&gt;write_queue_size += uv__count_bufs(bufs, nbufs);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Append the request to write_queue. */</span></span><br><span class="line">  QUEUE_INSERT_TAIL(&amp;stream-&gt;write_queue, &amp;req-&gt;<span class="built_in">queue</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* If the queue was empty when this function began, we should attempt to</span></span><br><span class="line"><span class="comment">   * do the write immediately. Otherwise start the write_watcher and wait</span></span><br><span class="line"><span class="comment">   * for the fd to become writable.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">if</span> (stream-&gt;connect_req) &#123;</span><br><span class="line">    <span class="comment">/* Still connecting, do nothing. */</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (empty_queue) &#123;</span><br><span class="line">    uv__write(stream);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * blocking streams should never have anything in the queue.</span></span><br><span class="line"><span class="comment">     * if this assert fires then somehow the blocking stream isn't being</span></span><br><span class="line"><span class="comment">     * sufficiently flushed in uv__write.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    assert(!(stream-&gt;flags &amp; UV_HANDLE_BLOCKING_WRITES));</span><br><span class="line">    uv__io_start(stream-&gt;loop, &amp;stream-&gt;io_watcher, POLLOUT);</span><br><span class="line">    uv__stream_osx_interrupt_select(stream);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpYnV2L2xpYnV2L2Jsb2Ivdmlldy12MS4yOC4wL3NyYy91bml4L3N0cmVhbS5jI0wxNTAx" title="https://github.com/libuv/libuv/blob/view-v1.28.0/src/unix/stream.c#L1501">https://github.com/libuv/libuv/blob/view-v1.28.0/src/unix/stream.c#L1501<i class="fa fa-external-link"></i></span></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_try_write</span><span class="params">(<span class="keyword">uv_stream_t</span>* stream,</span></span></span><br><span class="line"><span class="function"><span class="params">                 <span class="keyword">const</span> <span class="keyword">uv_buf_t</span> bufs[],</span></span></span><br><span class="line"><span class="function"><span class="params">                 <span class="keyword">unsigned</span> <span class="keyword">int</span> nbufs)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> r;</span><br><span class="line">  <span class="keyword">int</span> has_pollout;</span><br><span class="line">  <span class="keyword">size_t</span> written;</span><br><span class="line">  <span class="keyword">size_t</span> req_size;</span><br><span class="line">  <span class="keyword">uv_write_t</span> req;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Connecting or already writing some data */</span></span><br><span class="line">  <span class="keyword">if</span> (stream-&gt;connect_req != <span class="literal">NULL</span> || stream-&gt;write_queue_size != <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> UV_EAGAIN;</span><br><span class="line"></span><br><span class="line">  has_pollout = uv__io_active(&amp;stream-&gt;io_watcher, POLLOUT);</span><br><span class="line"></span><br><span class="line">  r = uv_write(&amp;req, stream, bufs, nbufs, uv_try_write_cb);</span><br><span class="line">  <span class="keyword">if</span> (r != <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Remove not written bytes from write queue size */</span></span><br><span class="line">  written = uv__count_bufs(bufs, nbufs);</span><br><span class="line">  <span class="keyword">if</span> (req.bufs != <span class="literal">NULL</span>)</span><br><span class="line">    req_size = uv__write_req_size(&amp;req);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    req_size = <span class="number">0</span>;</span><br><span class="line">  written -= req_size;</span><br><span class="line">  stream-&gt;write_queue_size -= req_size;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Unqueue request, regardless of immediateness */</span></span><br><span class="line">  QUEUE_REMOVE(&amp;req.<span class="built_in">queue</span>);</span><br><span class="line">  uv__req_unregister(stream-&gt;loop, &amp;req);</span><br><span class="line">  <span class="keyword">if</span> (req.bufs != req.bufsml)</span><br><span class="line">    uv__free(req.bufs);</span><br><span class="line">  req.bufs = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Do not poll for writable, if we wasn't before calling this */</span></span><br><span class="line">  <span class="keyword">if</span> (!has_pollout) &#123;</span><br><span class="line">    uv__io_stop(stream-&gt;loop, &amp;stream-&gt;io_watcher, POLLOUT);</span><br><span class="line">    uv__stream_osx_interrupt_select(stream);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (written == <span class="number">0</span> &amp;&amp; req_size != <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> UV_EAGAIN;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> written;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di82LWxpYnV2LXN0cmVhbS5tZA==" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/6-libuv-stream.md">https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/6-libuv-stream.md<i class="fa fa-external-link"></i></span></p>
+<hr>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di82LWxpYnV2LXN0cmVhbS5tZA==" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/6-libuv-stream.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvbm9kZS5qcy9saWJ1di82LWxpYnV2LXN0cmVhbS5tZA==" title="https://github.com/liuyanjie/knowledge/edit/master/node.js/libuv/6-libuv-stream.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -655,35 +656,35 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer.md/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/1-libuv源码分析（二）事件循环（Eventloop）/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/0-libuv源码分析（一）全局概览（Overview）/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request.md/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/1-libuv-overview.md/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/4-libuv源码分析（五）IO观察者（io_watcher）/" rel="bookmark">libuv源码分析（五）IO观察者（io_watcher）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/7-libuv-async.md/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
       
     </li>
   
@@ -719,7 +720,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/5-libuv源码分析（六）流（Stream）/" title="libuv源码分析（六）流（Stream）">https://blog.butonly.com/posts/5-libuv源码分析（六）流（Stream）/</a>
+    <a href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/" title="libuv源码分析（六）流（Stream）">https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -749,7 +750,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/4-libuv源码分析（五）IO观察者（io_watcher）/" rel="next" title="libuv源码分析（五）IO观察者（io_watcher）">
+              <a href="/posts/node.js/libuv/5-libuv-io-watcher.md/" rel="next" title="libuv源码分析（五）IO观察者（io_watcher）">
                 <i class="fa fa-chevron-left"></i> libuv源码分析（五）IO观察者（io_watcher）
               </a>
             
@@ -759,7 +760,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/6-libuv源码分析（七）异步唤醒（Async）/" rel="prev" title="libuv源码分析（七）异步唤醒（Async）">
+              <a href="/posts/node.js/libuv/7-libuv-async.md/" rel="prev" title="libuv源码分析（七）异步唤醒（Async）">
                 libuv源码分析（七）异步唤醒（Async） <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1128,8 +1129,8 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://blog.butonly.com/posts/5-libuv源码分析（六）流（Stream）/";
-        this.page.identifier = "posts/5-libuv源码分析（六）流（Stream）/";
+        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream.md/";
+        this.page.identifier = "posts/node.js/libuv/6-libuv-stream.md/";
         this.page.title = 'libuv源码分析（六）流（Stream）';
         };
       function loadComments () {

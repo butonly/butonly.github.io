@@ -146,11 +146,11 @@
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（四）定时器（Timer）">
-<meta property="og:url" content="https://blog.butonly.com/posts/3-libuv源码分析（四）定时器（Timer）/index.html">
+<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/4-libuv-timer.md/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="在事件循环中，处理的一个 handle 就是计时器，通过 uv__run_timers，我们可以找到 timer.c 文件，里面包含了 timer 的实现。 先来看一下 uv__run_timers 的实现源码： https://github.com/libuv/libuv/blob/v1.28.0/src/timer.c#L158 123456789101112131415161718void">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T17:31:28.884Z">
+<meta property="og:updated_time" content="2019-07-23T07:01:17.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（四）定时器（Timer）">
 <meta name="twitter:description" content="在事件循环中，处理的一个 handle 就是计时器，通过 uv__run_timers，我们可以找到 timer.c 文件，里面包含了 timer 的实现。 先来看一下 uv__run_timers 的实现源码： https://github.com/libuv/libuv/blob/v1.28.0/src/timer.c#L158 123456789101112131415161718void">
@@ -162,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/posts/3-libuv源码分析（四）定时器（Timer）/">
+  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/4-libuv-timer.md/">
 
 
 
@@ -453,7 +453,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/3-libuv源码分析（四）定时器（Timer）/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/4-libuv-timer.md/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-24 01:31:28" itemprop="dateModified" datetime="2019-04-24T01:31:28+08:00">2019-04-24</time>
+                <time title="修改时间：2019-07-23 15:01:17" itemprop="dateModified" datetime="2019-07-23T15:01:17+08:00">2019-07-23</time>
               
             
           </span>
@@ -545,9 +545,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/3-libuv源码分析（四）定时器（Timer）/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/4-libuv-timer.md/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/3-libuv源码分析（四）定时器（Timer）/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/4-libuv-timer.md/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -599,7 +599,8 @@
 <h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_init</span><span class="params">(<span class="keyword">uv_loop_t</span>* loop, <span class="keyword">uv_timer_t</span>* handle)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_start</span><span class="params">(<span class="keyword">uv_timer_t</span>* handle, uv_timer_cb cb, <span class="keyword">uint64_t</span> timeout, <span class="keyword">uint64_t</span> repeat)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_stop</span><span class="params">(<span class="keyword">uv_timer_t</span>* handle)</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_again</span><span class="params">(<span class="keyword">uv_timer_t</span>* handle)</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uv_timer_set_repeat</span><span class="params">(<span class="keyword">uv_timer_t</span>* handle, <span class="keyword">uint64_t</span> repeat)</span></span></span><br><span class="line"><span class="function">uint64_t <span class="title">uv_timer_get_repeat</span><span class="params">(<span class="keyword">const</span> <span class="keyword">uv_timer_t</span>* handle)</span></span></span><br></pre></td></tr></table></figure>
 <p>uv_timer_t<br>void (<em>uv_timer_cb)(uv_timer_t</em> handle)</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_timer_init</span><span class="params">(<span class="keyword">uv_loop_t</span>* loop, <span class="keyword">uv_timer_t</span>* handle)</span> </span>&#123;</span><br><span class="line">  uv__handle_init(loop, (<span class="keyword">uv_handle_t</span>*)handle, UV_TIMER);</span><br><span class="line">  handle-&gt;timer_cb = <span class="literal">NULL</span>;</span><br><span class="line">  handle-&gt;repeat = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di80LWxpYnV2LXRpbWVyLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md">https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md<i class="fa fa-external-link"></i></span></p>
+<hr>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di80LWxpYnV2LXRpbWVyLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/4-libuv-timer.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvbm9kZS5qcy9saWJ1di80LWxpYnV2LXRpbWVyLm1k" title="https://github.com/liuyanjie/knowledge/edit/master/node.js/libuv/4-libuv-timer.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -613,35 +614,35 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/1-libuv源码分析（二）事件循环（Eventloop）/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request.md/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/0-libuv源码分析（一）全局概览（Overview）/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/1-libuv-overview.md/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/4-libuv源码分析（五）IO观察者（io_watcher）/" rel="bookmark">libuv源码分析（五）IO观察者（io_watcher）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/6-libuv-stream.md/" rel="bookmark">libuv源码分析（六）流（Stream）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/6-libuv源码分析（七）异步唤醒（Async）/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/7-libuv-async.md/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
       
     </li>
   
@@ -677,7 +678,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/3-libuv源码分析（四）定时器（Timer）/" title="libuv源码分析（四）定时器（Timer）">https://blog.butonly.com/posts/3-libuv源码分析（四）定时器（Timer）/</a>
+    <a href="https://blog.butonly.com/posts/node.js/libuv/4-libuv-timer.md/" title="libuv源码分析（四）定时器（Timer）">https://blog.butonly.com/posts/node.js/libuv/4-libuv-timer.md/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -707,7 +708,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" rel="next" title="libuv源码分析（三）资源抽象：Handle 和 Request">
+              <a href="/posts/node.js/libuv/3-libuv-handle-and-request.md/" rel="next" title="libuv源码分析（三）资源抽象：Handle 和 Request">
                 <i class="fa fa-chevron-left"></i> libuv源码分析（三）资源抽象：Handle 和 Request
               </a>
             
@@ -717,7 +718,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/4-libuv源码分析（五）IO观察者（io_watcher）/" rel="prev" title="libuv源码分析（五）IO观察者（io_watcher）">
+              <a href="/posts/node.js/libuv/5-libuv-io-watcher.md/" rel="prev" title="libuv源码分析（五）IO观察者（io_watcher）">
                 libuv源码分析（五）IO观察者（io_watcher） <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1086,8 +1087,8 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://blog.butonly.com/posts/3-libuv源码分析（四）定时器（Timer）/";
-        this.page.identifier = "posts/3-libuv源码分析（四）定时器（Timer）/";
+        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/4-libuv-timer.md/";
+        this.page.identifier = "posts/node.js/libuv/4-libuv-timer.md/";
         this.page.title = 'libuv源码分析（四）定时器（Timer）';
         };
       function loadComments () {

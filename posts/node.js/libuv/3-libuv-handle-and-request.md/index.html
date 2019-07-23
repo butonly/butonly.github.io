@@ -146,11 +146,11 @@
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（三）资源抽象：Handle 和 Request">
-<meta property="og:url" content="https://blog.butonly.com/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/index.html">
+<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/3-libuv-handle-and-request.md/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="Handle 是 libuv 设计实现的核心部分之一，根据官方描述：Handles 代表长生命周期的对象有能力执行某些操作当它们处于激活状态下。 libuv 采用了组合的方式实现代码复用，并且达到了面向对象编程中的继承的效果。 Handle 有很多种不同的类型，这些类型有一个共同的、公共的基础结构 uv_handle_s，因结构体内存布局字节对齐所有子类型都可以强制类型转换成 uv_handle_">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T17:31:28.883Z">
+<meta property="og:updated_time" content="2019-07-23T07:01:17.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（三）资源抽象：Handle 和 Request">
 <meta name="twitter:description" content="Handle 是 libuv 设计实现的核心部分之一，根据官方描述：Handles 代表长生命周期的对象有能力执行某些操作当它们处于激活状态下。 libuv 采用了组合的方式实现代码复用，并且达到了面向对象编程中的继承的效果。 Handle 有很多种不同的类型，这些类型有一个共同的、公共的基础结构 uv_handle_s，因结构体内存布局字节对齐所有子类型都可以强制类型转换成 uv_handle_">
@@ -162,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/">
+  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/3-libuv-handle-and-request.md/">
 
 
 
@@ -453,7 +453,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/3-libuv-handle-and-request.md/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-24 01:31:28" itemprop="dateModified" datetime="2019-04-24T01:31:28+08:00">2019-04-24</time>
+                <time title="修改时间：2019-07-23 15:01:17" itemprop="dateModified" datetime="2019-07-23T15:01:17+08:00">2019-07-23</time>
               
             
           </span>
@@ -545,9 +545,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/3-libuv-handle-and-request.md/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/3-libuv-handle-and-request.md/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -762,7 +762,8 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uv__req_register(loop, req)                                           \</span></span><br><span class="line">  <span class="keyword">do</span> &#123;                                                                        \</span><br><span class="line">    (loop)-&gt;active_reqs.count++;                                              \</span><br><span class="line">  &#125;                                                                           \</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uv__req_unregister(loop, req)                                         \</span></span><br><span class="line">  <span class="keyword">do</span> &#123;                                                                        \</span><br><span class="line">    assert(uv__has_active_reqs(loop));                                        \</span><br><span class="line">    (loop)-&gt;active_reqs.count--;                                              \</span><br><span class="line">  &#125;                                                                           \</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <p><code>uv__req_init</code> 初始化了 <code>request</code> 的类型，并通过 <code>uv__req_register</code> 更新 <code>request</code> 的引用计数，也可以通过 <code>uv__req_unregister</code> 反注册。</p>
 <p><code>request</code> 的更多内容，将在后续的分析中结合相关功能继续介绍。 </p>
-<p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di8zLWxpYnV2LWhhbmRsZS1hbmQtcmVxdWVzdC5tZA==" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/3-libuv-handle-and-request.md">https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/3-libuv-handle-and-request.md<i class="fa fa-external-link"></i></span></p>
+<hr>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di8zLWxpYnV2LWhhbmRsZS1hbmQtcmVxdWVzdC5tZA==" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/3-libuv-handle-and-request.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvbm9kZS5qcy9saWJ1di8zLWxpYnV2LWhhbmRsZS1hbmQtcmVxdWVzdC5tZA==" title="https://github.com/liuyanjie/knowledge/edit/master/node.js/libuv/3-libuv-handle-and-request.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -776,35 +777,35 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/1-libuv源码分析（二）事件循环（Eventloop）/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer.md/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/0-libuv源码分析（一）全局概览（Overview）/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/1-libuv-overview.md/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/4-libuv源码分析（五）IO观察者（io_watcher）/" rel="bookmark">libuv源码分析（五）IO观察者（io_watcher）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/6-libuv-stream.md/" rel="bookmark">libuv源码分析（六）流（Stream）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/6-libuv源码分析（七）异步唤醒（Async）/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/7-libuv-async.md/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
       
     </li>
   
@@ -840,7 +841,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" title="libuv源码分析（三）资源抽象：Handle 和 Request">https://blog.butonly.com/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/</a>
+    <a href="https://blog.butonly.com/posts/node.js/libuv/3-libuv-handle-and-request.md/" title="libuv源码分析（三）资源抽象：Handle 和 Request">https://blog.butonly.com/posts/node.js/libuv/3-libuv-handle-and-request.md/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -870,7 +871,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/1-libuv源码分析（二）事件循环（Eventloop）/" rel="next" title="libuv源码分析（二）事件循环（Eventloop）">
+              <a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="next" title="libuv源码分析（二）事件循环（Eventloop）">
                 <i class="fa fa-chevron-left"></i> libuv源码分析（二）事件循环（Eventloop）
               </a>
             
@@ -880,7 +881,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="prev" title="libuv源码分析（四）定时器（Timer）">
+              <a href="/posts/node.js/libuv/4-libuv-timer.md/" rel="prev" title="libuv源码分析（四）定时器（Timer）">
                 libuv源码分析（四）定时器（Timer） <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1249,8 +1250,8 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://blog.butonly.com/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/";
-        this.page.identifier = "posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/";
+        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/3-libuv-handle-and-request.md/";
+        this.page.identifier = "posts/node.js/libuv/3-libuv-handle-and-request.md/";
         this.page.title = 'libuv源码分析（三）资源抽象：Handle 和 Request';
         };
       function loadComments () {

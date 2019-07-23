@@ -146,11 +146,11 @@
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（八）线程池（Threadpool）">
-<meta property="og:url" content="https://blog.butonly.com/posts/7-libuv源码分析（八）线程池（Threadpool）/index.html">
+<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/8-libuv-threadpool.md/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="http://docs.libuv.org/en/v1.x/threadpool.html http://docs.libuv.org/en/v1.x/dns.html  线程池在程序设计中是常用的提升并发计算能力、提升吞吐量的常用手段，在 libnv 也不例外，并且结合事件循环，实现了异步支持。 libuv 提供可用于执行用户代码的线程池，并且能够在任务完成时，向事件循环线程发送消息通知主线程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T17:31:28.887Z">
+<meta property="og:updated_time" content="2019-07-23T07:01:17.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（八）线程池（Threadpool）">
 <meta name="twitter:description" content="http://docs.libuv.org/en/v1.x/threadpool.html http://docs.libuv.org/en/v1.x/dns.html  线程池在程序设计中是常用的提升并发计算能力、提升吞吐量的常用手段，在 libnv 也不例外，并且结合事件循环，实现了异步支持。 libuv 提供可用于执行用户代码的线程池，并且能够在任务完成时，向事件循环线程发送消息通知主线程">
@@ -162,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/posts/7-libuv源码分析（八）线程池（Threadpool）/">
+  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/8-libuv-threadpool.md/">
 
 
 
@@ -453,7 +453,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/7-libuv源码分析（八）线程池（Threadpool）/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/8-libuv-threadpool.md/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-24 01:31:28" itemprop="dateModified" datetime="2019-04-24T01:31:28+08:00">2019-04-24</time>
+                <time title="修改时间：2019-07-23 15:01:17" itemprop="dateModified" datetime="2019-07-23T15:01:17+08:00">2019-07-23</time>
               
             
           </span>
@@ -545,9 +545,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/7-libuv源码分析（八）线程池（Threadpool）/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/8-libuv-threadpool.md/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/7-libuv源码分析（八）线程池（Threadpool）/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/8-libuv-threadpool.md/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -637,7 +637,8 @@
 </ol>
 <p>在接口使用中，是不需要太关心以上流程和工作原理的，更应该关系 <code>work_cb</code> 和 <code>after_work_cb</code> 以及其他逻辑的实现。</p>
 <h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>线程池在 libuv 内部用于完成所有文件系统操作（<code>requests</code>），也用于实现 <code>getaddrinfo</code> 和 <code>getnameinfo</code> 等 DNS 相关的操作（<code>requests</code>）。搜索 <code>uv_queue_work</code> 可找到相关使用位置。可以这些内部实现作为使用示例，在内部，并不通过 <code>uv_queue_work</code> 提交任务，而是直接调用 <code>uv__work_submit</code>，因为它们都有各自不同的 <code>uv__x_work</code> 和 <code>uv__x_done</code> 实现。</p>
-<p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di84LWxpYnV2LXRocmVhZHBvb2wubWQ=" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/8-libuv-threadpool.md">https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/8-libuv-threadpool.md<i class="fa fa-external-link"></i></span></p>
+<hr>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di84LWxpYnV2LXRocmVhZHBvb2wubWQ=" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/8-libuv-threadpool.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvbm9kZS5qcy9saWJ1di84LWxpYnV2LXRocmVhZHBvb2wubWQ=" title="https://github.com/liuyanjie/knowledge/edit/master/node.js/libuv/8-libuv-threadpool.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -651,35 +652,35 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer.md/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/1-libuv源码分析（二）事件循环（Eventloop）/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/0-libuv源码分析（一）全局概览（Overview）/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request.md/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/1-libuv-overview.md/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/4-libuv源码分析（五）IO观察者（io_watcher）/" rel="bookmark">libuv源码分析（五）IO观察者（io_watcher）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/6-libuv-stream.md/" rel="bookmark">libuv源码分析（六）流（Stream）</a></div>
       
     </li>
   
@@ -715,7 +716,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/7-libuv源码分析（八）线程池（Threadpool）/" title="libuv源码分析（八）线程池（Threadpool）">https://blog.butonly.com/posts/7-libuv源码分析（八）线程池（Threadpool）/</a>
+    <a href="https://blog.butonly.com/posts/node.js/libuv/8-libuv-threadpool.md/" title="libuv源码分析（八）线程池（Threadpool）">https://blog.butonly.com/posts/node.js/libuv/8-libuv-threadpool.md/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -745,7 +746,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/6-libuv源码分析（七）异步唤醒（Async）/" rel="next" title="libuv源码分析（七）异步唤醒（Async）">
+              <a href="/posts/node.js/libuv/7-libuv-async.md/" rel="next" title="libuv源码分析（七）异步唤醒（Async）">
                 <i class="fa fa-chevron-left"></i> libuv源码分析（七）异步唤醒（Async）
               </a>
             
@@ -1120,8 +1121,8 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://blog.butonly.com/posts/7-libuv源码分析（八）线程池（Threadpool）/";
-        this.page.identifier = "posts/7-libuv源码分析（八）线程池（Threadpool）/";
+        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/8-libuv-threadpool.md/";
+        this.page.identifier = "posts/node.js/libuv/8-libuv-threadpool.md/";
         this.page.title = 'libuv源码分析（八）线程池（Threadpool）';
         };
       function loadComments () {

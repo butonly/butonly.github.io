@@ -146,11 +146,11 @@
 <meta name="keywords" content="libuv,node.js,eventloop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libuv源码分析（七）异步唤醒（Async）">
-<meta property="og:url" content="https://blog.butonly.com/posts/6-libuv源码分析（七）异步唤醒（Async）/index.html">
+<meta property="og:url" content="https://blog.butonly.com/posts/node.js/libuv/7-libuv-async.md/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="Async 允许用户在其他线程中唤醒主事件循环线程并触发回调函数调用。 事件循环线程在运行到 Pool 阶段会因为 epoll_pwait 调用阻塞一定的时间，libuv 会根据事件循环信息预估阻塞多长时间合适，也就是 timeout。但是在某些情境下，libuv 是无法准确预估的，例如线程池支持的异步文件操作，这些其他线程中的任务是无法有效判断多久能够运行完成的，在 libuv 中，其他线程工作">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-23T17:31:28.886Z">
+<meta property="og:updated_time" content="2019-07-23T07:01:17.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（七）异步唤醒（Async）">
 <meta name="twitter:description" content="Async 允许用户在其他线程中唤醒主事件循环线程并触发回调函数调用。 事件循环线程在运行到 Pool 阶段会因为 epoll_pwait 调用阻塞一定的时间，libuv 会根据事件循环信息预估阻塞多长时间合适，也就是 timeout。但是在某些情境下，libuv 是无法准确预估的，例如线程池支持的异步文件操作，这些其他线程中的任务是无法有效判断多久能够运行完成的，在 libuv 中，其他线程工作">
@@ -162,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/posts/6-libuv源码分析（七）异步唤醒（Async）/">
+  <link rel="canonical" href="https://blog.butonly.com/posts/node.js/libuv/7-libuv-async.md/">
 
 
 
@@ -453,7 +453,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/6-libuv源码分析（七）异步唤醒（Async）/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/7-libuv-async.md/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-24 01:31:28" itemprop="dateModified" datetime="2019-04-24T01:31:28+08:00">2019-04-24</time>
+                <time title="修改时间：2019-07-23 15:01:17" itemprop="dateModified" datetime="2019-07-23T15:01:17+08:00">2019-07-23</time>
               
             
           </span>
@@ -545,9 +545,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/6-libuv源码分析（七）异步唤醒（Async）/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/7-libuv-async.md/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/6-libuv源码分析（七）异步唤醒（Async）/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/7-libuv-async.md/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -616,7 +616,8 @@
 <p><code>uv_async_send</code> 可能在多个线程中同时调用，而且有可能在同一个 Async Handle 上调用，所以要求对 <code>handle-&gt;pending</code> 进行原子性读写。</p>
 <p><code>uv__async_send</code> 为实际进行写操作，因为管道中存在缓存区，所以需要不断的向 <code>loop-&gt;async_wfd</code> 写入数据，直到阻塞为止。</p>
 <p>以上，就是 Async 唤醒事件循环线程的实现方式，很简单，核心在于竞态问题的解决。</p>
-<p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di83LWxpYnV2LWFzeW5jLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/7-libuv-async.md">https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/7-libuv-async.md<i class="fa fa-external-link"></i></span></p>
+<hr>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvbm9kZS5qcy9saWJ1di83LWxpYnV2LWFzeW5jLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/node.js/libuv/7-libuv-async.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvbm9kZS5qcy9saWJ1di83LWxpYnV2LWFzeW5jLm1k" title="https://github.com/liuyanjie/knowledge/edit/master/node.js/libuv/7-libuv-async.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
 
       
     </div>
@@ -630,35 +631,35 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/2-libuv源码分析（三）资源抽象：Handle 和 Request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer.md/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/1-libuv源码分析（二）事件循环（Eventloop）/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop.md/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/0-libuv源码分析（一）全局概览（Overview）/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request.md/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/3-libuv源码分析（四）定时器（Timer）/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/1-libuv-overview.md/" rel="bookmark">libuv源码分析（一）全局概览（Overview）</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/4-libuv源码分析（五）IO观察者（io_watcher）/" rel="bookmark">libuv源码分析（五）IO观察者（io_watcher）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/6-libuv-stream.md/" rel="bookmark">libuv源码分析（六）流（Stream）</a></div>
       
     </li>
   
@@ -694,7 +695,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/6-libuv源码分析（七）异步唤醒（Async）/" title="libuv源码分析（七）异步唤醒（Async）">https://blog.butonly.com/posts/6-libuv源码分析（七）异步唤醒（Async）/</a>
+    <a href="https://blog.butonly.com/posts/node.js/libuv/7-libuv-async.md/" title="libuv源码分析（七）异步唤醒（Async）">https://blog.butonly.com/posts/node.js/libuv/7-libuv-async.md/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -724,7 +725,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/5-libuv源码分析（六）流（Stream）/" rel="next" title="libuv源码分析（六）流（Stream）">
+              <a href="/posts/node.js/libuv/6-libuv-stream.md/" rel="next" title="libuv源码分析（六）流（Stream）">
                 <i class="fa fa-chevron-left"></i> libuv源码分析（六）流（Stream）
               </a>
             
@@ -734,7 +735,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/7-libuv源码分析（八）线程池（Threadpool）/" rel="prev" title="libuv源码分析（八）线程池（Threadpool）">
+              <a href="/posts/node.js/libuv/8-libuv-threadpool.md/" rel="prev" title="libuv源码分析（八）线程池（Threadpool）">
                 libuv源码分析（八）线程池（Threadpool） <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -1077,8 +1078,8 @@
   
     <script>
       var disqus_config = function () {
-        this.page.url = "https://blog.butonly.com/posts/6-libuv源码分析（七）异步唤醒（Async）/";
-        this.page.identifier = "posts/6-libuv源码分析（七）异步唤醒（Async）/";
+        this.page.url = "https://blog.butonly.com/posts/node.js/libuv/7-libuv-async.md/";
+        this.page.identifier = "posts/node.js/libuv/7-libuv-async.md/";
         this.page.title = 'libuv源码分析（七）异步唤醒（Async）';
         };
       function loadComments () {
