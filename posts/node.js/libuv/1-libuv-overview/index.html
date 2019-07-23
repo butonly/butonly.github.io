@@ -15,7 +15,7 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -154,7 +154,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/http://docs.libuv.org/en/v1.x/_images/loop_iteration.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/https://i3.wp.com/upload-images.jianshu.io/upload_images/5618238-eaf3e05931531d7e.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/https://cdn-images-1.medium.com/max/1600/0*XTYvSNj_rT2UZwfm.png">
-<meta property="og:updated_time" content="2019-07-23T08:32:42.642Z">
+<meta property="og:updated_time" content="2019-07-23T08:54:11.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（一）全局概览（Overview）">
 <meta name="twitter:description" content="简介libuv 是一个专注于异步I/O的跨平台的程序库，它主要是用于支持 Node.js，但是也被如 Luvit、Julia、pyuv 等很多其他的库使用。它使得 异步I/O 变的简单。 libuv 对于经常接触 c 语言程序开发的开发人员来说，应该是非常容易的，但是对于没有没有相关经验的开发人员来说，阅读源码就比较吃力了，但是如果能阅读并理解 libuv，才能更深入的了解 Node.js 是怎样">
@@ -236,7 +236,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -246,7 +246,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta">
     
@@ -453,20 +453,20 @@
     <div class="reading-progress-bar"></div>
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview/">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lyj">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/avatar.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="lyj's blog">
     </span>
 
@@ -518,7 +518,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:54:11" itemprop="dateModified" datetime="2019-07-23T16:54:11+08:00">2019-07-23</time>
               
             
           </span>
@@ -535,7 +535,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
 
                 
                 
@@ -641,7 +641,7 @@
 <p><code>Event-Loop</code> 和 <code>Async I/O</code> 是实现高性能I/O的常见手段，这些都始于 <code>C10k</code> 问题，单服务器同时服务 10000 个客户端，当然现在远不止这些了。早期的服务器是基于进程/线程模型，每新来一个连接，就分配一个进程（线程）去处理这个连接，这是一个非常大的开销，容易达到系统软硬件瓶颈，另外，进程/线程切换上下文的成本也非常高。</p>
 <p>一般而言，大多数网络应用服务器端软件都是I/O密集型系统，服务器系统大部分的时间都花费在等待数据的输入输出上了，而不是计算，如果CPU把时间花在等待I/O操作上，就白白浪费了CPU的处理能力了，更重要的是，此时可能还有大量的客户端请求需要处理，而CPU却在等待I/O无法脱身。最终，以此方式工作的服务器吞吐量极低，需要更多的服务支撑业务，导致成本升高。</p>
 <p>为了充分利用CPU的计算能力，就需要避免让CPU等待I/O操作完成能够抽出身来做其他工作，例如，接收更多请求，等I/O操作完成之后再来进一步处理。这就有了 非阻塞I/O。异步I/O给编程带来了一定的麻烦，因为同步思维对于人来说更自然、更容易，也不易于调试，但是实际上限时世界原本偏向异步的。如何在I/O操作完成后能够让CPU回来继续完成工作也需要更复杂的流程逻辑控制，这些都带来了一定的设计难度。不过幸好，聪明的开发者设计了 <code>Event-Driven</code> 编程模型解决了此问题。基于此模型，也衍生出高性能IO常见实现模式：<code>Reactor</code> 模式，该模式有很多变体。Redis、Nginx、Netty、java.NIO都采用类似的模式来解决高并发的问题，libuv 自然也不例外，实现了事件驱动的异步IO。<code>Reactor</code> 模式采用同步I/O，<code>Proactor</code> 是一个采用异步I/O的模式。</p>
-<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/https://i3.wp.com/upload-images.jianshu.io/upload_images/5618238-eaf3e05931531d7e.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/https://i3.wp.com/upload-images.jianshu.io/upload_images/5618238-eaf3e05931531d7e.png" alt></p>
 <p>该部分内容参考：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRXZlbnQtZHJpdmVu" title="https://en.wikipedia.org/wiki/Event-driven">https://en.wikipedia.org/wiki/Event-driven<i class="fa fa-external-link"></i></span></li>
@@ -675,8 +675,10 @@
 <li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvOTQzMzg2NC93aGF0cy10aGUtZGlmZmVyZW5jZS1iZXR3ZWVuLWxpYmV2LWFuZC1saWJldmVudA==" title="https://stackoverflow.com/questions/9433864/whats-the-difference-between-libev-and-libevent">whats-the-difference-between-libev-and-libevent<i class="fa fa-external-link"></i></span></li>
 </ul>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout v1<span class="number">.28</span><span class="number">.0</span></span><br><span class="line">Previous HEAD position was a4fc9a66 <span class="number">2019.03</span><span class="number">.17</span>, Version <span class="number">1.27</span><span class="number">.0</span> (Stable)</span><br><span class="line">HEAD is now at <span class="number">7b</span>f8fabf <span class="number">2019.04</span><span class="number">.16</span>, Version <span class="number">1.28</span><span class="number">.0</span> (Stable)</span><br></pre></td></tr></table></figure>
+
 <h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>以下为源码的文件结构，删掉了无关的部分</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">$ tree</span><br><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── docs/</span><br><span class="line">├── include</span><br><span class="line">│   ├── uv</span><br><span class="line">│   │   ├── aix.h</span><br><span class="line">│   │   ├── android-ifaddrs.h</span><br><span class="line">│   │   ├── bsd.h</span><br><span class="line">│   │   ├── darwin.h</span><br><span class="line">│   │   ├── errno.h</span><br><span class="line">│   │   ├── linux.h</span><br><span class="line">│   │   ├── os390.h</span><br><span class="line">│   │   ├── posix.h</span><br><span class="line">│   │   ├── stdint-msvc2008.h</span><br><span class="line">│   │   ├── sunos.h</span><br><span class="line">│   │   ├── threadpool.h</span><br><span class="line">│   │   ├── tree.h</span><br><span class="line">│   │   ├── unix.h</span><br><span class="line">│   │   ├── version.h</span><br><span class="line">│   │   └── win.h</span><br><span class="line">│   └── uv.h</span><br><span class="line">├── src</span><br><span class="line">│   ├── fs-poll.c</span><br><span class="line">│   ├── heap-inl.h</span><br><span class="line">│   ├── idna.c</span><br><span class="line">│   ├── idna.h</span><br><span class="line">│   ├── inet.c</span><br><span class="line">│   ├── queue.h</span><br><span class="line">│   ├── strscpy.c</span><br><span class="line">│   ├── strscpy.h</span><br><span class="line">│   ├── threadpool.c</span><br><span class="line">│   ├── timer.c</span><br><span class="line">│   ├── uv-common.c</span><br><span class="line">│   ├── uv-common.h</span><br><span class="line">│   ├── uv-data-getter-setters.c</span><br><span class="line">│   ├── version.c</span><br><span class="line">│   ├── unix/</span><br><span class="line">│   └── win/</span><br><span class="line">├── <span class="built_in">test</span>/</span><br><span class="line">├── samples/</span><br><span class="line">├── uv.gyp</span><br><span class="line">└── vcbuild.bat</span><br></pre></td></tr></table></figure>
+
 <p>源码主要存在于以下几个目录：</p>
 <ul>
 <li><p><code>include</code>：存放 <code>.h</code> 文件，这些文件主要用于对外暴露 <code>c</code> API</p>
@@ -702,7 +704,8 @@
 </li>
 <li><p><code>test</code>：存放一些 单元测试 代码，这里面的很多代码可以作为参考示例</p>
 </li>
-<li><code>samples</code>：存放 示例代码，其中 <code>samples/socks5-proxy</code> 是一个基于 <code>libuv</code> 实现的 <code>sock5</code> 代理</li>
+<li><p><code>samples</code>：存放 示例代码，其中 <code>samples/socks5-proxy</code> 是一个基于 <code>libuv</code> 实现的 <code>sock5</code> 代理</p>
+</li>
 </ul>
 <h3 id="命名风格"><a href="#命名风格" class="headerlink" title="命名风格"></a>命名风格</h3><p>libuv 所有函数、结构体都采用了统一的前缀 <code>uv_</code>，名称格式为：<code>uv_ + name</code>，<code>name</code> 可以以下划线开头，表示内部成员，例如：</p>
 <ul>
@@ -710,13 +713,15 @@
 <li>内部名称：<code>uv__io_t = uv_ + _io_t</code> <code>uv__io_poll = uv_ + _io_poll</code></li>
 </ul>
 <h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>libuv 中的数据结构（队列，堆）采用被称为<code>侵入式</code>的实现方式实现，下图为 Linux 内核 <code>/include/linux/list.h</code> 的实现示意图：</p>
-<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/https://cdn-images-1.medium.com/max/1600/0*XTYvSNj_rT2UZwfm.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/https://cdn-images-1.medium.com/max/1600/0*XTYvSNj_rT2UZwfm.png" alt></p>
 <p>该队列与通常实现最大的不同是兄弟节点指针 <code>prev</code> 和 <code>next</code> 存储的并发数据结构首地址，而是队列节点（数据结构某个成员）的地址，图中是 <code>list_head</code>，如果需要拿到完整的数据结构，需要获得数据结构的首地址，已知条件是已知 <code>list_head</code> 的地址，<code>c</code> 语言程序中结构体的内存布局是对齐的，所以可以计算出 <code>list_head</code> 相对数据结构首地址的偏移量，这样就可以算出数据结构首地址了，<code>container_of</code> 就是完成这一换算的。这种方式实现的数据结构，图中 <code>data structure 1</code>、<code>data structure 2</code>、<code>data structure 3</code> 可以是不同的类型，所以这种方式实现的数据结构可以很通用。</p>
 <p><code>container_of</code> 定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> container_of(ptr, type, member) \</span></span><br><span class="line">  ((type *) ((<span class="keyword">char</span> *) (ptr) - offsetof(type, member)))</span><br></pre></td></tr></table></figure>
+
 <p>在 linux 内核中也定义了这个宏，但是略微不同，宏定义如下：</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LmdpdC90cmVlL2luY2x1ZGUvbGludXgva2VybmVsLmg/aWQ9cmVmcy90YWdzL3Y0LjEwLjEzI244NDI=" title="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/include/linux/kernel.h?id=refs/tags/v4.10.13#n842">https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/include/linux/kernel.h?id=refs/tags/v4.10.13#n842<i class="fa fa-external-link"></i></span></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * container_of - cast a member of a structure out to the containing structure</span></span><br><span class="line"><span class="comment"> * @ptr:        the pointer to the member.</span></span><br><span class="line"><span class="comment"> * @type:       the type of the container struct this is embedded in.</span></span><br><span class="line"><span class="comment"> * @member:     the name of the member within the struct.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> container_of(ptr, type, member) (&#123;                      \</span></span><br><span class="line">        <span class="function"><span class="keyword">const</span> <span class="title">typeof</span><span class="params">( ((type *)<span class="number">0</span>)-&gt;member )</span> *__mptr </span>= (ptr);    \</span><br><span class="line">        (type *)( (<span class="keyword">char</span> *)__mptr - offsetof(type,member) );&#125;)</span><br></pre></td></tr></table></figure>
+
 <p>关于 <code>container_of</code> 的实现原理可参考：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vaWRvcmF4L3AvNjc5Njg5Ny5odG1s" title="https://www.cnblogs.com/idorax/p/6796897.html">typeof, offsetof 和container_of<i class="fa fa-external-link"></i></span></li>
@@ -737,21 +742,21 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/3-libuv-handle-and-request/" rel="bookmark">libuv源码分析（三）资源抽象：Handle 和 Request</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
       <div class="popular-posts-title"><a href="/posts/node.js/libuv/4-libuv-timer/" rel="bookmark">libuv源码分析（四）定时器（Timer）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/7-libuv-async/" rel="bookmark">libuv源码分析（七）异步唤醒（Async）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/2-libuv-event-loop/" rel="bookmark">libuv源码分析（二）事件循环（Eventloop）</a></div>
       
     </li>
   
@@ -765,7 +770,7 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/posts/node.js/libuv/5-libuv-io-watcher/" rel="bookmark">libuv源码分析（五）IO观察者（io_watcher）</a></div>
+      <div class="popular-posts-title"><a href="/posts/node.js/libuv/8-libuv-threadpool/" rel="bookmark">libuv源码分析（八）线程池（Threadpool）</a></div>
       
     </li>
   
@@ -903,7 +908,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="/avatar.png" alt="lyj">
             
@@ -1071,7 +1076,7 @@
 </div>
 
 
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.8.0</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
 
 
 
