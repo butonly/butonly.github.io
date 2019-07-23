@@ -150,17 +150,17 @@
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://blog.butonly.com/posts/vcs/git/git-object-model/images/object-blob.png">
-<meta property="og:image" content="https://blog.butonly.com/posts/vcs/git/git-object-model/images/object-tree.png">
-<meta property="og:image" content="https://blog.butonly.com/posts/vcs/git/git-object-model/images/object-commit.png">
-<meta property="og:image" content="https://blog.butonly.com/posts/vcs/git/git-object-model/images/object-tag.png">
-<meta property="og:image" content="https://blog.butonly.com/posts/vcs/git/git-object-model/images/object-c-t-b.png">
-<meta property="og:image" content="https://blog.butonly.com/posts/vcs/git/git-object-model/images/git-obj-model.png">
-<meta property="og:updated_time" content="2019-07-23T07:48:36.058Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tree.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-commit.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tag.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-c-t-b.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png">
+<meta property="og:updated_time" content="2019-07-23T08:32:42.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git对象模型">
 <meta name="twitter:description" content="Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
-<meta name="twitter:image" content="https://blog.butonly.com/posts/vcs/git/git-object-model/images/object-blob.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
 
 
 
@@ -520,7 +520,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -600,18 +600,18 @@
 <p>有四种类型的对象：<code>&quot;blob&quot;</code>、<code>&quot;tree&quot;</code>、<code>&quot;commit&quot;</code> 和 <code>&quot;tag&quot;</code>。</p>
 <p>几乎所有的Git功能都是使用这四个简单的对象类型来完成的。它就像是在你本机的文件系统之上构建一个小的文件系统。</p>
 <h4 id="blob-文件-对象"><a href="#blob-文件-对象" class="headerlink" title="blob (文件) 对象"></a>blob (文件) 对象</h4><p><code>blob</code> 用来存储文件数据，通常是一个文件。</p>
-<p><img src="images/object-blob.png" alt="blob"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png" alt="blob"></p>
 <h4 id="tree-目录-对象"><a href="#tree-目录-对象" class="headerlink" title="tree (目录) 对象"></a>tree (目录) 对象</h4><p><code>tree</code> 像一个目录，管理 <code>tree（子目录）</code> 或 <code>blob（文件）</code></p>
-<p><img src="images/object-tree.png" alt="tree"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tree.png" alt="tree"></p>
 <h4 id="commit-提交-对象"><a href="#commit-提交-对象" class="headerlink" title="commit (提交) 对象"></a>commit (提交) 对象</h4><p>一个 <code>commit</code> 只指向一个 <code>tree</code>，它用来标记项目某一个特定时间点的状态。<code>commit</code> 保存了树根的 <code>对象名</code>。</p>
 <p>它包括一些关于时间点的元数据，如 <code>时间戳</code>、<code>最近一次提交的作者</code>、<code>指向上次提交（commits）的指针</code> 等等。</p>
-<p><img src="images/object-commit.png" alt="tree"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-commit.png" alt="tree"></p>
 <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p <span class="number">830</span>f<span class="number">4857e9</span>f<span class="number">579818</span><span class="keyword">c</span><span class="number">5e69104</span>d<span class="number">3e2</span><span class="keyword">cc</span><span class="number">30</span>f<span class="number">1</span>f<span class="number">0</span>d<span class="number">0</span>d</span><br><span class="line">tree f<span class="number">25061</span>fa<span class="number">4</span>f<span class="number">8</span>b<span class="number">3</span>bffbf<span class="number">8</span>ebcc<span class="number">3</span>ab<span class="number">2351</span>efdad<span class="number">2</span>f<span class="number">605</span></span><br><span class="line">parent <span class="number">06e13701</span>ac<span class="number">86</span>eb<span class="number">09</span><span class="keyword">c</span><span class="number">2035329</span>a<span class="number">5e1</span><span class="keyword">c</span><span class="number">18</span>f<span class="number">95898</span>cf<span class="number">2</span></span><br><span class="line">author liuyanjie &lt;<span class="keyword">x</span><span class="title">@gmail.com</span>&gt; <span class="number">1526828841</span> +<span class="number">0800</span></span><br><span class="line">committer liuyanjie &lt;<span class="keyword">x</span><span class="title">@gmail.com</span>&gt; <span class="number">1526828841</span> +<span class="number">0800</span></span><br><span class="line"></span><br><span class="line">commit message</span><br></pre></td></tr></table></figure>
-<h4 id="tag-标签-对象"><a href="#tag-标签-对象" class="headerlink" title="tag (标签) 对象"></a>tag (标签) 对象</h4><p><img src="images/object-tag.png" alt="tag"></p>
+<h4 id="tag-标签-对象"><a href="#tag-标签-对象" class="headerlink" title="tag (标签) 对象"></a>tag (标签) 对象</h4><p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tag.png" alt="tag"></p>
 <p>一个 <code>tag</code> 是来标记某一个 <code>commit</code> 的方法。</p>
 <p>实际上 <code>tag</code> 本身是文件名，内容是 <code>commit</code> 的对象名。<code>tag</code> 是 <code>commit</code> 的别名，类似于域名和ip地址的关系。</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/tags/v0<span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="number">830</span>f4857e9f579818c5e69104d3e2cc30f1f0d0d</span><br></pre></td></tr></table></figure>
-<h4 id="commit-gt-tree-gt-blob"><a href="#commit-gt-tree-gt-blob" class="headerlink" title="commit -&gt; tree -&gt; blob"></a>commit -&gt; tree -&gt; blob</h4><p><img src="images/object-c-t-b.png" alt="object-c-t-b"></p>
+<h4 id="commit-gt-tree-gt-blob"><a href="#commit-gt-tree-gt-blob" class="headerlink" title="commit -&gt; tree -&gt; blob"></a>commit -&gt; tree -&gt; blob</h4><p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-c-t-b.png" alt="object-c-t-b"></p>
 <p>从图上可以看出：一个 <code>commit</code> 指向了一棵由 <code>tree</code> 和 <code>blob</code> 构成的 Git 对象树。</p>
 <h3 id="与其他版本控制系统的区别"><a href="#与其他版本控制系统的区别" class="headerlink" title="与其他版本控制系统的区别"></a>与其他版本控制系统的区别</h3><p>Git与你熟悉的大部分版本控制系统的差别是很大的。</p>
 <p>也许你熟悉 <code>Subversion</code>、<code>CVS</code>、<code>Perforce</code>、<code>Mercurial</code> 等等，他们使用 “增量文件系统” （Delta Storage systems）, 就是说它们存储每次提交(commit)之间的差异。</p>
@@ -775,7 +775,7 @@
 <p>.git/HEAD 指明了当前活跃分支是哪个分支</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/HEAD</span><br><span class="line">ref: refs/heads/master</span><br></pre></td></tr></table></figure>
 <p><a href="images/git-obj-model.svg">svg版</a></p>
-<p><img src="images/git-obj-model.png" alt="git-obj-model"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png" alt="git-obj-model"></p>
 <hr>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/edit/master/vcs/git/git-object-model.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
 

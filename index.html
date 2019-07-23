@@ -510,7 +510,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -592,18 +592,18 @@
 <p>有四种类型的对象：<code>&quot;blob&quot;</code>、<code>&quot;tree&quot;</code>、<code>&quot;commit&quot;</code> 和 <code>&quot;tag&quot;</code>。</p>
 <p>几乎所有的Git功能都是使用这四个简单的对象类型来完成的。它就像是在你本机的文件系统之上构建一个小的文件系统。</p>
 <h4 id="blob-文件-对象"><a href="#blob-文件-对象" class="headerlink" title="blob (文件) 对象"></a>blob (文件) 对象</h4><p><code>blob</code> 用来存储文件数据，通常是一个文件。</p>
-<p><img src="images/object-blob.png" alt="blob"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png" alt="blob"></p>
 <h4 id="tree-目录-对象"><a href="#tree-目录-对象" class="headerlink" title="tree (目录) 对象"></a>tree (目录) 对象</h4><p><code>tree</code> 像一个目录，管理 <code>tree（子目录）</code> 或 <code>blob（文件）</code></p>
-<p><img src="images/object-tree.png" alt="tree"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tree.png" alt="tree"></p>
 <h4 id="commit-提交-对象"><a href="#commit-提交-对象" class="headerlink" title="commit (提交) 对象"></a>commit (提交) 对象</h4><p>一个 <code>commit</code> 只指向一个 <code>tree</code>，它用来标记项目某一个特定时间点的状态。<code>commit</code> 保存了树根的 <code>对象名</code>。</p>
 <p>它包括一些关于时间点的元数据，如 <code>时间戳</code>、<code>最近一次提交的作者</code>、<code>指向上次提交（commits）的指针</code> 等等。</p>
-<p><img src="images/object-commit.png" alt="tree"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-commit.png" alt="tree"></p>
 <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p <span class="number">830</span>f<span class="number">4857e9</span>f<span class="number">579818</span><span class="keyword">c</span><span class="number">5e69104</span>d<span class="number">3e2</span><span class="keyword">cc</span><span class="number">30</span>f<span class="number">1</span>f<span class="number">0</span>d<span class="number">0</span>d</span><br><span class="line">tree f<span class="number">25061</span>fa<span class="number">4</span>f<span class="number">8</span>b<span class="number">3</span>bffbf<span class="number">8</span>ebcc<span class="number">3</span>ab<span class="number">2351</span>efdad<span class="number">2</span>f<span class="number">605</span></span><br><span class="line">parent <span class="number">06e13701</span>ac<span class="number">86</span>eb<span class="number">09</span><span class="keyword">c</span><span class="number">2035329</span>a<span class="number">5e1</span><span class="keyword">c</span><span class="number">18</span>f<span class="number">95898</span>cf<span class="number">2</span></span><br><span class="line">author liuyanjie &lt;<span class="keyword">x</span><span class="title">@gmail.com</span>&gt; <span class="number">1526828841</span> +<span class="number">0800</span></span><br><span class="line">committer liuyanjie &lt;<span class="keyword">x</span><span class="title">@gmail.com</span>&gt; <span class="number">1526828841</span> +<span class="number">0800</span></span><br><span class="line"></span><br><span class="line">commit message</span><br></pre></td></tr></table></figure>
-<h4 id="tag-标签-对象"><a href="#tag-标签-对象" class="headerlink" title="tag (标签) 对象"></a>tag (标签) 对象</h4><p><img src="images/object-tag.png" alt="tag"></p>
+<h4 id="tag-标签-对象"><a href="#tag-标签-对象" class="headerlink" title="tag (标签) 对象"></a>tag (标签) 对象</h4><p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tag.png" alt="tag"></p>
 <p>一个 <code>tag</code> 是来标记某一个 <code>commit</code> 的方法。</p>
 <p>实际上 <code>tag</code> 本身是文件名，内容是 <code>commit</code> 的对象名。<code>tag</code> 是 <code>commit</code> 的别名，类似于域名和ip地址的关系。</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/tags/v0<span class="number">.0</span><span class="number">.0</span></span><br><span class="line"><span class="number">830</span>f4857e9f579818c5e69104d3e2cc30f1f0d0d</span><br></pre></td></tr></table></figure>
-<h4 id="commit-gt-tree-gt-blob"><a href="#commit-gt-tree-gt-blob" class="headerlink" title="commit -&gt; tree -&gt; blob"></a>commit -&gt; tree -&gt; blob</h4><p><img src="images/object-c-t-b.png" alt="object-c-t-b"></p>
+<h4 id="commit-gt-tree-gt-blob"><a href="#commit-gt-tree-gt-blob" class="headerlink" title="commit -&gt; tree -&gt; blob"></a>commit -&gt; tree -&gt; blob</h4><p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-c-t-b.png" alt="object-c-t-b"></p>
 <p>从图上可以看出：一个 <code>commit</code> 指向了一棵由 <code>tree</code> 和 <code>blob</code> 构成的 Git 对象树。</p>
 <h3 id="与其他版本控制系统的区别"><a href="#与其他版本控制系统的区别" class="headerlink" title="与其他版本控制系统的区别"></a>与其他版本控制系统的区别</h3><p>Git与你熟悉的大部分版本控制系统的差别是很大的。</p>
 <p>也许你熟悉 <code>Subversion</code>、<code>CVS</code>、<code>Perforce</code>、<code>Mercurial</code> 等等，他们使用 “增量文件系统” （Delta Storage systems）, 就是说它们存储每次提交(commit)之间的差异。</p>
@@ -767,7 +767,7 @@
 <p>.git/HEAD 指明了当前活跃分支是哪个分支</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/HEAD</span><br><span class="line">ref: refs/heads/master</span><br></pre></td></tr></table></figure>
 <p><a href="images/git-obj-model.svg">svg版</a></p>
-<p><img src="images/git-obj-model.png" alt="git-obj-model"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png" alt="git-obj-model"></p>
 <hr>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/edit/master/vcs/git/git-object-model.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
 
@@ -888,7 +888,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -1629,7 +1629,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -1875,7 +1875,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -2100,7 +2100,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -2350,7 +2350,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -2640,7 +2640,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -2848,7 +2848,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -3219,7 +3219,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -3306,7 +3306,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uv_run</span><span class="params">(<span class="keyword">uv_loop_t</span>* loop, uv_run_mode mode)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> timeout;</span><br><span class="line">  <span class="keyword">int</span> r;</span><br><span class="line">  <span class="keyword">int</span> ran_pending;</span><br><span class="line"></span><br><span class="line">  r = uv__loop_alive(loop);</span><br><span class="line">  <span class="keyword">if</span> (!r)</span><br><span class="line">    uv__update_time(loop);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (r != <span class="number">0</span> &amp;&amp; loop-&gt;stop_flag == <span class="number">0</span>) &#123;</span><br><span class="line">    uv__update_time(loop);</span><br><span class="line">    uv__run_timers(loop);</span><br><span class="line">    ran_pending = uv__run_pending(loop);</span><br><span class="line">    uv__run_idle(loop);</span><br><span class="line">    uv__run_prepare(loop);</span><br><span class="line"></span><br><span class="line">    timeout = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> ((mode == UV_RUN_ONCE &amp;&amp; !ran_pending) || mode == UV_RUN_DEFAULT)</span><br><span class="line">      timeout = uv_backend_timeout(loop);</span><br><span class="line"></span><br><span class="line">    uv__io_poll(loop, timeout);</span><br><span class="line">    uv__run_check(loop);</span><br><span class="line">    uv__run_closing_handles(loop);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (mode == UV_RUN_ONCE) &#123;</span><br><span class="line">      <span class="comment">/* UV_RUN_ONCE implies forward progress: at least one callback must have</span></span><br><span class="line"><span class="comment">       * been invoked when it returns. uv__io_poll() can return without doing</span></span><br><span class="line"><span class="comment">       * I/O (meaning: no callbacks) when its timeout expires - which means we</span></span><br><span class="line"><span class="comment">       * have pending timers that satisfy the forward progress constraint.</span></span><br><span class="line"><span class="comment">       *</span></span><br><span class="line"><span class="comment">       * UV_RUN_NOWAIT makes no guarantees about progress so it's omitted from</span></span><br><span class="line"><span class="comment">       * the check.</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      uv__update_time(loop);</span><br><span class="line">      uv__run_timers(loop);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    r = uv__loop_alive(loop);</span><br><span class="line">    <span class="keyword">if</span> (mode == UV_RUN_ONCE || mode == UV_RUN_NOWAIT)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* The if statement lets gcc compile it to a conditional store. Avoids</span></span><br><span class="line"><span class="comment">   * dirtying a cache line.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">if</span> (loop-&gt;stop_flag != <span class="number">0</span>)</span><br><span class="line">    loop-&gt;stop_flag = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以看到 <code>uv_run</code> 内部就是一个 <code>while</code> 循环，在 <code>UV_RUN_ONCE</code> 和 <code>UV_RUN_NOWAIT</code> 两种模式下，循环在执行一次后就会 <code>break</code>，一次性的，实际上没有循环。另外 在 <code>uv__loop_alive(loop) == 0</code> 或者 <code>loop-&gt;stop_flag != 0</code> 时 无法进入循环，同样循环结束，<code>uv_run</code> 函数返回。</p>
 <p>该函数就如官网给出的流程图一样简单</p>
-<p><img src="http://docs.libuv.org/en/v1.x/_images/loop_iteration.png" alt="loop_iteration"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/http://docs.libuv.org/en/v1.x/_images/loop_iteration.png" alt="loop_iteration"></p>
 <p>再看看几个关键的函数调用：</p>
 <ol>
 <li><code>uv__update_time(loop)</code>：对应图中 <code>Update loop time</code></li>
@@ -3488,7 +3488,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 15:48:36" itemprop="dateModified" datetime="2019-07-23T15:48:36+08:00">2019-07-23</time>
+                <time title="修改时间：2019-07-23 16:32:42" itemprop="dateModified" datetime="2019-07-23T16:32:42+08:00">2019-07-23</time>
               
             
           </span>
@@ -3566,7 +3566,7 @@
 <p>libuv 最初是为 NodeJS 编写的跨平台支持库。它是围绕<code>事件驱动的异步I/O模型</code>设计的。提到异步非阻塞I/O模型，有经验的开发人员应该能很快意识到这是一种很常见的实现高并发的模型，这是一种不同于多进程/多线程的并发模型。并发模型可以参考知乎专栏<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80NDkxNzkyMA==" title="https://zhuanlan.zhihu.com/p/44917920">并发模型之间的比较<i class="fa fa-external-link"></i></span>或其他资料。</p>
 <p>libuv 不仅仅在多种不同I/O轮询机制之上提供了的简单抽象——I/O观察者，更通过 <code>handles</code> 和 <code>streams</code> 为套接字和其他实体提供了更高级别的抽象，同时也提供了跨平台I/O和线程管理能力，还包含一些其他功能。</p>
 <p>下图说明了 libuv 的不同组成部分以及它们与哪些子系统相关：</p>
-<p><img src="http://docs.libuv.org/en/v1.x/_images/architecture.png" alt="architecture"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/http://docs.libuv.org/en/v1.x/_images/architecture.png" alt="architecture"></p>
 <p>从图中可以看到，libuv 主要部分都是和I/O相关的，主要包括网络I/O和文件I/O，其中文件I/O和其他少部分功能基于线程池实现，网络I/O在 <code>*nix</code> 平台基于 <code>uv__io_t</code>（内部抽象的I/O观察者）实现，<code>uv__io_t</code> 又基于不同环境采用了不同的底层机制，网络I/O在 <code>win</code> 平台基于 <code>IOCP</code> 机制实现。</p>
 <h3 id="Handles-and-requests"><a href="#Handles-and-requests" class="headerlink" title="Handles and requests"></a>Handles and requests</h3><p>libuv 为用户提供了两个与实践循环结合使用的抽象：<code>handles</code> 和 <code>requests</code></p>
 <p><code>Handles</code> 代表长生命周期的<code>对象</code>有能力执行某些操作当它们处于激活状态下。例如：</p>
@@ -3580,7 +3580,7 @@
 <p>所有的异步操作的结果最终在事件循环中被处理，也就是通常所说的回调函数，在事件循环中被调用。因为事件循环线程是单线程模式，所以所有用户代码都在一个线程中运行，libuv 更像是一个调度器，在合适的时候调度用户代码运行。此时，如果用户代码CPU密集型的耗时运算，将会阻塞事件循环。</p>
 <p>事件循环是非常常见的单线程异步I/O的处理方法：所有（网络）I/O都在非阻塞的套接字上执行，这些套接字使用给定平台上可用的最佳机制进行轮询：Linux 上使用 <code>epoll</code>，OSX 和其他 BSDs 系统上使用 <code>kqueue</code>，SunOS 使用 <code>event ports</code>，Windows 上使用 <code>IOCP</code>。以上I/O轮询作为事件循环迭代的一部分，事件循环将会被阻塞在I/O轮询（例如：linux 上的 <code>epoll_pwait</code> 调用），直到被添加到轮询器中的套接字有IO活动（事件），事件循环线程将会在有IO事件时被唤醒，关联的回调函数将会被调用表明套接字有新的连接，然后便可以在 <code>handles</code> 上进行读、写或其他想要进行的操作 <code>requests</code>。</p>
 <p>下图显示了事件循环的所有阶段：</p>
-<p><img src="http://docs.libuv.org/en/v1.x/_images/loop_iteration.png" alt="loop_iteration"></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/http://docs.libuv.org/en/v1.x/_images/loop_iteration.png" alt="loop_iteration"></p>
 <p>图中主要有七个阶段，</p>
 <p>其中 <code>idle</code>、<code>prepare</code>、<code>check</code> 的实现完全相同，调用时间不同，类似于生命周期勾子，这几个阶段目的是允许开发者在事件循环的特定阶段执行代码，在 Node.js 主要用于性能信息收集。这三个阶段的实现代码比较简单，很容易理解。因源代码几乎完全使用宏实现，所以编辑器无法跳转到对应实现，搜索关键字也无法匹配，这里给出源文件路径：<code>src/unix/loop-watcher.c</code>，便于读者找到源文件。</p>
 <p>其余剩下的阶段就主要有 <code>Call pending callbacks</code> <code>Poll for I/O</code> <code>Call close callbacks</code>，这三个阶段主要用于处理IO操作等异步操作结果，阅读源码也主要是围绕着这三个阶段的代码展开的。</p>
@@ -3613,7 +3613,7 @@
 <p><code>Event-Loop</code> 和 <code>Async I/O</code> 是实现高性能I/O的常见手段，这些都始于 <code>C10k</code> 问题，单服务器同时服务 10000 个客户端，当然现在远不止这些了。早期的服务器是基于进程/线程模型，每新来一个连接，就分配一个进程（线程）去处理这个连接，这是一个非常大的开销，容易达到系统软硬件瓶颈，另外，进程/线程切换上下文的成本也非常高。</p>
 <p>一般而言，大多数网络应用服务器端软件都是I/O密集型系统，服务器系统大部分的时间都花费在等待数据的输入输出上了，而不是计算，如果CPU把时间花在等待I/O操作上，就白白浪费了CPU的处理能力了，更重要的是，此时可能还有大量的客户端请求需要处理，而CPU却在等待I/O无法脱身。最终，以此方式工作的服务器吞吐量极低，需要更多的服务支撑业务，导致成本升高。</p>
 <p>为了充分利用CPU的计算能力，就需要避免让CPU等待I/O操作完成能够抽出身来做其他工作，例如，接收更多请求，等I/O操作完成之后再来进一步处理。这就有了 非阻塞I/O。异步I/O给编程带来了一定的麻烦，因为同步思维对于人来说更自然、更容易，也不易于调试，但是实际上限时世界原本偏向异步的。如何在I/O操作完成后能够让CPU回来继续完成工作也需要更复杂的流程逻辑控制，这些都带来了一定的设计难度。不过幸好，聪明的开发者设计了 <code>Event-Driven</code> 编程模型解决了此问题。基于此模型，也衍生出高性能IO常见实现模式：<code>Reactor</code> 模式，该模式有很多变体。Redis、Nginx、Netty、java.NIO都采用类似的模式来解决高并发的问题，libuv 自然也不例外，实现了事件驱动的异步IO。<code>Reactor</code> 模式采用同步I/O，<code>Proactor</code> 是一个采用异步I/O的模式。</p>
-<p><img src="https://i3.wp.com/upload-images.jianshu.io/upload_images/5618238-eaf3e05931531d7e.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/https://i3.wp.com/upload-images.jianshu.io/upload_images/5618238-eaf3e05931531d7e.png" alt=""></p>
 <p>该部分内容参考：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRXZlbnQtZHJpdmVu" title="https://en.wikipedia.org/wiki/Event-driven">https://en.wikipedia.org/wiki/Event-driven<i class="fa fa-external-link"></i></span></li>
@@ -3682,7 +3682,7 @@
 <li>内部名称：<code>uv__io_t = uv_ + _io_t</code> <code>uv__io_poll = uv_ + _io_poll</code></li>
 </ul>
 <h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>libuv 中的数据结构（队列，堆）采用被称为<code>侵入式</code>的实现方式实现，下图为 Linux 内核 <code>/include/linux/list.h</code> 的实现示意图：</p>
-<p><img src="https://cdn-images-1.medium.com/max/1600/0*XTYvSNj_rT2UZwfm.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/node.js/libuv/https://cdn-images-1.medium.com/max/1600/0*XTYvSNj_rT2UZwfm.png" alt=""></p>
 <p>该队列与通常实现最大的不同是兄弟节点指针 <code>prev</code> 和 <code>next</code> 存储的并发数据结构首地址，而是队列节点（数据结构某个成员）的地址，图中是 <code>list_head</code>，如果需要拿到完整的数据结构，需要获得数据结构的首地址，已知条件是已知 <code>list_head</code> 的地址，<code>c</code> 语言程序中结构体的内存布局是对齐的，所以可以计算出 <code>list_head</code> 相对数据结构首地址的偏移量，这样就可以算出数据结构首地址了，<code>container_of</code> 就是完成这一换算的。这种方式实现的数据结构，图中 <code>data structure 1</code>、<code>data structure 2</code>、<code>data structure 3</code> 可以是不同的类型，所以这种方式实现的数据结构可以很通用。</p>
 <p><code>container_of</code> 定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> container_of(ptr, type, member) \</span></span><br><span class="line">  ((type *) ((<span class="keyword">char</span> *) (ptr) - offsetof(type, member)))</span><br></pre></td></tr></table></figure>
