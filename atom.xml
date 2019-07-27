@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.butonly.com/"/>
-  <updated>2019-07-24T07:24:34.678Z</updated>
+  <updated>2019-07-26T19:26:59.406Z</updated>
   <id>https://blog.butonly.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Git对象模型</title>
-    <link href="https://blog.butonly.com/posts/vcs/git/git-object-model/"/>
-    <id>https://blog.butonly.com/posts/vcs/git/git-object-model/</id>
-    <published>2019-06-24T03:00:08.000Z</published>
-    <updated>2019-07-24T07:24:34.678Z</updated>
+    <title>Git命令工作机制</title>
+    <link href="https://blog.butonly.com/posts/vcs/git/git-working-mechanism/"/>
+    <id>https://blog.butonly.com/posts/vcs/git/git-working-mechanism/</id>
+    <published>2019-06-24T04:00:00.000Z</published>
+    <updated>2019-07-26T19:26:59.406Z</updated>
     
     <summary type="html">
     
@@ -45,11 +45,11 @@
   </entry>
   
   <entry>
-    <title>Git命令工作机制</title>
-    <link href="https://blog.butonly.com/posts/vcs/git/git-working-mechanism/"/>
-    <id>https://blog.butonly.com/posts/vcs/git/git-working-mechanism/</id>
-    <published>2019-06-24T03:00:08.000Z</published>
-    <updated>2019-07-24T07:24:34.679Z</updated>
+    <title>Git对象模型：一步一步分析Git底层对象模型</title>
+    <link href="https://blog.butonly.com/posts/vcs/git/git-object-model/"/>
+    <id>https://blog.butonly.com/posts/vcs/git/git-object-model/</id>
+    <published>2019-06-24T03:00:00.000Z</published>
+    <updated>2019-07-26T19:26:59.403Z</updated>
     
     <summary type="html">
     

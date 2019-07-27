@@ -142,13 +142,13 @@
 
 
 
-  <meta name="description" content="Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
+  <meta name="description" content="Git是一个非常强大的版本管理工具，有非常多的概念和命令，也有非常多且复杂的用法。但是其底层模型相对而言却非常简单，了解底层对象模型将非常有助于理解上层命令到底对仓库做了什么。如果想要精通Git，了解底层对象模型也是必不可少的。本文将会通过基本的命令操作，分析每一步操作对仓库数据做了哪些改动，进而分析出Git底层对象模型。 Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符">
 <meta name="keywords" content="vcs,git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git对象模型">
+<meta property="og:title" content="Git对象模型：一步一步分析Git底层对象模型">
 <meta property="og:url" content="https://blog.butonly.com/posts/vcs/git/git-object-model/index.html">
 <meta property="og:site_name" content="lyj&#39;s blog">
-<meta property="og:description" content="Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
+<meta property="og:description" content="Git是一个非常强大的版本管理工具，有非常多的概念和命令，也有非常多且复杂的用法。但是其底层模型相对而言却非常简单，了解底层对象模型将非常有助于理解上层命令到底对仓库做了什么。如果想要精通Git，了解底层对象模型也是必不可少的。本文将会通过基本的命令操作，分析每一步操作对仓库数据做了哪些改动，进而分析出Git底层对象模型。 Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tree.png">
@@ -156,10 +156,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tag.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-c-t-b.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png">
-<meta property="og:updated_time" content="2019-07-24T07:24:34.678Z">
+<meta property="og:updated_time" content="2019-07-26T19:26:59.403Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git对象模型">
-<meta name="twitter:description" content="Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:  6ff87c4664981e4397625791c8ea3bbb5f2279a3  在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。 你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的。这样">
+<meta name="twitter:title" content="Git对象模型：一步一步分析Git底层对象模型">
+<meta name="twitter:description" content="Git是一个非常强大的版本管理工具，有非常多的概念和命令，也有非常多且复杂的用法。但是其底层模型相对而言却非常简单，了解底层对象模型将非常有助于理解上层命令到底对仓库做了什么。如果想要精通Git，了解底层对象模型也是必不可少的。本文将会通过基本的命令操作，分析每一步操作对仓库数据做了哪些改动，进而分析出Git底层对象模型。 Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-blob.png">
 
 
@@ -179,7 +179,7 @@
   };
 </script>
 
-  <title>Git对象模型 | lyj's blog</title>
+  <title>Git对象模型：一步一步分析Git底层对象模型 | lyj's blog</title>
   
 
 
@@ -477,7 +477,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Git对象模型
+          <h2 class="post-title" itemprop="name headline">Git对象模型：一步一步分析Git底层对象模型
 
               
             
@@ -503,7 +503,7 @@
                 
               
 
-              <time title="创建时间：2019-06-24 11:00:08" itemprop="dateCreated datePublished" datetime="2019-06-24T11:00:08+08:00">2019-06-24</time>
+              <time title="创建时间：2019-06-24 11:00:00" itemprop="dateCreated datePublished" datetime="2019-06-24T11:00:00+08:00">2019-06-24</time>
             
 
             
@@ -520,7 +520,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
+                <time title="修改时间：2019-07-27 03:26:59" itemprop="dateModified" datetime="2019-07-27T03:26:59+08:00">2019-07-27</time>
               
             
           </span>
@@ -582,7 +582,8 @@
       
 
       
-        <h2 id="Git基本概念"><a href="#Git基本概念" class="headerlink" title="Git基本概念"></a>Git基本概念</h2><h3 id="SHA"><a href="#SHA" class="headerlink" title="SHA"></a>SHA</h3><p>所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:</p>
+        <p>Git是一个非常强大的版本管理工具，有非常多的概念和命令，也有非常多且复杂的用法。但是其底层模型相对而言却非常简单，了解底层对象模型将非常有助于理解上层命令到底对仓库做了什么。如果想要精通Git，了解底层对象模型也是必不可少的。本文将会通过基本的命令操作，分析每一步操作对仓库数据做了哪些改动，进而分析出Git底层对象模型。</p>
+<h2 id="Git基本概念"><a href="#Git基本概念" class="headerlink" title="Git基本概念"></a>Git基本概念</h2><h3 id="SHA"><a href="#SHA" class="headerlink" title="SHA"></a>SHA</h3><p>所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:</p>
 <blockquote>
 <p>6ff87c4664981e4397625791c8ea3bbb5f2279a3</p>
 </blockquote>
@@ -894,7 +895,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://blog.butonly.com/posts/vcs/git/git-object-model/" title="Git对象模型">https://blog.butonly.com/posts/vcs/git/git-object-model/</a>
+    <a href="https://blog.butonly.com/posts/vcs/git/git-object-model/" title="Git对象模型：一步一步分析Git底层对象模型">https://blog.butonly.com/posts/vcs/git/git-object-model/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
@@ -922,8 +923,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/vcs/git/git-working-mechanism/" rel="next" title="Git命令工作机制">
-                <i class="fa fa-chevron-left"></i> Git命令工作机制
+              <a href="/posts/node.js/libuv/8-libuv-threadpool/" rel="next" title="libuv源码分析（八）线程池（Threadpool）">
+                <i class="fa fa-chevron-left"></i> libuv源码分析（八）线程池（Threadpool）
               </a>
             
           </div>
@@ -931,6 +932,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/vcs/git/git-working-mechanism/" rel="prev" title="Git命令工作机制">
+                Git命令工作机制 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -1305,7 +1310,7 @@
       var disqus_config = function () {
         this.page.url = "https://blog.butonly.com/posts/vcs/git/git-object-model/";
         this.page.identifier = "posts/vcs/git/git-object-model/";
-        this.page.title = 'Git对象模型';
+        this.page.title = 'Git对象模型：一步一步分析Git底层对象模型';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');
