@@ -150,7 +150,7 @@
 <meta property="og:site_name" content="lyj&#39;s blog">
 <meta property="og:description" content="Git 是当前最广泛使用的版本控制系统，具备非常强大的版本控制能力。Git 有非常多的命令，很多人被种类繁多的命令搞的非常头大，也会经常忘记。本文尝试从原理角度来介绍 Git 常用命令，以便于加深对 Git 原理的理解。只有理解了原理，才能知道这些命令到底对仓库做了什么，进而才能更好使用命令，也更加不容易忘记。作为一个版本控制系统，理解其原理也是十分必要的，否则，很多命令根本不敢用，用错了可能会造">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-28T07:33:41.299Z">
+<meta property="og:updated_time" content="2019-07-29T07:36:47.491Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git命令工作机制">
 <meta name="twitter:description" content="Git 是当前最广泛使用的版本控制系统，具备非常强大的版本控制能力。Git 有非常多的命令，很多人被种类繁多的命令搞的非常头大，也会经常忘记。本文尝试从原理角度来介绍 Git 常用命令，以便于加深对 Git 原理的理解。只有理解了原理，才能知道这些命令到底对仓库做了什么，进而才能更好使用命令，也更加不容易忘记。作为一个版本控制系统，理解其原理也是十分必要的，否则，很多命令根本不敢用，用错了可能会造">
@@ -513,7 +513,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-28 15:33:41" itemprop="dateModified" datetime="2019-07-28T15:33:41+08:00">2019-07-28</time>
+                <time title="修改时间：2019-07-29 15:36:47" itemprop="dateModified" datetime="2019-07-29T15:36:47+08:00">2019-07-29</time>
               
             
           </span>
@@ -758,6 +758,8 @@
 <h3 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1mZXRjaA==" title="https://git-scm.com/docs/git-fetch">git fetch<i class="fa fa-external-link"></i></span></h3><blockquote>
 <p>从另外一个仓库下载 <strong>Refs</strong>，以及完成他们的变更历史所需要的 <strong>Objects</strong>，追踪的远程分支将会被更新。</p>
 </blockquote>
+<p>从一个或多个其他存储库中获取分支，以及完成它们的历史记录所需的对象，追踪的远程分支将会被更新（具体策略取决于 <code>RefSpec</code>）。</p>
+<p>默认情况下，还会获取指向要获取分支的历史记录上的标签，效果是获取指向您感兴趣的分支的标签。分支和标签统称为 <code>Refs</code>。也可以改变这种行为。</p>
 <p><code>git fetch</code> 的主要工作就是和远程同步 <code>Refs</code>，而 <code>Refs</code> 可以 被 <code>创建、修改、删除</code>，所以 <code>fetch</code> 操作必然应该能够同步这些变化。</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1mZXRjaCNfcmVtb3Rlc19hX2lkX3JlbW90ZXNfYQ==" title="https://git-scm.com/docs/git-fetch#_remotes_a_id_remotes_a">REMOTES<i class="fa fa-external-link"></i></span></li>
@@ -766,8 +768,9 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git fetch [&lt;options&gt;] [&lt;repository&gt; [&lt;refspec&gt;…​]]</span><br><span class="line">git fetch [&lt;options&gt;] &lt;group&gt;</span><br><span class="line">git fetch --multiple [&lt;options&gt;] [(&lt;repository&gt; | &lt;group&gt;)…​]</span><br><span class="line">git fetch --all [&lt;options&gt;]</span><br></pre></td></tr></table></figure>
 
 <p><code>.git/FETCH_HEAD</code>：是一个版本链接，记录在本地的一个文件中，指向着目前已经从远程仓库取下来的分支的末端版本。</p>
-<p>执行过 <code>fetch</code> 操作的项目都会存在一个 <code>FETCH_HEAD</code> 列表，其中每一行对应于远程服务器的一个分支。</p>
-<p>当前分支指向的 <code>FETCH_HEAD</code>，就是这个文件第一行对应的那个分支。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/FETCH_HEAD                                </span><br><span class="line">25f8a1026c24d8dee71a7ffd43310588d01c246f                branch <span class="string">'master'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">0d572bc6b622355f930688af4f44ae8f3416e12b        not-for-merge   branch <span class="string">'feature/travis-ci'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">58a6618947d44720494860fbb77a6a22c9a30ddb        not-for-merge   branch <span class="string">'feature/vpn'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">c761eb7a69dc54260b88c271b6271df559e7bce0        not-for-merge   branch <span class="string">'php-lang'</span> of github.com:liuyanjie/knowledge</span><br></pre></td></tr></table></figure>
+
+<p>执行过 <code>fetch</code> 操作的项目都会存在一个 <code>FETCH_HEAD</code> 文件，其中每一行对应于远程服务器的一个分支。当前分支指向的 <code>FETCH_HEAD</code>，就是这个文件第一行对应的那个分支。</p>
 <p>从本质上来说，唯一能从服务器下拉取数据的只有 <code>fetch</code>，其他命令的下拉数据的操作都是基于 <code>fetch</code> 的，所以 <code>fetch</code> 必然需要能够尽可能处理所有下拉数据时可能出现的情况。</p>
 <p>Options:</p>
 <ul>
