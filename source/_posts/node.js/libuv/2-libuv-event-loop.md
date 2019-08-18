@@ -1,7 +1,7 @@
 ---
 title: libuv源码分析（二）事件循环（Eventloop）
 date: 2019-04-23T15:00:02.000Z
-updated: 2019-07-24T15:24:34.673Z
+updated: 2019-08-18T13:47:16.802Z
 tags: [libuv,node.js,eventloop]
 categories: [源码分析]
 ---
@@ -269,13 +269,13 @@ int uv_run(uv_loop_t* loop, uv_run_mode mode) {
 再看看几个关键的函数调用：
 
 1. `uv__update_time(loop)`：对应图中 `Update loop time`
-2. `uv__run_timers(loop)`：对应图中 `Run due timers`，用于 `uv_timer_t`，见 [Timer](4-libuv-timer.md)
-3. `uv__run_pending(loop)`：对应图中 `Call pending callbacks`，用于 `uv__io_t`，见 [I/O-Watcher](5-libuv-io-watcher.md)
+2. `uv__run_timers(loop)`：对应图中 `Run due timers`，用于 `uv_timer_t`，见[Timer](/posts/node.js/libuv/4-libuv-timer)
+3. `uv__run_pending(loop)`：对应图中 `Call pending callbacks`，用于 `uv__io_t`，见[I/O-Watcher](/posts/node.js/libuv/5-libuv-io-watcher)
 4. `uv__run_idle(loop)`：对应图中 `Run idle handles`，用于 `uv_idle_t`
 5. `uv__run_prepare(loop)`：对应图中 `Run prepare handles`，用于 `uv_prepare_t`
-6. `uv__io_poll(loop, timeout)`：对应图中 `Poll for I/O`，用于 `uv__io_t`，见 [I/O-Watcher](5-libuv-io-watcher.md)
+6. `uv__io_poll(loop, timeout)`：对应图中 `Poll for I/O`，用于 `uv__io_t`，见[I/O-Watcher](/posts/node.js/libuv/5-libuv-io-watcher)
 7. `uv__run_check(loop)`：对应图中 `Run check handles`，用于 `uv_check_t`
-8. `uv__run_closing_handles(loop)`：对应图中 `Call close callbacks`，用于 `uv_handle_t`，见 [Handle and Requst](3-libuv-handle-and-request.md)
+8. `uv__run_closing_handles(loop)`：对应图中 `Call close callbacks`，用于 `uv_handle_t`，见[Handle and Requst](/posts/node.js/libuv/3-libuv-handle-and-request)
 
 以上执行逻辑正好和文档中的各个执行阶段相对应，文档中描述的各个执行阶段分别对应了不同的函数调用。整个循环迭代的不同阶段，对应于不同类型/状态的 handle 处理。除了用于 `uv_timer_t`、`uv_idle_t`、`uv_prepare_t`、`uv_check_t` 这四种类型的 handle 处理的几个阶段之外，没看到其他 handle 相关内容，倒是有个 `uv__io_t` 的处理，这是前文所提到的 libuv 内部关于I/O观察者的一个基本抽象，所有其他的 `handle` 都可以当做是一个I/O观察者，类似于双重继承。
 

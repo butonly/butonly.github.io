@@ -1,7 +1,7 @@
 ---
 title: libuv源码分析（一）全局概览（Overview）
 date: 2019-04-23T15:00:01.000Z
-updated: 2019-07-24T15:24:34.672Z
+updated: 2019-08-18T13:47:16.799Z
 tags: [libuv,node.js,eventloop]
 categories: [源码分析]
 ---
@@ -51,7 +51,7 @@ libuv 为用户提供了两个与实践循环结合使用的抽象：`handles` �
 
 `Requests` 一般代表一个短生命周期的`操作`。这些操作可以通过 handle 执行：`write requests` 用于在 handle 上写数据，所以 `request` 和 `handle` 可能存在一定的数据关联；或者也可以独立执行：`getaddrinfo requests` 不需要一个 `handle`，他们直接运行在事件循环中。
 
-相关的代码分析在 [Handle and Requst](3-libuv-handle-and-request.md) 部分进行。
+相关的代码分析在[Handle and Requst](/posts/node.js/libuv/3-libuv-handle-and-request) 部分进行。
 
 ### The I/O loop
 
@@ -83,7 +83,7 @@ I/O loop 也就是事件循环（Event Loop）是 libuv 的核心组成部分。
   
 更多详细描述，请直接阅读[The I/O loop](http://docs.libuv.org/en/v1.x/design.html#the-i-o-loop)的详细描述。
 
-相关的代码分析在 [EventLoop](2-libuv-event-loop.md) 部分进行。
+相关的代码分析在[EventLoop](/posts/node.js/libuv/2-libuv-event-loop) 部分进行。
 
 ### File I/O
 

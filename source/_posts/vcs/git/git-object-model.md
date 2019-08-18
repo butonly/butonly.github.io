@@ -1,7 +1,7 @@
 ---
 title: Git对象模型：一步一步分析Git底层对象模型
 date: 2019-06-24T11:00:00.000Z
-updated: 2019-07-27T03:26:59.403Z
+updated: 2019-08-18T13:47:16.812Z
 tags: [vcs,git]
 categories: [git]
 ---
@@ -1299,7 +1299,7 @@ ref: refs/heads/master
 
 ```
 
-[svg版](images/git-obj-model.svg)
+[svg版](https://github.com/liuyanjie/knowledge/tree/master/vcs/git/images/git-obj-model.svg)
 
 ![git-obj-model](https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png)
 
