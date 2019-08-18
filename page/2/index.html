@@ -146,7 +146,7 @@
 <meta name="keywords" content="个人博客,技术分享,前端,后端,容器,架构">
 <meta property="og:type" content="website">
 <meta property="og:title" content="liuyanjie&#39;s blog">
-<meta property="og:url" content="https://blog.butonly.com/index.html">
+<meta property="og:url" content="https://blog.butonly.com/page/2/index.html">
 <meta property="og:site_name" content="liuyanjie&#39;s blog">
 <meta property="og:description" content="体系化的技术分享博客">
 <meta property="og:locale" content="zh-CN">
@@ -161,7 +161,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.butonly.com/">
+  <link rel="canonical" href="https://blog.butonly.com/page/2/">
 
 
 
@@ -280,7 +280,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -464,7 +464,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/vcs/git/git-working-mechanism/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/5-libuv-io-watcher/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyanjie">
@@ -484,7 +484,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/posts/vcs/git/git-working-mechanism/" class="post-title-link" itemprop="url">Git命令工作机制</a>
+                <a href="/posts/node.js/libuv/5-libuv-io-watcher/" class="post-title-link" itemprop="url">libuv源码分析（五）IO观察者（io_watcher）</a>
               
             
           </h2>
@@ -509,7 +509,594 @@
                 
               
 
-              <time title="创建时间：2019-06-24 12:00:00" itemprop="dateCreated datePublished" datetime="2019-06-24T12:00:00+08:00">2019-06-24</time>
+              <time title="创建时间：2019-04-23 15:00:05" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:05+08:00">2019-04-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/node.js/libuv/5-libuv-io-watcher/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/5-libuv-io-watcher/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              在 libuv 内部，对所有IO操作进行了统一的抽象，在底层的操作系统IO操作基础上，结合事件循环机制，实现了IO观察者，对应结构体 uv__io_s。其他 handle 通过内嵌I/O观察者的方式获得IO的监测能力，例如有 uv_stream_t、uv_udp_t、uv_poll_t 及 uv_stream_t 的派生类型 uv_tcp_t、uv_pipe_t、uv_tty_t。uv_stream_t 是一个抽象基类，一般不直接使用。内嵌IO观察者的 handle 本身就是IO观察者，和面向对象语言中常提到的 has-a 是一样的，所以，可以说 uv_stream_t 是一个I/O观察者，它的派生类也是I/O观察者。这类似于多重继承，即继承 uv_handle_t，又继承了 uv__io_t，所以即是 han
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/posts/node.js/libuv/5-libuv-io-watcher/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/4-libuv-timer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyanjie">
+      <meta itemprop="description" content="体系化的技术分享博客">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liuyanjie's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/posts/node.js/libuv/4-libuv-timer/" class="post-title-link" itemprop="url">libuv源码分析（四）定时器（Timer）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-23 15:00:04" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:04+08:00">2019-04-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/node.js/libuv/4-libuv-timer/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/4-libuv-timer/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              在事件循环中，处理的一个 handle 就是计时器，通过 uv__run_timers，我们可以找到 timer.c 文件，里面包含了 timer 的实现。
+先来看一下 uv__run_timers 的实现源码：
+https://github.com/libuv/libuv/blob/v1.28.0/src/timer.c#L158
+void uv__run_timers(uv_loop_t* loop) &#123;  struct heap_node* heap_node;  uv_timer_t* handle;  for (;;) &#123;    heap_node = heap_min(timer_heap(loop));    if (heap_node == NULL)      break;
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/posts/node.js/libuv/4-libuv-timer/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/3-libuv-handle-and-request/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyanjie">
+      <meta itemprop="description" content="体系化的技术分享博客">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liuyanjie's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/posts/node.js/libuv/3-libuv-handle-and-request/" class="post-title-link" itemprop="url">libuv源码分析（三）资源抽象：Handle 和 Request</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-23 15:00:03" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:03+08:00">2019-04-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/node.js/libuv/3-libuv-handle-and-request/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/3-libuv-handle-and-request/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              Handle 是 libuv 设计实现的核心部分之一，根据官方描述：Handles 代表长生命周期的对象有能力执行某些操作当它们处于激活状态下。
+libuv 采用了组合的方式实现代码复用，并且达到了面向对象编程中的继承的效果。
+Handle 有很多种不同的类型，这些类型有一个共同的、公共的基础结构 uv_handle_s，因结构体内存布局字节对齐所有子类型都可以强制类型转换成 uv_handle_t 类型，所以所有能够应用在 uv_handle_t 上的基础API都可用于子类型的 handle。
+在开始对不同类型的 Handle 开始分析之前，将会对 Handle 进行整体分析。
+首先，看一下 libuv 中的 Handle 相关的类型声明和定义：
+https://github.com/libuv/libuv/
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/posts/node.js/libuv/3-libuv-handle-and-request/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/2-libuv-event-loop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyanjie">
+      <meta itemprop="description" content="体系化的技术分享博客">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liuyanjie's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/posts/node.js/libuv/2-libuv-event-loop/" class="post-title-link" itemprop="url">libuv源码分析（二）事件循环（Eventloop）</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-23 15:00:02" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:02+08:00">2019-04-23</time>
             
 
             
@@ -543,7 +1130,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
 
                 
                 
@@ -558,9 +1145,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/vcs/git/git-working-mechanism/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/2-libuv-event-loop/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/vcs/git/git-working-mechanism/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/2-libuv-event-loop/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -591,14 +1178,16 @@
         
           
             <p>
-              Git 是当前最广泛使用的版本控制系统，具备非常强大的版本控制能力。Git 有非常多的命令，很多人被种类繁多的命令搞的非常头大，也会经常忘记。本文尝试从原理角度来介绍 Git 常用命令，以便于加深对 Git 原理的理解。只有理解了原理，才能知道这些命令到底对仓库做了什么，进而才能更好使用命令，也更加不容易忘记。作为一个版本控制系统，理解其原理也是十分必要的，否则，很多命令根本不敢用，用错了可能会造成严重后果，搞丢代码的成本是非常大的，谁都不想自己或他人做工作被一键抹除。知道原理后，即使一不小心操作错了，也可以坦然处之，轻松恢复。
-相比命令行工具，可视化的 GUI 就要直观和方便很多，但是很多时候一样可能因为对于具体做什么不了解而操作错误，并且，目前常用的 GUI 软件，都未提供全部的命令行操作能力，GUI 很多
+              事件循环是 libuv 功能的核心部分。它的主要职责是对I/O进行轮询然后基于不同的事件源调度它们的回调。
+事件循环主体数据结构在 libuv 中用 struct uv_loop_s 或类型别名 uv_loop_t 表示，文中统一使用 loop 表示其实例，它代表了事件循环，实际上它是事件循环所有资源的统一入口，所有在事件循环上运行的各类 Handle/Request 实例都被注册到 uv_loop_s 内部的各类结构中如队列、堆、伸展树等，同一实例往往被关联到多个不同的结构中，如大多数 Handle 都会同时存在两个队列中。
+uv_loop_t 是一种特殊的 Handle，它管理了同一事件循环上的所有资源。
+uv_loop_t 实例通常需要经历 Init、Run、Stop、Close 这几个生命周期，下面将分
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/posts/vcs/git/git-working-mechanism/#more" rel="contents">
+              <a class="btn" href="/posts/node.js/libuv/2-libuv-event-loop/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -658,7 +1247,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/vcs/git/git-object-model/">
+    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/1-libuv-overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyanjie">
@@ -678,7 +1267,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/posts/vcs/git/git-object-model/" class="post-title-link" itemprop="url">Git对象模型：一步一步分析Git底层对象模型</a>
+                <a href="/posts/node.js/libuv/1-libuv-overview/" class="post-title-link" itemprop="url">libuv源码分析（一）全局概览（Overview）</a>
               
             
           </h2>
@@ -703,7 +1292,7 @@
                 
               
 
-              <time title="创建时间：2019-06-24 11:00:00" itemprop="dateCreated datePublished" datetime="2019-06-24T11:00:00+08:00">2019-06-24</time>
+              <time title="创建时间：2019-04-23 15:00:01" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:01+08:00">2019-04-23</time>
             
 
             
@@ -737,205 +1326,6 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/vcs/git/git-object-model/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/vcs/git/git-object-model/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              Git是一个非常强大的版本管理工具，有非常多的概念和命令，也有非常多且复杂的用法。但是其底层模型相对而言却非常简单，了解底层对象模型将非常有助于理解上层命令到底对仓库做了什么。如果想要精通Git，了解底层对象模型也是必不可少的。本文将会通过基本的命令操作，分析每一步操作对仓库数据做了哪些改动，进而分析出Git底层对象模型。
-Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:
-
-6ff87c4664981e4397625791c8ea3bbb5f2279a3
-
-在后边使用对象名时，只使用前面几个字符即可，但是最少需要4个。
-你会在Git里到处看到这种“40个字符”字符串。每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/posts/vcs/git/git-object-model/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/8-libuv-threadpool/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liuyanjie">
-      <meta itemprop="description" content="体系化的技术分享博客">
-      <meta itemprop="image" content="/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liuyanjie's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/posts/node.js/libuv/8-libuv-threadpool/" class="post-title-link" itemprop="url">libuv源码分析（八）线程池（Threadpool）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-23 15:00:08" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:08+08:00">2019-04-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
 
                 
@@ -951,9 +1341,9 @@ Git基本概念SHA所有用来表示项目历史信息的文件，都是通过�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/node.js/libuv/8-libuv-threadpool/#comments" itemprop="discussionUrl">
+                <a href="/posts/node.js/libuv/1-libuv-overview/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/8-libuv-threadpool/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/1-libuv-overview/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -984,411 +1374,17 @@ Git基本概念SHA所有用来表示项目历史信息的文件，都是通过�
         
           
             <p>
-              
-http://docs.libuv.org/en/v1.x/threadpool.html
-http://docs.libuv.org/en/v1.x/dns.html
+              简介libuv 是一个专注于异步I/O的跨平台的程序库，它主要是用于支持 Node.js，但是也被如 Luvit、Julia、pyuv 等很多其他的库使用。它使得 异步I/O 变的简单。
+libuv 对于经常接触 c 语言程序开发的开发人员来说，应该是非常容易的，但是对于没有没有相关经验的开发人员来说，阅读源码就比较吃力了，但是如果能阅读并理解 libuv，才能更深入的了解 Node.js 是怎样工作的，以及 Node.js 中的事件驱动、非阻塞异步I/O是怎么一回事儿，它是怎么解决这些问题的，它有哪些不足。
+基础要求阅读源代码需要 c 语言相关的知识和一定的系统编程基础，需要了解常见的系统API调用及相关机制。主要有以下几个方面：
 
-线程池在程序设计中是常用的提升并发计算能力、提升吞吐量的常用手段，在 libnv 也不例外，并且结合事件循环，实现了异步支持。
-libuv 提供可用于执行用户代码的线程池，并且能够在任务完成时，向事件循环线程发送消息通知主线程完成收尾工作。
-默认情况下，线程池的大小是 4，但是可以在启动阶段通过设置 UV_THREADPOOL_SIZE 环境变量进行修改，最大为 128。
-初始化线程池全局的并且跨所有事件循环共享，当特定的函数使用线程池时（例如，调用 uv_queue_work()），libuv 通过 init_threads 函数预分配和
+libuv 主要是用 c 实现的，所以需要有一定的 c 语言基础，尤其是宏、
               ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/posts/node.js/libuv/8-libuv-threadpool/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/7-libuv-async/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liuyanjie">
-      <meta itemprop="description" content="体系化的技术分享博客">
-      <meta itemprop="image" content="/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liuyanjie's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/posts/node.js/libuv/7-libuv-async/" class="post-title-link" itemprop="url">libuv源码分析（七）异步唤醒（Async）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-23 15:00:07" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:07+08:00">2019-04-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/node.js/libuv/7-libuv-async/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/7-libuv-async/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              Async 允许用户在其他线程中唤醒主事件循环线程并触发回调函数调用。
-事件循环线程在运行到 Pool 阶段会因为 epoll_pwait 调用阻塞一定的时间，libuv 会根据事件循环信息预估阻塞多长时间合适，也就是 timeout。但是在某些情境下，libuv 是无法准确预估的，例如线程池支持的异步文件操作，这些其他线程中的任务是无法有效判断多久能够运行完成的，在 libuv 中，其他线程工作完成之后，执行结果需要交给主事件循环线程，而事件循环线程可能恰好阻塞在 epoll_pwait 上，这时为了能够让其他线程的执行结果能够快速得到处理，需要唤醒主事件循环线程，也就是 epoll_pwait，而 Async 正式用来至此唤醒主事件循环的机制，简单的调用 uv_async_send 即可。线程池中的线程也正
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/posts/node.js/libuv/7-libuv-async/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.butonly.com/posts/node.js/libuv/6-libuv-stream/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liuyanjie">
-      <meta itemprop="description" content="体系化的技术分享博客">
-      <meta itemprop="image" content="/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liuyanjie's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/posts/node.js/libuv/6-libuv-stream/" class="post-title-link" itemprop="url">libuv源码分析（六）流（Stream）</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-23 15:00:06" itemprop="dateCreated datePublished" datetime="2019-04-23T15:00:06+08:00">2019-04-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/源码分析/" itemprop="url" rel="index"><span itemprop="name">源码分析</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/node.js/libuv/6-libuv-stream/#comments" itemprop="discussionUrl">
-                
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/node.js/libuv/6-libuv-stream/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              Stream 提供一个全双工的通信信道的抽象，uv_stream_t 是一个抽象数据类型，libuv 提供了 uv_tcp_t、uv_pipe_t、uv_tty_t 3 个 Stream 实现。
-uv_stream_tuv_stream_t 并未直接提供初始化函数，如同 uv_handle_t 一样，uv_stream_t 是在派生类型初始化的时候间接初始化的。派生类型的初始化函数中都调用了 uv__stream_init 函数对 uv_stream_t 进行初始化。
-先介绍一下 uv_stream_t 的各个字段的含义
-https://github.com/libuv/libuv/blob/view-v1.28.0/include/uv.h#L470
-/* * uv_stream_t is a subclas
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/posts/node.js/libuv/6-libuv-stream/#more" rel="contents">
+              <a class="btn" href="/posts/node.js/libuv/1-libuv-overview/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1437,7 +1433,7 @@ https://github.com/libuv/libuv/blob/view-v1.28.0/include/uv.h#L470
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 
