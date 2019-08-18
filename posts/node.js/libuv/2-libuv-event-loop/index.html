@@ -151,7 +151,7 @@
 <meta property="og:description" content="事件循环是 libuv 功能的核心部分。它的主要职责是对I/O进行轮询然后基于不同的事件源调度它们的回调。 事件循环主体数据结构在 libuv 中用 struct uv_loop_s 或类型别名 uv_loop_t 表示，文中统一使用 loop 表示其实例，它代表了事件循环，实际上它是事件循环所有资源的统一入口，所有在事件循环上运行的各类 Handle/Request 实例都被注册到 uv_loo">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://docs.libuv.org/en/v1.x/_images/loop_iteration.png">
-<meta property="og:updated_time" content="2019-07-24T07:24:34.673Z">
+<meta property="og:updated_time" content="2019-08-18T05:47:16.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libuv源码分析（二）事件循环（Eventloop）">
 <meta name="twitter:description" content="事件循环是 libuv 功能的核心部分。它的主要职责是对I/O进行轮询然后基于不同的事件源调度它们的回调。 事件循环主体数据结构在 libuv 中用 struct uv_loop_s 或类型别名 uv_loop_t 表示，文中统一使用 loop 表示其实例，它代表了事件循环，实际上它是事件循环所有资源的统一入口，所有在事件循环上运行的各类 Handle/Request 实例都被注册到 uv_loo">
@@ -515,7 +515,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
+                <time title="修改时间：2019-08-18 13:47:16" itemprop="dateModified" datetime="2019-08-18T13:47:16+08:00">2019-08-18</time>
               
             
           </span>
@@ -610,13 +610,13 @@
 <p>再看看几个关键的函数调用：</p>
 <ol>
 <li><code>uv__update_time(loop)</code>：对应图中 <code>Update loop time</code></li>
-<li><code>uv__run_timers(loop)</code>：对应图中 <code>Run due timers</code>，用于 <code>uv_timer_t</code>，见 <a href="4-libuv-timer.md">Timer</a></li>
-<li><code>uv__run_pending(loop)</code>：对应图中 <code>Call pending callbacks</code>，用于 <code>uv__io_t</code>，见 <a href="5-libuv-io-watcher.md">I/O-Watcher</a></li>
+<li><code>uv__run_timers(loop)</code>：对应图中 <code>Run due timers</code>，用于 <code>uv_timer_t</code>，见<a href="/posts/node.js/libuv/4-libuv-timer">Timer</a></li>
+<li><code>uv__run_pending(loop)</code>：对应图中 <code>Call pending callbacks</code>，用于 <code>uv__io_t</code>，见<a href="/posts/node.js/libuv/5-libuv-io-watcher">I/O-Watcher</a></li>
 <li><code>uv__run_idle(loop)</code>：对应图中 <code>Run idle handles</code>，用于 <code>uv_idle_t</code></li>
 <li><code>uv__run_prepare(loop)</code>：对应图中 <code>Run prepare handles</code>，用于 <code>uv_prepare_t</code></li>
-<li><code>uv__io_poll(loop, timeout)</code>：对应图中 <code>Poll for I/O</code>，用于 <code>uv__io_t</code>，见 <a href="5-libuv-io-watcher.md">I/O-Watcher</a></li>
+<li><code>uv__io_poll(loop, timeout)</code>：对应图中 <code>Poll for I/O</code>，用于 <code>uv__io_t</code>，见<a href="/posts/node.js/libuv/5-libuv-io-watcher">I/O-Watcher</a></li>
 <li><code>uv__run_check(loop)</code>：对应图中 <code>Run check handles</code>，用于 <code>uv_check_t</code></li>
-<li><code>uv__run_closing_handles(loop)</code>：对应图中 <code>Call close callbacks</code>，用于 <code>uv_handle_t</code>，见 <a href="3-libuv-handle-and-request.md">Handle and Requst</a></li>
+<li><code>uv__run_closing_handles(loop)</code>：对应图中 <code>Call close callbacks</code>，用于 <code>uv_handle_t</code>，见<a href="/posts/node.js/libuv/3-libuv-handle-and-request">Handle and Requst</a></li>
 </ol>
 <p>以上执行逻辑正好和文档中的各个执行阶段相对应，文档中描述的各个执行阶段分别对应了不同的函数调用。整个循环迭代的不同阶段，对应于不同类型/状态的 handle 处理。除了用于 <code>uv_timer_t</code>、<code>uv_idle_t</code>、<code>uv_prepare_t</code>、<code>uv_check_t</code> 这四种类型的 handle 处理的几个阶段之外，没看到其他 handle 相关内容，倒是有个 <code>uv__io_t</code> 的处理，这是前文所提到的 libuv 内部关于I/O观察者的一个基本抽象，所有其他的 <code>handle</code> 都可以当做是一个I/O观察者，类似于双重继承。</p>
 <p>如果这个函数处于一直不断的循环状态，所在进程岂不是会一直占用CPU？实际上不会这样的，因为线程会在 <code>uv__io_poll(loop, timeout)</code> 这个函数内部因为阻塞而挂起，挂起的时间主要由下一次到来的定时器决定。在线程挂起这段时间内，不会占用CPU。</p>

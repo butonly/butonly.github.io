@@ -510,7 +510,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-29 15:36:47" itemprop="dateModified" datetime="2019-07-29T15:36:47+08:00">2019-07-29</time>
+                <time title="修改时间：2019-08-18 13:47:16" itemprop="dateModified" datetime="2019-08-18T13:47:16+08:00">2019-08-18</time>
               
             
           </span>
@@ -764,10 +764,8 @@
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1mZXRjaCNfcmVtb3Rlc19hX2lkX3JlbW90ZXNfYQ==" title="https://git-scm.com/docs/git-fetch#_remotes_a_id_remotes_a">REMOTES<i class="fa fa-external-link"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9kb2NzL2dpdC1mZXRjaCNfY29uZmlndXJlZF9yZW1vdGVfdHJhY2tpbmdfYnJhbmNoZXNfYV9pZF9jcnRiX2E=" title="https://git-scm.com/docs/git-fetch#_configured_remote_tracking_branches_a_id_crtb_a">CONFIGURED REMOTE-TRACKING BRANCHES<i class="fa fa-external-link"></i></span></li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git fetch [&lt;options&gt;] [&lt;repository&gt; [&lt;refspec&gt;…​]]</span><br><span class="line">git fetch [&lt;options&gt;] &lt;group&gt;</span><br><span class="line">git fetch --multiple [&lt;options&gt;] [(&lt;repository&gt; | &lt;group&gt;)…​]</span><br><span class="line">git fetch --all [&lt;options&gt;]</span><br></pre></td></tr></table></figure>
-
 <p><code>.git/FETCH_HEAD</code>：是一个版本链接，记录在本地的一个文件中，指向着目前已经从远程仓库取下来的分支的末端版本。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/FETCH_HEAD                                </span><br><span class="line">25f8a1026c24d8dee71a7ffd43310588d01c246f                branch <span class="string">'master'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">0d572bc6b622355f930688af4f44ae8f3416e12b        not-for-merge   branch <span class="string">'feature/travis-ci'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">58a6618947d44720494860fbb77a6a22c9a30ddb        not-for-merge   branch <span class="string">'feature/vpn'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">c761eb7a69dc54260b88c271b6271df559e7bce0        not-for-merge   branch <span class="string">'php-lang'</span> of github.com:liuyanjie/knowledge</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/FETCH_HEAD                                </span><br><span class="line">25f8a1026c24d8dee71a7ffd43310588d01c246f                        branch <span class="string">'master'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">0d572bc6b622355f930688af4f44ae8f3416e12b        not-for-merge   branch <span class="string">'feature/travis-ci'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">58a6618947d44720494860fbb77a6a22c9a30ddb        not-for-merge   branch <span class="string">'feature/vpn'</span> of github.com:liuyanjie/knowledge</span><br><span class="line">c761eb7a69dc54260b88c271b6271df559e7bce0        not-for-merge   branch <span class="string">'php-lang'</span> of github.com:liuyanjie/knowledge</span><br></pre></td></tr></table></figure>
 
 <p>执行过 <code>fetch</code> 操作的项目都会存在一个 <code>FETCH_HEAD</code> 文件，其中每一行对应于远程服务器的一个分支。当前分支指向的 <code>FETCH_HEAD</code>，就是这个文件第一行对应的那个分支。</p>
 <p>从本质上来说，唯一能从服务器下拉取数据的只有 <code>fetch</code>，其他命令的下拉数据的操作都是基于 <code>fetch</code> 的，所以 <code>fetch</code> 必然需要能够尽可能处理所有下拉数据时可能出现的情况。</p>
@@ -1381,7 +1379,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-27 03:26:59" itemprop="dateModified" datetime="2019-07-27T03:26:59+08:00">2019-07-27</time>
+                <time title="修改时间：2019-08-18 13:47:16" itemprop="dateModified" datetime="2019-08-18T13:47:16+08:00">2019-08-18</time>
               
             
           </span>
@@ -1705,7 +1703,7 @@
 <p>.git/HEAD 指明了当前活跃分支是哪个分支</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/HEAD</span><br><span class="line">ref: refs/heads/master</span><br></pre></td></tr></table></figure>
 
-<p><a href="images/git-obj-model.svg">svg版</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvdmNzL2dpdC9pbWFnZXMvZ2l0LW9iai1tb2RlbC5zdmc=" title="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/images/git-obj-model.svg">svg版<i class="fa fa-external-link"></i></span></p>
 <p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png" alt="git-obj-model"></p>
 <hr>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/edit/master/vcs/git/git-object-model.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
@@ -3509,7 +3507,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
+                <time title="修改时间：2019-08-18 13:47:16" itemprop="dateModified" datetime="2019-08-18T13:47:16+08:00">2019-08-18</time>
               
             
           </span>
@@ -3606,13 +3604,13 @@
 <p>再看看几个关键的函数调用：</p>
 <ol>
 <li><code>uv__update_time(loop)</code>：对应图中 <code>Update loop time</code></li>
-<li><code>uv__run_timers(loop)</code>：对应图中 <code>Run due timers</code>，用于 <code>uv_timer_t</code>，见 <a href="4-libuv-timer.md">Timer</a></li>
-<li><code>uv__run_pending(loop)</code>：对应图中 <code>Call pending callbacks</code>，用于 <code>uv__io_t</code>，见 <a href="5-libuv-io-watcher.md">I/O-Watcher</a></li>
+<li><code>uv__run_timers(loop)</code>：对应图中 <code>Run due timers</code>，用于 <code>uv_timer_t</code>，见<a href="/posts/node.js/libuv/4-libuv-timer">Timer</a></li>
+<li><code>uv__run_pending(loop)</code>：对应图中 <code>Call pending callbacks</code>，用于 <code>uv__io_t</code>，见<a href="/posts/node.js/libuv/5-libuv-io-watcher">I/O-Watcher</a></li>
 <li><code>uv__run_idle(loop)</code>：对应图中 <code>Run idle handles</code>，用于 <code>uv_idle_t</code></li>
 <li><code>uv__run_prepare(loop)</code>：对应图中 <code>Run prepare handles</code>，用于 <code>uv_prepare_t</code></li>
-<li><code>uv__io_poll(loop, timeout)</code>：对应图中 <code>Poll for I/O</code>，用于 <code>uv__io_t</code>，见 <a href="5-libuv-io-watcher.md">I/O-Watcher</a></li>
+<li><code>uv__io_poll(loop, timeout)</code>：对应图中 <code>Poll for I/O</code>，用于 <code>uv__io_t</code>，见<a href="/posts/node.js/libuv/5-libuv-io-watcher">I/O-Watcher</a></li>
 <li><code>uv__run_check(loop)</code>：对应图中 <code>Run check handles</code>，用于 <code>uv_check_t</code></li>
-<li><code>uv__run_closing_handles(loop)</code>：对应图中 <code>Call close callbacks</code>，用于 <code>uv_handle_t</code>，见 <a href="3-libuv-handle-and-request.md">Handle and Requst</a></li>
+<li><code>uv__run_closing_handles(loop)</code>：对应图中 <code>Call close callbacks</code>，用于 <code>uv_handle_t</code>，见<a href="/posts/node.js/libuv/3-libuv-handle-and-request">Handle and Requst</a></li>
 </ol>
 <p>以上执行逻辑正好和文档中的各个执行阶段相对应，文档中描述的各个执行阶段分别对应了不同的函数调用。整个循环迭代的不同阶段，对应于不同类型/状态的 handle 处理。除了用于 <code>uv_timer_t</code>、<code>uv_idle_t</code>、<code>uv_prepare_t</code>、<code>uv_check_t</code> 这四种类型的 handle 处理的几个阶段之外，没看到其他 handle 相关内容，倒是有个 <code>uv__io_t</code> 的处理，这是前文所提到的 libuv 内部关于I/O观察者的一个基本抽象，所有其他的 <code>handle</code> 都可以当做是一个I/O观察者，类似于双重继承。</p>
 <p>如果这个函数处于一直不断的循环状态，所在进程岂不是会一直占用CPU？实际上不会这样的，因为线程会在 <code>uv__io_poll(loop, timeout)</code> 这个函数内部因为阻塞而挂起，挂起的时间主要由下一次到来的定时器决定。在线程挂起这段时间内，不会占用CPU。</p>
@@ -3792,7 +3790,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-24 15:24:34" itemprop="dateModified" datetime="2019-07-24T15:24:34+08:00">2019-07-24</time>
+                <time title="修改时间：2019-08-18 13:47:16" itemprop="dateModified" datetime="2019-08-18T13:47:16+08:00">2019-08-18</time>
               
             
           </span>
@@ -3879,7 +3877,7 @@
 <li><code>TCP server handle</code> 在每一次有一个新的 <code>connection</code> 进来的时候都会调用一次它的回调。</li>
 </ul>
 <p><code>Requests</code> 一般代表一个短生命周期的<code>操作</code>。这些操作可以通过 handle 执行：<code>write requests</code> 用于在 handle 上写数据，所以 <code>request</code> 和 <code>handle</code> 可能存在一定的数据关联；或者也可以独立执行：<code>getaddrinfo requests</code> 不需要一个 <code>handle</code>，他们直接运行在事件循环中。</p>
-<p>相关的代码分析在 <a href="3-libuv-handle-and-request.md">Handle and Requst</a> 部分进行。</p>
+<p>相关的代码分析在<a href="/posts/node.js/libuv/3-libuv-handle-and-request">Handle and Requst</a> 部分进行。</p>
 <h3 id="The-I-O-loop"><a href="#The-I-O-loop" class="headerlink" title="The I/O loop"></a>The I/O loop</h3><p>I/O loop 也就是事件循环（Event Loop）是 libuv 的核心组成部分。它为所有 I/O 操作建立内容，实际上这意味着事件循环被绑定到一个单一的线程。可以运行多个不同的事件循环只要它们在不同的线程中。除非另有说明，事件循环（任何涉及事件循环和 handle 的API）并不是线程安全的。</p>
 <p>所有的异步操作的结果最终在事件循环中被处理，也就是通常所说的回调函数，在事件循环中被调用。因为事件循环线程是单线程模式，所以所有用户代码都在一个线程中运行，libuv 更像是一个调度器，在合适的时候调度用户代码运行。此时，如果用户代码CPU密集型的耗时运算，将会阻塞事件循环。</p>
 <p>事件循环是非常常见的单线程异步I/O的处理方法：所有（网络）I/O都在非阻塞的套接字上执行，这些套接字使用给定平台上可用的最佳机制进行轮询：Linux 上使用 <code>epoll</code>，OSX 和其他 BSDs 系统上使用 <code>kqueue</code>，SunOS 使用 <code>event ports</code>，Windows 上使用 <code>IOCP</code>。以上I/O轮询作为事件循环迭代的一部分，事件循环将会被阻塞在I/O轮询（例如：linux 上的 <code>epoll_pwait</code> 调用），直到被添加到轮询器中的套接字有IO活动（事件），事件循环线程将会在有IO事件时被唤醒，关联的回调函数将会被调用表明套接字有新的连接，然后便可以在 <code>handles</code> 上进行读、写或其他想要进行的操作 <code>requests</code>。</p>
@@ -3899,7 +3897,7 @@
 <li>Call close callbacks：清理被关闭的 <code>handles</code>。</li>
 </ol>
 <p>更多详细描述，请直接阅读<span class="exturl" data-url="aHR0cDovL2RvY3MubGlidXYub3JnL2VuL3YxLngvZGVzaWduLmh0bWwjdGhlLWktby1sb29w" title="http://docs.libuv.org/en/v1.x/design.html#the-i-o-loop">The I/O loop<i class="fa fa-external-link"></i></span>的详细描述。</p>
-<p>相关的代码分析在 <a href="2-libuv-event-loop.md">EventLoop</a> 部分进行。</p>
+<p>相关的代码分析在<a href="/posts/node.js/libuv/2-libuv-event-loop">EventLoop</a> 部分进行。</p>
 <h3 id="File-I-O"><a href="#File-I-O" class="headerlink" title="File I/O"></a>File I/O</h3><p>不同于网络IO，目前没有 libuv 可以依赖的平台特定（异步）文件IO机制，所以当前的方式是在线程池中运行阻塞式的文件IO操作。</p>
 <p>libuv 目前采用一个全局的线程池，所有事件循环都可以在向其任务队列提交任务，目前有3种类型的操作运行在线程中：</p>
 <ul>

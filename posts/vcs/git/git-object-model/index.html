@@ -156,7 +156,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-tag.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/object-c-t-b.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png">
-<meta property="og:updated_time" content="2019-07-26T19:26:59.403Z">
+<meta property="og:updated_time" content="2019-08-18T05:47:16.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git对象模型：一步一步分析Git底层对象模型">
 <meta name="twitter:description" content="Git是一个非常强大的版本管理工具，有非常多的概念和命令，也有非常多且复杂的用法。但是其底层模型相对而言却非常简单，了解底层对象模型将非常有助于理解上层命令到底对仓库做了什么。如果想要精通Git，了解底层对象模型也是必不可少的。本文将会通过基本的命令操作，分析每一步操作对仓库数据做了哪些改动，进而分析出Git底层对象模型。 Git基本概念SHA所有用来表示项目历史信息的文件，都是通过一个40个字符">
@@ -520,7 +520,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-27 03:26:59" itemprop="dateModified" datetime="2019-07-27T03:26:59+08:00">2019-07-27</time>
+                <time title="修改时间：2019-08-18 13:47:16" itemprop="dateModified" datetime="2019-08-18T13:47:16+08:00">2019-08-18</time>
               
             
           </span>
@@ -842,7 +842,7 @@
 <p>.git/HEAD 指明了当前活跃分支是哪个分支</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/HEAD</span><br><span class="line">ref: refs/heads/master</span><br></pre></td></tr></table></figure>
 
-<p><a href="images/git-obj-model.svg">svg版</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvdmNzL2dpdC9pbWFnZXMvZ2l0LW9iai1tb2RlbC5zdmc=" title="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/images/git-obj-model.svg">svg版<i class="fa fa-external-link"></i></span></p>
 <p><img src="https://raw.githubusercontent.com/liuyanjie/knowledge/master/vcs/git/images/git-obj-model.png" alt="git-obj-model"></p>
 <hr>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvdHJlZS9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/tree/master/vcs/git/git-object-model.md">查看源文件<i class="fa fa-external-link"></i></span>&nbsp;&nbsp;<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpdXlhbmppZS9rbm93bGVkZ2UvZWRpdC9tYXN0ZXIvdmNzL2dpdC9naXQtb2JqZWN0LW1vZGVsLm1k" title="https://github.com/liuyanjie/knowledge/edit/master/vcs/git/git-object-model.md">编辑源文件<i class="fa fa-external-link"></i></span></p>
