@@ -1,7 +1,7 @@
 ---
 title: Git命令工作机制
 date: 2019-06-24T12:00:00.000Z
-updated: 2019-08-18T13:47:16.815Z
+updated: 2021-05-23T13:15:53.021Z
 tags: [vcs,git]
 categories: [git]
 ---
@@ -981,7 +981,7 @@ git push origin master --set-upstream    # 同上
 git push origin --all                    # 将所有本地分支都推送到origin主机
 git push origin --force                  # 强制推送更新远程分支
 
-git push origin :hotfix/xxxx             # 删除远程仓库的 hotfix/xxxx 分支
+git push origin :hotfix/xxxx              # 删除远程仓库的 hotfix/xxxx 分支
 git push origin :master                  # 删除远程仓库的 master 分支
 git push origin --delete master          # 删除远程仓库的 master 分支
 
