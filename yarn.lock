@@ -1509,10 +1509,10 @@ hexo-symbols-count-time@^0.7.1:
   dependencies:
     hexo-util "1.9.0"
 
-hexo-theme-next@^8.4.0:
-  version "8.4.0"
-  resolved "https://registry.npmjs.org/hexo-theme-next/-/hexo-theme-next-8.4.0.tgz#dc0887fea7da97c9507574045a45d46ecc6ad6b5"
-  integrity sha512-deqog5urkCC8uJ9g47bA3vFRJtgHlunKUyJlJWmPHtp4r8CaAa1plhspTV2EZHnZBowYcbBsDJ25xkjzhUZgUA==
+hexo-theme-next@^8.15.1:
+  version "8.15.1"
+  resolved "https://mirrors.tencent.com/npm/hexo-theme-next/-/hexo-theme-next-8.15.1.tgz#e238c60b55a3b7186583d3b93ce6fa81487df04c"
+  integrity sha512-ZM+dPx6mkFvmk8vp+dsvI+Cu1LE8XZW3PQjirmc+xd7CSUFby+4rYZ9puFVQlc5dvCM/lTfzp/WJu74JcC3Q2w==
 
 hexo-util@1.9.0:
   version "1.9.0"
